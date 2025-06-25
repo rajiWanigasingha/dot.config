@@ -1,0 +1,4 @@
+category,displayName,settingsName,description,type,value
+ecosystem,Disable Update News,no_update_news,Disable the popup that shows up when you update Hyprland to a new version,bool,false
+ecosystem,Disable Donation Nag,no_donation_nag,Disable the popup that shows up twice a year encouraging to donate,bool,0
+ecosystem,Enforce Permissions,enforce_permissions,Whether to enable permission control,bool,false

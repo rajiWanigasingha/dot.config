@@ -1,0 +1,29 @@
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+inputs,Keyboard Model,kb_model,Appropriate XKB keymap parameter. See the note below.,str,""
+inputs,Keyboard Layout,kb_layout,Appropriate XKB keymap parameter,str,us
+inputs,Keyboard Variant,kb_variant,Appropriate XKB keymap parameter,str,""
+inputs,Keyboard Options,kb_options,Appropriate XKB keymap parameter,str,""
+inputs,Keyboard Rules,kb_rules,Appropriate XKB keymap parameter,str,""
+inputs,Keyboard File,kb_file,If you prefer; you can use a path to your custom .xkb file.,str,""
+inputs,Numlock by Default,numlock_by_default,Engage numlock by default.,bool,false
+inputs,Resolve Binds by Symbol,resolve_binds_by_sym,Determines how keybinds act when multiple layouts are used. If false; keybinds will always act as if the first specified layout is active. If true; keybinds specified by symbols are activated when you type the respective symbol with the current layout.,bool,false
+inputs,Repeat Rate,repeat_rate,The repeat rate for held-down keys; in repeats per second.,int,25
+inputs,Repeat Delay,repeat_delay,Delay before a held-down key is repeated; in milliseconds.,int,600
+inputs,Mouse Sensitivity,sensitivity,Sets the mouse input sensitivity.,float,0.0,MOUSE_AND_TOUCHPAD,mouse,INPUT_RANGE,"-1.0,1.0"
+inputs,Acceleration Profile,accel_profile,Sets the cursor acceleration profile.,str,"",MOUSE_AND_TOUCHPAD,general,INPUT_STR_SELECT,"flat,adaptive,custom","Flat,Adaptive,Custom"
+inputs,Force No Acceleration,force_no_accel,Force no cursor acceleration. This bypasses most of your pointer settings to get as raw of a signal as possible. Enabling this is not recommended due to potential cursor desynchronization.,bool,false,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE,""
+inputs,Left Handed,left_handed,Switches RMB To LMB,bool,false,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE,""
+inputs,Scroll Points,scroll_points,Sets the scroll acceleration profile; when accel_profile is set to custom. Has to be in the form <step> <points>. Leave empty to have a flat scroll curve.,str,"",MOUSE_AND_TOUCHPAD,general,INPUT_STR,^\s*(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)\s*$
+inputs,Scroll Method,scroll_method,Sets the scroll method.,str,"",MOUSE_AND_TOUCHPAD,touchpad,INPUT_STR_SELECT,"2fg,edge,on_button_down,no_scroll","Two Fingers,Scroll From Edge Of Touchpad,On-Button scrolling,No Scroll"
+inputs,Scroll Button,scroll_button,Sets the scroll button. Has to be an int; cannot be a string. Check wev if you have any doubts regarding the ID. 0 means default.,int,0,MOUSE_AND_TOUCHPAD,mouse,INPUT_INT,""
+inputs,Scroll Button Lock,scroll_button_lock,If the scroll button lock is enabled; the button does not need to be held down. Pressing and releasing the button toggles the button lock; which logically holds the button down or releases it. While the button is logically held down; motion events are converted to scroll events.,bool,false,MOUSE_AND_TOUCHPAD,mouse,INPUT_TOGGLE,""
+inputs,Scroll Factor,scroll_factor,Multiplier added to scroll movement for external mice. Note that there is a separate setting for touchpad scroll_factor.,float,1.0,MOUSE_AND_TOUCHPAD,mouse,INPUT_FLOAT,""
+inputs,Natural Scroll,natural_scroll,Inverts scrolling direction. When enabled; scrolling moves content directly; rather than manipulating a scrollbar.,bool,false,MOUSE_AND_TOUCHPAD,mouse,INPUT_TOGGLE
+inputs,Follow Mouse,follow_mouse,Specify if and how cursor movement should affect window focus.,int,1,MOUSE_AND_TOUCHPAD,general,INPUT_INT_SELECT,"0,1,2,3","Cursor movement will not change focus,Cursor movement will always change focus to the window under the cursor,Cursor focus will be detached from keyboard focus. Clicking on a window will move keyboard focus to that window,Cursor focus will be completely separate from keyboard focus. Clicking on a window will not change keyboard focus"
+inputs,Follow Mouse Threshold,follow_mouse_threshold,The smallest distance in logical pixels the mouse needs to travel for the window under it to get focused. Works only with follow_mouse = 1.,float,0.0,MOUSE_AND_TOUCHPAD,general,INPUT_FLOAT
+inputs,Focus On Close,focus_on_close,Controls the window focus behavior when a window is closed. When set to 0; focus will shift to the next window candidate. When set to 1; focus will shift to the window under the cursor. [0/1],int,0,MOUSE_AND_TOUCHPAD,general,INPUT_INT
+inputs,Mouse Refocus,mouse_refocus,If disabled; mouse focus won’t switch to the hovered window unless the mouse crosses a window boundary when follow_mouse=1.,bool,true,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+inputs,Float Switch Override Focus,float_switch_override_focus,"If enabled (1 or 2), focus will change to the window under the cursor when changing from tiled-to-floating and vice versa. If 2, focus will also follow mouse on float-to-float switches.",int,1,MOUSE_AND_TOUCHPAD,general,INPUT_INT_SELECT,"1,2","focus will change to the window under the cursor when changing from tiled-to-floating and vice versa,focus will also follow mouse on float-to-float switches"
+inputs,Special Fallthrough,special_fallthrough,if enabled; having only floating windows in the special workspace will not block focusing windows in the regular workspace.,bool,false,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+inputs,Off Window Axis Events,off_window_axis_events,Handles axis events around (gaps/border for tiled; dragarea/border for floated) a focused window.,int,1,MOUSE_AND_TOUCHPAD,general,INPUT_INT,"0,1,2,3","ignores axis events,sends out-of-bound coordinates,fakes pointer coordinates to the closest point inside the window,warps the cursor to the closest point inside the window"
+inputs,Emulate Discrete Scroll,emulate_discrete_scroll,Emulates discrete scrolling from high resolution scrolling events.,int,1,MOUSE_AND_TOUCHPAD,general,INPUT_INT,"0,1,2","disables it,enables handling of non-standard events only,force enables all scroll wheel events to be handled"

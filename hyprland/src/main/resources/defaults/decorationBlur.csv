@@ -1,0 +1,17 @@
+category,displayName,settingsName,description,type,value
+decoration:blur,Enable Blur,enabled,enable kawase window background blur,bool,true
+decoration:blur,Blur Size,size,blur size (distance),int,8
+decoration:blur,Blur Passes,passes,the amount of passes to perform,int,1
+decoration:blur,Ignore Opacity,ignore_opacity,make the blur layer ignore the opacity of the window,bool,true
+decoration:blur,Optimized Blur,new_optimizations,whether to enable further optimizations to the blur. Recommended to leave on; as it will massively improve performance.,bool,true
+decoration:blur,XRay Mode,xray,if enabled; floating windows will ignore tiled windows in their blur. Only available if new_optimizations is true. Will reduce overhead on floating blur significantly.,bool,false
+decoration:blur,Noise Amount,noise,how much noise to apply. [0.0 - 1.0],float,0.0117
+decoration:blur,Contrast,contrast,contrast modulation for blur. [0.0 - 2.0],float,0.8916
+decoration:blur,Brightness,brightness,brightness modulation for blur. [0.0 - 2.0],float,0.8172
+decoration:blur,Vibrancy,vibrancy,Increase saturation of blurred colors. [0.0 - 1.0],float,0.1696
+decoration:blur,Vibrancy Darkness,vibrancy_darkness,How strong the effect of vibrancy is on dark areas . [0.0 - 1.0],float,0.0
+decoration:blur,Special Workspace Blur,special,whether to blur behind the special workspace (note: expensive),bool,false
+decoration:blur,Blur Popups,popups,whether to blur popups (e.g. right-click menus),bool,false
+decoration:blur,Popups Ignore Alpha,popups_ignorealpha,works like ignorealpha in layer rules. If pixel opacity is below set value; will not blur. [0.0 - 1.0],float,0.2
+decoration:blur,Blur Input Methods,input_methods,whether to blur input methods (e.g. fcitx5),bool,false
+decoration:blur,Input Methods Ignore Alpha,input_methods_ignorealpha,works like ignorealpha in layer rules. If pixel opacity is below set value; will not blur. [0.0 - 1.0],float,0.2

@@ -1,0 +1,19 @@
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+cursor,Sync GSettings Theme,sync_gsettings_theme,Sync xcursor theme with gsettings; applies cursor-theme and cursor-size on theme load to gsettings making most CSD GTK clients use same xcursor theme and size.,bool,true,CURSOR,cursor,INPUT_TOGGLE
+cursor,No Hardware Cursors,no_hardware_cursors,Disables hardware cursors,int,2,CURSOR,cursor,INPUT_INT_SELECT,"0,1,2","Use hardware cursors if possible,Don’t use hardware cursors,Auto - Disable when tearing"
+cursor,No Break FS VRR,no_break_fs_vrr,Disables scheduling new frames on cursor movement for fullscreen apps with VRR enabled to avoid framerate spikes; may require no_hardware_cursors = true;,int,2,CURSOR,cursor,INPUT_INT_SELECT,"0,1,2","Off,On,Auto - On with content type `game`"
+cursor,Minimum Refresh Rate,min_refresh_rate,Minimum refresh rate for cursor movement when no_break_fs_vrr is active; set to minimum supported refresh rate or higher,int,24,CURSOR,cursor,INPUT_INT
+cursor,Hotspot Padding,hotspot_padding,Padding in logical px between screen edges and the cursor,int,1,CURSOR,cursor,INPUT_INT
+cursor,Inactive Timeout,inactive_timeout,Seconds of cursor inactivity before hiding; set to 0 for never,float,0,CURSOR,cursor,INPUT_FLOAT
+cursor,No Warps,no_warps,If true; will not warp the cursor in many cases (focusing; keybinds; etc),bool,false,CURSOR,cursor,INPUT_TOGGLE
+cursor,Persistent Warps,persistent_warps,When a window is refocused; cursor returns to its last position relative to that window rather than to the center,bool,false,CURSOR,cursor,INPUT_TOGGLE
+cursor,Warp On Change Workspace,warp_on_change_workspace,Move the cursor to the last focused window after changing workspace;,int,0,CURSOR,cursor,INPUT_INT_SELECT,"0,1,2","Disabled,Enabled,Force - Ignores cursor:no_warps option"
+cursor,Warp On Toggle Special,warp_on_toggle_special,Move the cursor to the last focused window when toggling special workspace;,int,0,CURSOR,cursor,INPUT_INT_SELECT,"0,1,2","Disabled,Enabled,Force - Ignores cursor:no_warps option"
+cursor,Default Monitor,default_monitor,Name of a default monitor for the cursor on startup (see hyprctl monitors),str,"",CURSOR,cursor,INPUT_STR
+cursor,Zoom Factor,zoom_factor,Factor to zoom by around the cursor like a magnifying glass; minimum 1.0 (no zoom),float,1.0,CURSOR,cursor,INPUT_FLOAT
+cursor,Zoom Rigid,zoom_rigid,Whether the zoom follows the cursor rigidly (cursor always centered) or loosely,bool,false,CURSOR,cursor,INPUT_TOGGLE
+cursor,Enable Hyprcursor,enable_hyprcursor,Whether to enable hyprcursor support,bool,true,CURSOR,cursor,INPUT_TOGGLE
+cursor,Hide On Key Press,hide_on_key_press,Hides the cursor when you press any key until the mouse is moved,bool,false,CURSOR,cursor,INPUT_TOGGLE
+cursor,Hide On Touch,hide_on_touch,Hides the cursor when the last input was a touch input until a mouse input is done,bool,true,CURSOR,cursor,INPUT_TOGGLE
+cursor,Use CPU Buffer,use_cpu_buffer,Makes HW cursors use a CPU buffer; required on Nvidia to have HW cursors;,int,2,CURSOR,cursor,INPUT_INT_SELECT,"0,1,2","Off,On,Auto - Nvidia only"
+cursor,Warp Back After Non-Mouse Input,warp_back_after_non_mouse_input,Warp the cursor back after using a non-mouse input to move it and returning to mouse,bool,false,CURSOR,cursor,INPUT_TOGGLE

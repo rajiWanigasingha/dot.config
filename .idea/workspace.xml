@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development">
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers/BuildPageHelpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers/BuildPageHelpers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/ui/SidebarController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/ui/SidebarController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/Helpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/Helpers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/InputAndOutput.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/InputAndOutput.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/SendAndReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/SendAndReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/basicComponents/InputComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/basicComponents/InputComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/errors/ErrorsBasicInputComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/errors/ErrorsBasicInputComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/ui/HandleMainUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/ui/HandleMainUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/dwindle.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/dwindle.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/gestures.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/gestures.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTablet.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTablet.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTouchDevice.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTouchDevice.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/master.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/master.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/hyprland">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/hyprlandSettingsParser">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/hyprlandSettingsParser">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/hyprland">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hyprland" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hyprland" type="f1a62948:ProjectNode" />
+                <item name="hyprland" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hyprland" type="f1a62948:ProjectNode" />
+                <item name="hyprland" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hyprland" type="f1a62948:ProjectNode" />
+                <item name="hyprland" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2yOi08LTHCwoTg7otXUw0u3kPEa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build hyprland.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprland [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprland [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprlandSettingsParser [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.ApplicationKt.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rajindawanigasingha/hyprlandSettings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers" />
+      <recent name="$PROJECT_DIR$/hyprland/src/main/kotlin/view/ui" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Kotlin.ApplicationKt">
+    <configuration name="hyprland [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hyprland" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="hyprland [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hyprland" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="hyprlandSettingsParser [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hyprlandSettingsParser" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dot.config.ApplicationKt" />
+      <module name="hyprland.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.ApplicationKt" />
+        <item itemvalue="Gradle.hyprland [build]" />
+        <item itemvalue="Gradle.hyprland [clean]" />
+        <item itemvalue="Gradle.hyprlandSettingsParser [publishToMavenLocal]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="" />
+      <created>1749711794568</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749711794568</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1749819348244</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749819348244</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1749875531801</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749875531801</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1749905418311</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749905418311</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1750135935417</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750135935417</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1750315935871</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1750315935871</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1750418386048</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750418386048</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1750684128155</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750684128155</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update Development">
+      <option name="closed" value="true" />
+      <created>1750750465558</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1750750465558</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update Development" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Development" />
+  </component>
+</project>

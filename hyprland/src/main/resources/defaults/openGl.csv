@@ -1,0 +1,2 @@
+category,displayName,settingsName,description,type,value
+opengl,NVIDIA Anti-Flicker,nvidia_anti_flicker,Reduces flickering on NVIDIA at the cost of possible frame drops on lower-end GPUs; on non-NVIDIA; this is ignored.,bool,"""1"""

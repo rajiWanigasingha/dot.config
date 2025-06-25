@@ -1,0 +1,65 @@
+package org.hyprconfig.model
+
+import org.hyprconfig.helpers.HyprlandTypes
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class InputsModel(
+    val name: String,
+    var value: String,
+    val type: HyprlandTypes
+)
+
+val defaultInputSettings = listOf(
+    InputsModel("input:follow_mouse", "1", HyprlandTypes.INT),
+    InputsModel("input:follow_mouse_threshold", "0.0", HyprlandTypes.FLOAT),
+    InputsModel("input:focus_on_close", "0", HyprlandTypes.INT),
+    InputsModel("input:mouse_refocus", "1", HyprlandTypes.BOOL),
+    InputsModel("input:special_fallthrough", "0", HyprlandTypes.BOOL),
+    InputsModel("input:off_window_axis_events", "1", HyprlandTypes.INT),
+    InputsModel("input:sensitivity", "0.0", HyprlandTypes.FLOAT),
+    InputsModel("input:accel_profile", "", HyprlandTypes.STR),
+    InputsModel("input:kb_file", "", HyprlandTypes.STR),
+    InputsModel("input:kb_layout", "us", HyprlandTypes.STR),
+    InputsModel("input:kb_variant", "", HyprlandTypes.STR),
+    InputsModel("input:kb_options", "", HyprlandTypes.STR),
+    InputsModel("input:kb_rules", "", HyprlandTypes.STR),
+    InputsModel("input:kb_model", "", HyprlandTypes.STR),
+    InputsModel("input:repeat_rate", "25", HyprlandTypes.INT),
+    InputsModel("input:repeat_delay", "600", HyprlandTypes.INT),
+    InputsModel("input:natural_scroll", "0", HyprlandTypes.BOOL),
+    InputsModel("input:numlock_by_default", "0", HyprlandTypes.BOOL),
+    InputsModel("input:resolve_binds_by_sym", "0", HyprlandTypes.BOOL),
+    InputsModel("input:force_no_accel", "0", HyprlandTypes.BOOL),
+    InputsModel("input:float_switch_override_focus", "1", HyprlandTypes.INT),
+    InputsModel("input:left_handed", "0", HyprlandTypes.BOOL),
+    InputsModel("input:scroll_method", "", HyprlandTypes.STR),
+    InputsModel("input:scroll_button", "0", HyprlandTypes.INT),
+    InputsModel("input:scroll_button_lock", "0", HyprlandTypes.BOOL),
+    InputsModel("input:scroll_factor", "1.0", HyprlandTypes.FLOAT),
+    InputsModel("input:scroll_points", "", HyprlandTypes.STR),
+    InputsModel("input:emulate_discrete_scroll", "1", HyprlandTypes.INT),
+    InputsModel("input:touchpad:natural_scroll", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:disable_while_typing", "1", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:clickfinger_behavior", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:tap_button_map", "", HyprlandTypes.STR),
+    InputsModel("input:touchpad:middle_button_emulation", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:tap-to-click", "1", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:tap-and-drag", "1", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:drag_lock", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:scroll_factor", "1.0", HyprlandTypes.FLOAT),
+    InputsModel("input:touchpad:flip_x", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchpad:flip_y", "0", HyprlandTypes.BOOL),
+    InputsModel("input:touchdevice:transform", "-1", HyprlandTypes.INT),
+    InputsModel("input:touchdevice:output", "[[Auto]]", HyprlandTypes.STR),
+    InputsModel("input:touchdevice:enabled", "1", HyprlandTypes.BOOL),
+    InputsModel("input:tablet:transform", "0", HyprlandTypes.INT),
+    InputsModel("input:tablet:output", "", HyprlandTypes.STR),
+    InputsModel("input:tablet:region_position", "0 0", HyprlandTypes.VEC2),
+    InputsModel("input:tablet:absolute_region_position", "0", HyprlandTypes.BOOL),
+    InputsModel("input:tablet:region_size", "0 0", HyprlandTypes.VEC2),
+    InputsModel("input:tablet:relative_input", "0", HyprlandTypes.BOOL),
+    InputsModel("input:tablet:left_handed", "0", HyprlandTypes.BOOL),
+    InputsModel("input:tablet:active_area_position", "0 0", HyprlandTypes.VEC2),
+    InputsModel("input:tablet:active_area_size", "0 0", HyprlandTypes.VEC2),
+)

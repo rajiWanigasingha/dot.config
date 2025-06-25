@@ -1,0 +1,27 @@
+category,displayName,settingsName,description,type,value
+group:groupbar,Enabled,enabled,Enables groupbars,bool,true
+group:groupbar,Font Family,font_family,Font used to display groupbar titles; use misc:font_family if not specified,string,""
+group:groupbar,Font Size,font_size,Font size of groupbar title,int,8
+group:groupbar,Font Weight (Active),font_weight_active,Font weight of active groupbar title,font_weight,normal
+group:groupbar,Font Weight (Inactive),font_weight_inactive,Font weight of inactive groupbar title,font_weight,normal
+group:groupbar,Gradients,gradients,Enables gradients,bool,false
+group:groupbar,Height,height,Height of the groupbar,int,14
+group:groupbar,Indicator Gap,indicator_gap,Height of gap between groupbar indicator and title,int,0
+group:groupbar,Indicator Height,indicator_height,Height of the groupbar indicator,int,3
+group:groupbar,Stacked,stacked,Render the groupbar as a vertical stack,bool,false
+group:groupbar,Priority,priority,Sets the decoration priority for groupbars,int,3
+group:groupbar,Render Titles,render_titles,Whether to render titles in the group bar decoration,bool,true
+group:groupbar,Text Offset,text_offset,Adjust vertical position for titles,int,0
+group:groupbar,Scrolling,scrolling,Whether scrolling in the groupbar changes group active window,bool,true
+group:groupbar,Rounding,rounding,How much to round the indicator,int,1
+group:groupbar,Gradient Rounding,gradient_rounding,How much to round the gradients,int,2
+group:groupbar,Round Only Edges,round_only_edges,Round only the indicator edges of the entire groupbar,bool,true
+group:groupbar,Gradient Round Only Edges,gradient_round_only_edges,Round only the gradient edges of the entire groupbar,bool,true
+group:groupbar,Text Color,text_color,Controls the group bar text color,color,0xffffffff
+group:groupbar,Color Active,col.active,Active group bar background color,gradient,0x66ffff00
+group:groupbar,Color Inactive,col.inactive,Inactive (out of focus) group bar background color,gradient,0x66777700
+group:groupbar,Color Locked Active,col.locked_active,Active locked group bar background color,gradient,0x66ff5500
+group:groupbar,Color Locked Inactive,col.locked_inactive,Inactive locked group bar background color,gradient,0x66775500
+group:groupbar,Gaps In,gaps_in,Gap size between gradients,int,2
+group:groupbar,Gaps Out,gaps_out,Gap size between gradients and window,int,2
+group:groupbar,Keep Upper Gap,keep_upper_gap,Add or remove upper gap,bool,true

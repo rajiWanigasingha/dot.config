@@ -1,0 +1,15 @@
+category,displayName,settingsName,description,type,value
+binds,Pass Mouse When Bound,pass_mouse_when_bound,If disabled; will not pass mouse events to apps/dragging windows if a keybind has been triggered.,bool,false
+binds,Scroll Event Delay,scroll_event_delay,In ms; how many ms to wait after a scroll event to allow passing another one for the binds.,int,300
+binds,Workspace Back and Forth,workspace_back_and_forth,Switches to the previous workspace instead of refocusing the same one.,bool,false
+binds,Hide Special on Workspace Change,hide_special_on_workspace_change,Hides the special workspace when switching to another.,bool,false
+binds,Allow Workspace Cycles,allow_workspace_cycles,Allows workspaces to remember their previous one; enabling workspace cycles.,bool,false
+binds,Workspace Center On,workspace_center_on,Controls whether the cursor centers on workspace or last active window.,int,0
+binds,Focus Preferred Method,focus_preferred_method,Preferred focus finding method: 0=history; 1=edge length.,int,0
+binds,Ignore Group Lock,ignore_group_lock,Ignores per-group lock when using group-related dispatchers.,bool,false
+binds,Movefocus Cycles Fullscreen,movefocus_cycles_fullscreen,Movefocus cycles fullscreen when a fullscreen window is focused.,bool,false
+binds,Movefocus Cycles Group First,movefocus_cycles_groupfirst,Movefocus prioritizes cycling within groups before others.,bool,false
+binds,Disable Keybind Grabbing,disable_keybind_grabbing,Prevents apps from disabling keybinds (e.g.; VMs).,bool,false
+binds,Window Direction Monitor Fallback,window_direction_monitor_fallback,Allows directional movement of windows/focus across monitors.,bool,true
+binds,Allow Pin Fullscreen,allow_pin_fullscreen,Allows pinned windows to enter fullscreen and restore pin later.,bool,false
+binds,Drag Threshold,drag_threshold,Movement threshold in px for dragging or grab on mousedown.,int,0
