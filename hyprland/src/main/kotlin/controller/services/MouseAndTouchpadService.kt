@@ -1,6 +1,7 @@
 package org.dot.config.controller.services
 
 import kotlinx.datetime.Instant
+import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.hyprconfig.helpers.HyprlandTypes
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.filter
@@ -40,6 +41,8 @@ class MouseAndTouchpadService {
         var update = false
 
         at.forEach {
+            if (update) return@forEach
+
             val path = "$dataStorePath/$it"
 
             val inputs = DataFrame.readCsv(fileOrUrl = path)
@@ -49,7 +52,11 @@ class MouseAndTouchpadService {
 
             findRow.print()
 
-            if (!findRow.isEmpty()) update = true
+            if (!findRow.isEmpty()) {
+                update = true
+            } else {
+                throw ErrorsBasicInputComponent.UpdateMainPageStandedCategoryCouldNotFound(name ,category ,type)
+            }
 
             val update = inputs.update { "value"<String?>() }
                 .where { "settingsName"<String>() == name && "type"<String>() == type.toString().lowercase() && "category"<String>() == category }

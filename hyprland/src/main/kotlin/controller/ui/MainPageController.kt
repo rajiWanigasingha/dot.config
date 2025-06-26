@@ -11,7 +11,7 @@ class MainPageController {
 
         val mouseAndTouchpadUpdate = mouseAndTouchpad.update(name ,value ,type ,category)
 
-        mouseAndTouchpad.writeIntoHyprland()
+        if (mouseAndTouchpadUpdate) mouseAndTouchpad.writeIntoHyprland()
 
         return mouseAndTouchpadUpdate
     }

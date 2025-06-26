@@ -11,6 +11,7 @@ import org.dot.config.model.InputAndOutput
 import org.dot.config.model.SendAndReceive
 import org.dot.config.view.builderComponents.Sidebar
 import org.dot.config.view.errors.ErrorWebsocket
+import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.slf4j.LoggerFactory
 
 private val Logger = LoggerFactory.getLogger("Websocket")
@@ -63,25 +64,49 @@ fun Route.mainUI() {
 
                         if (receiveMouse.actionType != SendAndReceive.ActionType.MAIN) throw ErrorWebsocket.InvalidActionTypeForMain()
 
-                        val mouseAndTouchpadUpdate = mainPageController.mouseAndTouchpad(name = receiveMouse.payload.name , value = receiveMouse.payload.value , type = receiveMouse.payload.type , category = receiveMouse.payload.category)
+                        runCatching {
+                            val mouseAndTouchpadUpdate = mainPageController.mouseAndTouchpad(name = receiveMouse.payload.name , value = receiveMouse.payload.value , type = receiveMouse.payload.type , category = receiveMouse.payload.category)
 
-                        if (mouseAndTouchpadUpdate) {
-                            sendSerialized(data = SendAndReceive.Send(
-                                actionType = SendAndReceive.ActionType.MAIN,
-                                payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                                    status = SendAndReceive.SendUpdateStatus.SUCCESS,
-                                    message = "Update is successful updating ${receiveMouse.payload.name}"
-                                )
-                            ))
-                        } else {
-                            sendSerialized(data = SendAndReceive.Send(
-                                actionType = SendAndReceive.ActionType.MAIN,
-                                payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                                    status = SendAndReceive.SendUpdateStatus.ERROR,
-                                    message = "Update is unsuccessful updating ${receiveMouse.payload.name}"
-                                )
-                            ))
+                            if (mouseAndTouchpadUpdate) {
+
+                                Logger.info("Update is successful, and send success message for $receiveMouse")
+
+                                sendSerialized(data = SendAndReceive.Send(
+                                    actionType = SendAndReceive.ActionType.MAIN,
+                                    payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                        status = SendAndReceive.SendUpdateStatus.SUCCESS,
+                                        message = "Update is successful updating ${receiveMouse.payload.name}"
+                                    )
+                                ))
+                            } else {
+
+                                Logger.error("Update is failed, and send error message for $receiveMouse")
+
+                                sendSerialized(data = SendAndReceive.Send(
+                                    actionType = SendAndReceive.ActionType.MAIN,
+                                    payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                        status = SendAndReceive.SendUpdateStatus.ERROR,
+                                        message = "Couldn't Update ${receiveMouse.payload.name}, Something Went Wrong"
+                                    )
+                                ))
+                            }
+                        }.onFailure { exception ->
+                            when (exception) {
+                                is ErrorsBasicInputComponent.UpdateMainPageStandedCategoryCouldNotFound -> {
+
+                                    Logger.error("Update is failed, and send error message for $receiveMouse ,${exception.message}")
+
+                                    sendSerialized(data = SendAndReceive.Send(
+                                        actionType = SendAndReceive.ActionType.MAIN,
+                                        payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                            status = SendAndReceive.SendUpdateStatus.ERROR,
+                                            message = exception.message ?: ""
+                                        )
+                                    ))
+                                }
+                            }
                         }
+
                     }
                     Sidebar.ActionLinks.KEYBOARD -> TODO()
                     Sidebar.ActionLinks.KEYBINDS -> TODO()

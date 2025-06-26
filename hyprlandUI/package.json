@@ -40,6 +40,7 @@
 	},
 	"dependencies": {
 		"cmpstr": "^3.0.1",
-		"daisyui": "^5.0.43"
+		"daisyui": "^5.0.43",
+		"install": "^0.13.0"
 	}
 }

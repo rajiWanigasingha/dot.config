@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development">
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers/BuildPageHelpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers/BuildPageHelpers.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/ui/SidebarController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/ui/SidebarController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/Helpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/Helpers.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/InputAndOutput.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/InputAndOutput.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/SendAndReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/model/SendAndReceive.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/basicComponents/InputComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/basicComponents/InputComponents.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/errors/ErrorsBasicInputComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/errors/ErrorsBasicInputComponent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/ui/HandleMainUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/view/ui/HandleMainUI.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/dwindle.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/dwindle.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/gestures.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/gestures.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTablet.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTablet.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTouchDevice.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/inputsTouchDevice.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/master.csv" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/resources/defaults/master.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.css" beforeDir="false" />
-    </list>
+    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +71,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rajiWanigasingha"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/rajiWanigasingha/dot.config.git",
+    "accountId": "bde270c7-a7fc-4d3b-ac94-9ea170117419"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -94,21 +91,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build hyprland.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hyprland [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hyprland [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hyprlandSettingsParser [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.ApplicationKt.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/rajindawanigasingha/hyprlandSettings&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build hyprland.executor": "Run",
+    "Gradle.hyprland [build].executor": "Run",
+    "Gradle.hyprland [clean].executor": "Run",
+    "Gradle.hyprlandSettingsParser [publishToMavenLocal].executor": "Run",
+    "Kotlin.ApplicationKt.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/rajindawanigasingha/dot.config/hyprland",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers" />
