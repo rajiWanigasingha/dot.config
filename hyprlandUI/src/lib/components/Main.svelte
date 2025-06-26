@@ -21,7 +21,7 @@
 				{#each uiStore.mainPage as main}
 					<!-- svelte-ignore a11y_missing_attribute -->
 					<button onclick={() => uiStore.setActiveTab(main.tab)}>
-						<a role="tab" class="tab {uiStore.activeMainPageTab === main.tab ? 'tab-active' : ''}"
+						<a role="tab" class="tab capitalize {uiStore.activeMainPageTab === main.tab ? 'tab-active' : ''}"
 							>{main.tab}</a
 						>
 					</button>

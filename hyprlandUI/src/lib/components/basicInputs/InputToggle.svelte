@@ -3,7 +3,6 @@
 		ActionLinks,
 		HyprlandTypes,
 		uiStore,
-		updateChange,
 		websocketConnection,
 		type MainPageInputData,
 		type MainPageInputUI,
@@ -22,8 +21,6 @@
 
 		websocketConnection.sendActionToMainUpdate(actionLink, message);
 	}
-
-	$inspect(updateChange.update);
 </script>
 
 <div class="flex w-full flex-row items-center justify-between gap-3">
@@ -34,11 +31,7 @@
 		</p>
 	</div>
 	<label
-		class="toggle toggle-xl text-base-content {updateChange.update !== null &&
-		updateChange.update.name === data.settingsName &&
-		updateChange.update.category === data.category
-			? 'animate-pulse'
-			: ''}"
+		class="toggle toggle-xl text-base-conten"
 	>
 		<input
 			type="checkbox"

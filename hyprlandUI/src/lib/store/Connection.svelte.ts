@@ -74,20 +74,35 @@ class WebSocketConnection {
                     switch (data.payload.status) {
 
                         case MainPageActionStatus.SUCCESS: {
-                            updateChange.changeUpdate(true)
+                            updateChange.setUpdate(true)
 
                             setTimeout(() => {
                                 updateChange.clearUpdates()
                             }, 2000)
+
+                            break;
                         }
 
-                        case MainPageActionStatus.ERROR: { }
+                        case MainPageActionStatus.ERROR: {
+                            updateChange.setUpdate(false)
+
+                            setTimeout(() => {
+                                updateChange.clearUpdates()
+                            }, 2000)
+
+                            updateChange.changeError(data.payload.message)
+
+                            break;
+                        }
 
                         case MainPageActionStatus.MESSAGE: {
                             console.log(data.payload.message)
+                            break;
                         }
 
                     }
+
+                    break;
                 }
 
                 case ActionType.ERROR: { }
@@ -132,9 +147,7 @@ class WebSocketConnection {
                     payload: updateMessage
                 }
 
-                updateChange.setUpdate(
-                    { name: updateMessage.name, category: updateMessage.category, sucess: null }
-                )
+                updateChange.setError({ name: updateMessage.name, category: updateMessage.category, error: '' })
 
                 this.mainConnection?.send(JSON.stringify(update))
             }
