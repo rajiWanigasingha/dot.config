@@ -1,19 +1,239 @@
 package org.dot.config.controller.ui
 
-import org.dot.config.controller.services.MouseAndTouchpadService
+import org.dot.config.controller.helpers.HandlePaths
+import org.dot.config.controller.services.WriteIntoHyprland
+import org.dot.config.model.SendAndReceive
+import org.dot.config.view.builderComponents.Sidebar
+import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.hyprconfig.helpers.HyprlandTypes
+import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.filter
+import org.jetbrains.kotlinx.dataframe.api.isEmpty
+import org.jetbrains.kotlinx.dataframe.api.print
+import org.jetbrains.kotlinx.dataframe.api.update
+import org.jetbrains.kotlinx.dataframe.api.where
+import org.jetbrains.kotlinx.dataframe.api.with
+import org.jetbrains.kotlinx.dataframe.io.ColType
+import org.jetbrains.kotlinx.dataframe.io.readCsv
+import org.jetbrains.kotlinx.dataframe.io.writeCsv
+import org.slf4j.LoggerFactory
+import java.nio.file.Path
+import kotlin.io.path.writeText
 
 class MainPageController {
 
-    fun mouseAndTouchpad(name: String ,value: String ,type: HyprlandTypes ,category: String): Boolean {
+    private val logger = LoggerFactory.getLogger(javaClass.name)
+    private val user = System.getProperty("user.home")
+    private val dataStorePath = "${user}/.dot.config/data"
 
-        val mouseAndTouchpad = MouseAndTouchpadService()
+    fun updateChanges(data: SendAndReceive.ReceiveMainActionForStandedInputs): Boolean {
 
-        val mouseAndTouchpadUpdate = mouseAndTouchpad.update(name ,value ,type ,category)
+        when (data.actionLink) {
+            Sidebar.ActionLinks.MOUSE_AND_TOUCHPAD -> {
+                val update = updateStandedInDatabase(data)
 
-        if (mouseAndTouchpadUpdate) mouseAndTouchpad.writeIntoHyprland()
+                if (update) {
+                    createHyprlandText(
+                        listOfPaths = listOf(
+                            "inputs.csv",
+                            "inputsTouchpad.csv",
+                            "inputsTouchDevice.csv",
+                            "inputsTablet.csv"
+                        ),
+                        settingsStructure = listOf(
+                            "input {",
+                            "touchpad {",
+                            "}",
+                            "touchdevice {",
+                            "}",
+                            "tablet {",
+                            "}",
+                            "}"
+                        ),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/inputs.conf",
+                    )
+                }
 
-        return mouseAndTouchpadUpdate
+                return update
+            }
+
+            Sidebar.ActionLinks.CURSOR -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("cursor.csv"),
+                        settingsStructure = listOf("cursor {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/cursor.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.GESTURES -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("gestures.csv"),
+                        settingsStructure = listOf("gestures {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/gestures.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.KEYBOARD -> TODO()
+            Sidebar.ActionLinks.KEYBINDS -> TODO()
+            Sidebar.ActionLinks.DISPLAY_AND_MONITOR -> TODO()
+            Sidebar.ActionLinks.TOUCH -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf(
+                            "inputs.csv",
+                            "inputsTouchpad.csv",
+                            "inputsTouchDevice.csv",
+                            "inputsTablet.csv"
+                        ),
+                        settingsStructure = listOf(
+                            "input {",
+                            "touchpad {",
+                            "}",
+                            "touchdevice {",
+                            "}",
+                            "tablet {",
+                            "}",
+                            "}"
+                        ),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/inputs.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.LAYOUT_GENERAL -> TODO()
+            Sidebar.ActionLinks.DWINDLE_LAYOUT -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("dwindle.csv"),
+                        settingsStructure = listOf("dwindle {" ,"}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/dwindle.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.MASTER_LAYOUT -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("master.csv"),
+                        settingsStructure = listOf("master {" ,"}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/master.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.WORKSPACE_RULES -> TODO()
+            Sidebar.ActionLinks.WINDOW_RULES -> TODO()
+            Sidebar.ActionLinks.GROUPS -> TODO()
+            Sidebar.ActionLinks.GAPS_AND_BORDERS -> TODO()
+            Sidebar.ActionLinks.WINDOW_DECORATION -> TODO()
+            Sidebar.ActionLinks.BLUR -> TODO()
+            Sidebar.ActionLinks.SHADOW -> TODO()
+            Sidebar.ActionLinks.ANIMATIONS -> TODO()
+            Sidebar.ActionLinks.ENV -> TODO()
+            Sidebar.ActionLinks.AUTOSTART -> TODO()
+            Sidebar.ActionLinks.MISC -> TODO()
+            Sidebar.ActionLinks.GRAPHICS -> TODO()
+            Sidebar.ActionLinks.ECOSYSTEM -> TODO()
+            Sidebar.ActionLinks.EXPERIMENT -> TODO()
+            Sidebar.ActionLinks.DEBUG -> TODO()
+            Sidebar.ActionLinks.VARIABLES -> TODO()
+        }
+
+    }
+
+    private fun updateStandedInDatabase(data: SendAndReceive.ReceiveMainActionForStandedInputs): Boolean {
+        logger.info("Begin Updating ${data.actionLink}")
+
+        var update = false
+
+        val updatePaths = HandlePaths().getPathToUpdate(actionLink = data.actionLink)
+
+        updatePaths.forEachIndexed { index, it ->
+            if (update) return@forEachIndexed
+
+            val path = "$dataStorePath/$it"
+
+            val inputs = DataFrame.readCsv(
+                fileOrUrl = path,
+                colTypes = mapOf("value" to ColType.String, "validate" to ColType.String)
+            )
+
+            val findRow =
+                inputs.filter {
+                    "settingsName"<String>() == data.name && "type"<String>() == data.type.toString()
+                        .lowercase() && "category"<String>() == data.category
+                }
+
+            findRow.print()
+
+            if (!findRow.isEmpty()) {
+                update = true
+            } else if (index == updatePaths.size - 1) {
+                throw ErrorsBasicInputComponent.UpdateMainPageStandedCategoryCouldNotFound(
+                    name = data.name,
+                    category = data.category,
+                    type = data.type
+                )
+            }
+
+            val update = inputs.update { "value"<String?>() }
+                .where {
+                    "settingsName"<String>() == data.name && "type"<String>() == data.type.toString()
+                        .lowercase() && "category"<String>() == data.category
+                }
+                .with { _: String? -> data.value }
+
+            update.writeCsv(path)
+        }
+
+        return update
+    }
+
+    private fun createHyprlandText(listOfPaths: List<String>, settingsStructure: List<String>, pathToHyprland: String) {
+        val hyprlandWrite = WriteIntoHyprland().write(paths = listOfPaths)
+
+        val hyprlandSettings = mutableListOf<String>()
+
+        settingsStructure.forEachIndexed { index, string ->
+            hyprlandSettings.add(string)
+
+            if ("""\w+\s*\{""".toRegex().matches(input = string)) {
+                if (hyprlandWrite.isNotEmpty()) hyprlandSettings.add(hyprlandWrite.removeFirst())
+            }
+        }
+
+        Path.of(pathToHyprland).writeText(text = hyprlandSettings.joinToString("\n"))
+
+        WriteIntoHyprland().updateTime(hyprlandPath = pathToHyprland)
     }
 
 }

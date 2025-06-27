@@ -37,80 +37,43 @@ fun Route.mainUI() {
             runCatching {
                 Logger.info("Receive Action From Main Page")
 
-                val receiveAction = receiveDeserialized<SendAndReceive.Receive<SendAndReceive.ReceiveMainAction>>()
+                val receiveAction =
+                    receiveDeserialized<SendAndReceive.Receive<SendAndReceive.ReceiveMainActionForStandedInputs>>()
 
-                Logger.info("Receive Websocket At /pages -> $receiveAction")
+                Logger.info("Receive Websocket At /main -> $receiveAction")
 
                 if (receiveAction.actionType != SendAndReceive.ActionType.MAIN) throw ErrorWebsocket.InvalidActionTypeForMain()
 
-                sendSerialized(
-                    data = SendAndReceive.Send(
-                        actionType = SendAndReceive.ActionType.MAIN,
-                        payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                            status = SendAndReceive.SendUpdateStatus.MESSAGE,
-                            message = "Action Will Take At ${receiveAction.payload.actionLink.name}"
+                Logger.info("Receive action object of $receiveAction")
+
+                val update = mainPageController.updateChanges(data = receiveAction.payload)
+
+                if (update) {
+
+                    Logger.info("Update is successful, and send success message for $receiveAction")
+
+                    sendSerialized(
+                        data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN,
+                            payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                status = SendAndReceive.SendUpdateStatus.SUCCESS,
+                                message = "Update is successful updating ${receiveAction.payload.name}"
+                            )
                         )
                     )
-                )
+                } else {
 
-                when (receiveAction.payload.actionLink) {
-                    Sidebar.ActionLinks.MOUSE_AND_TOUCHPAD -> {
+                    Logger.error("Update is failed, and send error message for $receiveAction")
 
-                        Logger.info("Try to get mouse and touchpad action")
-
-                        val receiveMouse = receiveDeserialized<SendAndReceive.Receive<InputAndOutput.UpdateSettingsStandedCategories>>()
-
-                        Logger.info("Action Mouse And Touchpad ${receiveMouse.payload}")
-
-                        if (receiveMouse.actionType != SendAndReceive.ActionType.MAIN) throw ErrorWebsocket.InvalidActionTypeForMain()
-
-                        runCatching {
-                            val mouseAndTouchpadUpdate = mainPageController.mouseAndTouchpad(name = receiveMouse.payload.name , value = receiveMouse.payload.value , type = receiveMouse.payload.type , category = receiveMouse.payload.category)
-
-                            if (mouseAndTouchpadUpdate) {
-
-                                Logger.info("Update is successful, and send success message for $receiveMouse")
-
-                                sendSerialized(data = SendAndReceive.Send(
-                                    actionType = SendAndReceive.ActionType.MAIN,
-                                    payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                                        status = SendAndReceive.SendUpdateStatus.SUCCESS,
-                                        message = "Update is successful updating ${receiveMouse.payload.name}"
-                                    )
-                                ))
-                            } else {
-
-                                Logger.error("Update is failed, and send error message for $receiveMouse")
-
-                                sendSerialized(data = SendAndReceive.Send(
-                                    actionType = SendAndReceive.ActionType.MAIN,
-                                    payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                                        status = SendAndReceive.SendUpdateStatus.ERROR,
-                                        message = "Couldn't Update ${receiveMouse.payload.name}, Something Went Wrong"
-                                    )
-                                ))
-                            }
-                        }.onFailure { exception ->
-                            when (exception) {
-                                is ErrorsBasicInputComponent.UpdateMainPageStandedCategoryCouldNotFound -> {
-
-                                    Logger.error("Update is failed, and send error message for $receiveMouse ,${exception.message}")
-
-                                    sendSerialized(data = SendAndReceive.Send(
-                                        actionType = SendAndReceive.ActionType.MAIN,
-                                        payload = SendAndReceive.SendStandedCategoryValueUpdate(
-                                            status = SendAndReceive.SendUpdateStatus.ERROR,
-                                            message = exception.message ?: ""
-                                        )
-                                    ))
-                                }
-                            }
-                        }
-
-                    }
-                    Sidebar.ActionLinks.KEYBOARD -> TODO()
-                    Sidebar.ActionLinks.KEYBINDS -> TODO()
-                    else -> TODO()
+                    sendSerialized(
+                        data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN,
+                            payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                status = SendAndReceive.SendUpdateStatus.ERROR,
+                                message = "Couldn't Update ${receiveAction.payload.name}, Something Went Wrong"
+                            )
+                        )
+                    )
                 }
 
             }.onFailure { exception ->
@@ -122,31 +85,50 @@ fun Route.mainUI() {
                     }
 
                     is SerializationException -> {
-                        Logger.error("Couldn't parse into data class" ,exception)
+                        Logger.error("Couldn't parse into data class", exception)
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.ERROR,
-                            payload = SendAndReceive.SendMainBarError(
-                                code = SendAndReceive.MainErrorCodes.SERIALIZABLE,
-                                errorMessage = exception.message.toString()
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.ERROR,
+                                payload = SendAndReceive.SendMainBarError(
+                                    code = SendAndReceive.MainErrorCodes.SERIALIZABLE,
+                                    errorMessage = exception.message.toString()
+                                )
                             )
-                        ))
+                        )
                     }
 
                     is ErrorWebsocket.InvalidActionTypeForMain -> {
                         Logger.warn("Invalid Main Websocket Action")
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.ERROR,
-                            payload = SendAndReceive.SendMainBarError(
-                                code = SendAndReceive.MainErrorCodes.INVALID_ACTION_TYPE,
-                                errorMessage = "Invalid action on main socket"
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.ERROR,
+                                payload = SendAndReceive.SendMainBarError(
+                                    code = SendAndReceive.MainErrorCodes.INVALID_ACTION_TYPE,
+                                    errorMessage = "Invalid action on main socket"
+                                )
                             )
-                        ))
+                        )
+                    }
+
+                    is ErrorsBasicInputComponent.UpdateMainPageStandedCategoryCouldNotFound -> {
+
+                        Logger.error("Update is failed ,${exception.message}")
+
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN,
+                                payload = SendAndReceive.SendStandedCategoryValueUpdate(
+                                    status = SendAndReceive.SendUpdateStatus.ERROR,
+                                    message = exception.message ?: ""
+                                )
+                            )
+                        )
                     }
 
                     else -> {
-                        Logger.error(exception.message ,exception)
+                        Logger.error(exception.message, exception)
                         connect = false
                     }
                 }

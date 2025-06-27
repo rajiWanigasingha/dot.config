@@ -71,7 +71,11 @@ export interface ReceiveMainUpdateConnection {
 export interface SendMainUpdatesActionLink {
     actionType: ActionType
     payload: {
-        actionLink: ActionLinks
+        actionLink: ActionLinks,
+        name: string,
+        value: string,
+        type: HyprlandTypes,
+        category: string
     }
 }
 

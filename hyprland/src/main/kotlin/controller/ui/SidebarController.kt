@@ -1,6 +1,7 @@
 package org.dot.config.controller.ui
 
 import org.dot.config.controller.helpers.BuildPageHelpers
+import org.dot.config.controller.helpers.HandlePaths
 import org.dot.config.model.Helpers
 import org.dot.config.model.InputAndOutput
 import org.dot.config.model.Tables
@@ -16,6 +17,8 @@ class SidebarController {
 
     private val logger = LoggerFactory.getLogger(javaClass.name)
 
+    private val handlePaths = HandlePaths()
+
     fun getSidebarUI(): List<Sidebar.SideBarComponent> {
         return Sidebar.navigationSidebar
     }
@@ -24,22 +27,37 @@ class SidebarController {
         when (actionLinks) {
             Sidebar.ActionLinks.MOUSE_AND_TOUCHPAD -> return createPageUI(
                 actionLinks = actionLinks,
-                pageSettings = listOf("inputs.csv", "inputsTouchpad.csv")
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
-            Sidebar.ActionLinks.CURSOR -> return createPageUI(actionLinks = actionLinks, pageSettings = listOf("cursor.csv"))
+            Sidebar.ActionLinks.CURSOR -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
-            Sidebar.ActionLinks.GESTURES -> return createPageUI(actionLinks = actionLinks, pageSettings = listOf("gestures.csv"))
+            Sidebar.ActionLinks.GESTURES -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
-            Sidebar.ActionLinks.TOUCH -> return createPageUI(actionLinks = actionLinks, pageSettings = listOf("inputsTouchDevice.csv","inputsTablet.csv"))
+            Sidebar.ActionLinks.TOUCH -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
             Sidebar.ActionLinks.KEYBOARD -> TODO()
 
             Sidebar.ActionLinks.KEYBINDS -> TODO()
 
-            Sidebar.ActionLinks.DWINDLE_LAYOUT -> return createPageUI(actionLinks = actionLinks, pageSettings = listOf("dwindle.csv"))
+            Sidebar.ActionLinks.DWINDLE_LAYOUT -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
-            Sidebar.ActionLinks.MASTER_LAYOUT -> return createPageUI(actionLinks = actionLinks, pageSettings = listOf("master.csv"))
+            Sidebar.ActionLinks.MASTER_LAYOUT -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
             else -> TODO()
         }

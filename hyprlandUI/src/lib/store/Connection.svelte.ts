@@ -127,31 +127,22 @@ class WebSocketConnection {
 
     sendActionToMainUpdate(actionLink: ActionLinks, items: any) {
 
+        const updateMessage = items as SendMainStandedUpdate
+
         const message: SendMainUpdatesActionLink = {
             actionType: ActionType.MAIN,
             payload: {
-                actionLink: actionLink
+                actionLink: actionLink,
+                name: updateMessage.name,
+                value: updateMessage.value,
+                category: updateMessage.category,
+                type: updateMessage.type
             }
         }
+
+        updateChange.setError({ name: updateMessage.name, category: updateMessage.category, error: '' })
 
         this.mainConnection?.send(JSON.stringify(message))
-
-        switch (actionLink) {
-
-            default: {
-
-                const updateMessage = items as SendMainStandedUpdate
-
-                const update = {
-                    actionType: ActionType.MAIN,
-                    payload: updateMessage
-                }
-
-                updateChange.setError({ name: updateMessage.name, category: updateMessage.category, error: '' })
-
-                this.mainConnection?.send(JSON.stringify(update))
-            }
-        }
     }
 
 }

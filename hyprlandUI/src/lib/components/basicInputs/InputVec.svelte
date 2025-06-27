@@ -1,11 +1,42 @@
 <script lang="ts">
-	import type { MainPageInputData, MainPageInputUI } from '$lib';
+	import {
+		updateChange,
+		websocketConnection,
+		type ActionLinks,
+		type MainPageInputData,
+		type MainPageInputUI,
+		type SendMainStandedUpdate
+	} from '$lib';
 
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
 
 	let value = $state(ui.value as number[]);
 
 	let focusOn = $state(null as number | null);
+
+	let errorFromServer = $derived(() => {
+		if (
+			updateChange.error?.name === data.settingsName &&
+			updateChange.error.category === data.category &&
+			updateChange.error.error !== ''
+		) {
+			return updateChange.error.error;
+		} else {
+			return '';
+		}
+	});
+
+	function changeUpdate(actionLink: ActionLinks, num: number) {
+
+		const message: SendMainStandedUpdate = {
+			name: data.settingsName,
+			value: `${num}`,
+			type: data.typeOfHyprland,
+			category: data.category
+		};
+
+		websocketConnection.sendActionToMainUpdate(actionLink, message);
+	}
 </script>
 
 <div class="flex w-full flex-col gap-3">
@@ -70,3 +101,34 @@
 		</button>
 	</div>
 </div>
+
+{#if errorFromServer() !== ''}
+	<div role="alert" class="alert alert-vertical alert-error sm:alert-horizontal">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			class="stroke-error-content h-5 w-5 shrink-0"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+			></path>
+		</svg>
+		<div>
+			<h3 class="text-error-content font-bold">Error</h3>
+			<div class="text-error-content text-xs font-semibold">{errorFromServer()}</div>
+		</div>
+		<!-- svelte-ignore a11y_consider_explicit_label -->
+		<button class="btn btn-sm btn-ghost btn-circle" onclick={() => updateChange.clearError()}>
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+				><path
+					fill="currentColor"
+					d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"
+				/></svg
+			>
+		</button>
+	</div>
+{/if}

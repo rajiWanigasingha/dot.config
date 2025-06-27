@@ -2,6 +2,7 @@ package org.dot.config.model
 
 import kotlinx.serialization.Serializable
 import org.dot.config.view.builderComponents.Sidebar
+import org.hyprconfig.helpers.HyprlandTypes
 
 object SendAndReceive {
 
@@ -50,13 +51,17 @@ object SendAndReceive {
     // Main Action Receive And Send Message
 
     @Serializable
-    data class ReceiveMainAction(
+    data class ReceiveMainActionForStandedInputs(
         val actionLink: Sidebar.ActionLinks,
+        val name: String,
+        val value: String,
+        val type: HyprlandTypes,
+        val category: String
     )
 
     @Serializable
     enum class SendUpdateStatus {
-        SUCCESS, ERROR, MESSAGE
+        SUCCESS, ERROR
     }
 
     @Serializable

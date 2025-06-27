@@ -1,5 +1,6 @@
 package org.dot.config.controller.helpers
 
+import org.dot.config.view.builderComponents.Sidebar
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.forEach
 import org.jetbrains.kotlinx.dataframe.io.read
@@ -96,6 +97,39 @@ class HandlePaths {
         }
 
         return true
+    }
+
+    fun getPathToUpdate(actionLink: Sidebar.ActionLinks): List<String> {
+
+        return when (actionLink) {
+            Sidebar.ActionLinks.MOUSE_AND_TOUCHPAD -> listOf("inputs.csv", "inputsTouchpad.csv")
+            Sidebar.ActionLinks.CURSOR -> listOf("cursor.csv")
+            Sidebar.ActionLinks.GESTURES -> listOf("gestures.csv")
+            Sidebar.ActionLinks.KEYBOARD -> TODO()
+            Sidebar.ActionLinks.KEYBINDS -> TODO()
+            Sidebar.ActionLinks.DISPLAY_AND_MONITOR -> TODO()
+            Sidebar.ActionLinks.TOUCH -> listOf("inputsTouchDevice.csv","inputsTablet.csv")
+            Sidebar.ActionLinks.LAYOUT_GENERAL -> TODO()
+            Sidebar.ActionLinks.DWINDLE_LAYOUT -> listOf("dwindle.csv")
+            Sidebar.ActionLinks.MASTER_LAYOUT -> listOf("master.csv")
+            Sidebar.ActionLinks.WORKSPACE_RULES -> TODO()
+            Sidebar.ActionLinks.WINDOW_RULES -> TODO()
+            Sidebar.ActionLinks.GROUPS -> TODO()
+            Sidebar.ActionLinks.GAPS_AND_BORDERS -> TODO()
+            Sidebar.ActionLinks.WINDOW_DECORATION -> TODO()
+            Sidebar.ActionLinks.BLUR -> TODO()
+            Sidebar.ActionLinks.SHADOW -> TODO()
+            Sidebar.ActionLinks.ANIMATIONS -> TODO()
+            Sidebar.ActionLinks.ENV -> TODO()
+            Sidebar.ActionLinks.AUTOSTART -> TODO()
+            Sidebar.ActionLinks.MISC -> TODO()
+            Sidebar.ActionLinks.GRAPHICS -> TODO()
+            Sidebar.ActionLinks.ECOSYSTEM -> TODO()
+            Sidebar.ActionLinks.EXPERIMENT -> TODO()
+            Sidebar.ActionLinks.DEBUG -> TODO()
+            Sidebar.ActionLinks.VARIABLES -> TODO()
+        }
+
     }
 
 }

@@ -25,7 +25,7 @@ object InputAndOutput {
 
         pathToSettings.forEach {
 
-            val input = DataFrame.readCsv("$path/$it", colTypes = mapOf("validate" to ColType.String))
+            val input = DataFrame.readCsv("$path/$it", colTypes = mapOf("value" to ColType.String ,"validate" to ColType.String))
 
             val categoryInputs = input.filter { row -> row["actionLink"] == "$actionLink" }
 
