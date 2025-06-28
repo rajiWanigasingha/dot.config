@@ -8,6 +8,8 @@
 		InputVec,
 		uiStore
 	} from '$lib';
+	import InputColor from './basicInputs/InputColor.svelte';
+	import InputGradiant from './basicInputs/InputGradiant.svelte';
 	import InputInt from './basicInputs/InputInt.svelte';
 	import InputSelectInt from './basicInputs/InputSelectInt.svelte';
 	import InputStr from './basicInputs/InputStr.svelte';
@@ -21,7 +23,9 @@
 				{#each uiStore.mainPage as main}
 					<!-- svelte-ignore a11y_missing_attribute -->
 					<button onclick={() => uiStore.setActiveTab(main.tab)}>
-						<a role="tab" class="tab capitalize {uiStore.activeMainPageTab === main.tab ? 'tab-active' : ''}"
+						<a
+							role="tab"
+							class="tab capitalize {uiStore.activeMainPageTab === main.tab ? 'tab-active' : ''}"
 							>{main.tab}</a
 						>
 					</button>
@@ -63,10 +67,13 @@
 				<div class="divider m-0"></div>
 			{:else if main.inputUI.type === HyprlandUIType.INPUT_VEC}
 				<InputVec ui={main.inputUI} data={main.data} />
+			{:else if main.inputUI.type === HyprlandUIType.INPUT_COLOR}
+				<InputColor ui={main.inputUI} data={main.data} />
 			{:else}
 				<InputStr ui={main.inputUI} data={main.data} />
 				<div class="divider m-0"></div>
 			{/if}
 		{/each}
+		<InputGradiant />
 	</div>
 </div>
