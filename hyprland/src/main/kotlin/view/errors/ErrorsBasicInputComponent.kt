@@ -14,5 +14,7 @@ object ErrorsBasicInputComponent {
 
     class InputVecInvalidType() : IllegalArgumentException("Value that trying to set into input vec filed is not a vector value")
 
+    class InputColorInvalidType() : IllegalArgumentException("Value that trying to set into input color filed is not a color value")
+
     class UpdateMainPageStandedCategoryCouldNotFound(name: String ,category: String ,type: HyprlandTypes) : Exception("Couldn't update because this $name settings didn't exist or something didn't match $category ,$type")
 }

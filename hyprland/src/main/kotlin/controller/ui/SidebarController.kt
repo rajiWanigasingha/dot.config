@@ -49,12 +49,27 @@ class SidebarController {
 
             Sidebar.ActionLinks.KEYBINDS -> TODO()
 
+            Sidebar.ActionLinks.LAYOUT_GENERAL -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
             Sidebar.ActionLinks.DWINDLE_LAYOUT -> return createPageUI(
                 actionLinks = actionLinks,
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
             Sidebar.ActionLinks.MASTER_LAYOUT -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.GROUPS -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.GAPS_AND_BORDERS -> return createPageUI(
                 actionLinks = actionLinks,
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
@@ -95,6 +110,7 @@ class SidebarController {
                         InputComponents.TypesOfInputs.INPUT_FLOAT -> throw ErrorsBasicInputComponent.InputFloatInvalidType()
                         InputComponents.TypesOfInputs.INPUT_INT_SELECT -> throw ErrorsBasicInputComponent.InputIntInvalidType()
                         InputComponents.TypesOfInputs.INPUT_VEC -> throw ErrorsBasicInputComponent.InputVecInvalidType()
+                        InputComponents.TypesOfInputs.INPUT_COLOR -> throw ErrorsBasicInputComponent.InputColorInvalidType()
                     }
                 }
 

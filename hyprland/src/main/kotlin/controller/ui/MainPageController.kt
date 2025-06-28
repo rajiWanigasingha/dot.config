@@ -119,7 +119,21 @@ class MainPageController {
                 return update
             }
 
-            Sidebar.ActionLinks.LAYOUT_GENERAL -> TODO()
+            Sidebar.ActionLinks.LAYOUT_GENERAL -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("general.csv", "generalSnap.csv"),
+                        settingsStructure = listOf("general {", "snap {", "}", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/general.conf",
+                    )
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.DWINDLE_LAYOUT -> {
                 val update = updateStandedInDatabase(data)
 
@@ -127,7 +141,7 @@ class MainPageController {
 
                     createHyprlandText(
                         listOfPaths = listOf("dwindle.csv"),
-                        settingsStructure = listOf("dwindle {" ,"}"),
+                        settingsStructure = listOf("dwindle {", "}"),
                         pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/dwindle.conf",
                     )
                 }
@@ -142,7 +156,7 @@ class MainPageController {
 
                     createHyprlandText(
                         listOfPaths = listOf("master.csv"),
-                        settingsStructure = listOf("master {" ,"}"),
+                        settingsStructure = listOf("master {", "}"),
                         pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/master.conf",
                     )
                 }
@@ -152,8 +166,36 @@ class MainPageController {
 
             Sidebar.ActionLinks.WORKSPACE_RULES -> TODO()
             Sidebar.ActionLinks.WINDOW_RULES -> TODO()
-            Sidebar.ActionLinks.GROUPS -> TODO()
-            Sidebar.ActionLinks.GAPS_AND_BORDERS -> TODO()
+            Sidebar.ActionLinks.GROUPS -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("group.csv", "groupBar.csv"),
+                        settingsStructure = listOf("group {", "groupbar {", "}", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/group.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.GAPS_AND_BORDERS -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("general.csv", "generalSnap.csv"),
+                        settingsStructure = listOf("general {", "snap {", "}", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/general.conf",
+                    )
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.WINDOW_DECORATION -> TODO()
             Sidebar.ActionLinks.BLUR -> TODO()
             Sidebar.ActionLinks.SHADOW -> TODO()

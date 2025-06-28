@@ -69,6 +69,8 @@ object BuildPageHelpers {
             }
 
             InputComponents.TypesOfInputs.INPUT_VEC -> return ValidationObj()
+
+            InputComponents.TypesOfInputs.INPUT_COLOR -> return ValidationObj()
         }
     }
 
@@ -210,6 +212,21 @@ object BuildPageHelpers {
 
                 val inputUI = InputComponents.InputVec(
                     value = (content.value as Helpers.HyprValue.VecVal).value,
+                    placeholder = content.description,
+                    typeOfHyprland = content.typeOfHyprland,
+                    validation = validateOption,
+                    validationError = ""
+                )
+
+                return inputUI
+            }
+
+            InputComponents.TypesOfInputs.INPUT_COLOR -> {
+                val validateOption =
+                    createValidationObject(validation = validate, typeOfInput = InputComponents.TypesOfInputs.INPUT_COLOR)
+
+                val inputUI = InputComponents.InputColor(
+                    value = (content.value as Helpers.HyprValue.ColorVal).value,
                     placeholder = content.description,
                     typeOfHyprland = content.typeOfHyprland,
                     validation = validateOption,

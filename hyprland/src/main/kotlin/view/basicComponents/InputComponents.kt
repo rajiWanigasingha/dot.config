@@ -22,7 +22,8 @@ object InputComponents {
         INPUT_STR,
         INPUT_FLOAT,
         INPUT_INT_SELECT,
-        INPUT_VEC
+        INPUT_VEC,
+        INPUT_COLOR,
     }
 
     @Serializable
@@ -141,4 +142,13 @@ object InputComponents {
         override val typeOfHyprland: HyprlandTypes = HyprlandTypes.VEC2
     ) : InputShouldHave
 
+    @Serializable
+    @SerialName("INPUT_COLOR")
+    data class InputColor(
+        val value: String,
+        override val placeholder: String,
+        override val validation: ValidationObj,
+        override val validationError: String,
+        override val typeOfHyprland: HyprlandTypes
+    ) : InputShouldHave
 }

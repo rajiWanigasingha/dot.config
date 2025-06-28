@@ -1,6 +1,5 @@
-category,displayName,settingsName,description,type,value
-general:snap,Enable Snapping,enabled,Enable snapping for floating windows,bool,false
-general:snap,Snap Window Gap,window_gap,Minimum gap in pixels between windows before snapping,int,10
-general:snap,Snap Monitor Gap,monitor_gap,Minimum gap in pixels between window and monitor edges before snapping,int,10
-general:snap,Snap Border Overlap,border_overlap,Windows snap such that only one border’s worth of space is between them,bool,false
-general:snap,Snap Respect Gaps,respect_gaps,Snapping will respect gaps between windows (set in general:gaps_in),bool,false
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+general:snap,Enable Snapping,enabled,Enable snapping for floating windows,bool,false,""
+general:snap,Snap Window Gap,window_gap,Minimum gap in pixels between windows before snapping,int,10,GAPS_AND_BORDERS,Gaps,INPUT_INT
+general:snap,Snap Monitor Gap,monitor_gap,Minimum gap in pixels between window and monitor edges before snapping,int,10,GAPS_AND_BORDERS,Gaps,INPUT_INT
+general:snap,Snap Border Overlap,border_overlap,Windows snap such that only one border’s worth of space is between them,bool,false,GAPS_AND_BORDERS,Borders,INPUT_TOGGLE

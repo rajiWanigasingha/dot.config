@@ -1,13 +1,13 @@
-category,displayName,settingsName,description,type,value
-group,Auto Group,auto_group,Whether new windows will be automatically grouped into the focused unlocked group. Note: if you want to disable auto_group only for specific windows; use the “group barred” window rule instead.,bool,true
-group,Insert After Current,insert_after_current,Whether new windows in a group spawn after current or at group tail,bool,true
-group,Focus Removed Window,focus_removed_window,Whether Hyprland should focus on the window that has just been moved out of the group,bool,true
-group,Drag Into Group,drag_into_group,Whether dragging a window into a unlocked group will merge them. Options: 0 (disabled); 1 (enabled); 2 (only when dragging into the groupbar),int,1
-group,Merge Groups On Drag,merge_groups_on_drag,Whether window groups can be dragged into other groups,bool,true
-group,Merge Groups On Groupbar,merge_groups_on_groupbar,Whether one group will be merged with another when dragged into its groupbar,bool,true
-group,Merge Floated Into Tiled On Groupbar,merge_floated_into_tiled_on_groupbar,Whether dragging a floating window into a tiled window groupbar will merge them,bool,false
-group,Group On Move To Workspace,group_on_movetoworkspace,Whether using movetoworkspace[silent] will merge the window into the workspace’s solitary unlocked group,bool,false
-group,Active Group Border,col.border_active,Active group border color,gradient,0x66ffff00
-group,Inactive Group Border,col.border_inactive,Inactive (out of focus) group border color,gradient,0x66777700
-group,Active Locked Group Border,col.border_locked_active,Active locked group border color,gradient,0x66ff5500
-group,Inactive Locked Group Border,col.border_locked_inactive,Inactive locked group border color,gradient,0x66775500
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+group,Auto Group,auto_group,Whether new windows will be automatically grouped into the focused unlocked group. Note: if you want to disable auto_group only for specific windows; use the “group barred” window rule instead.,bool,true,GROUPS,group general,INPUT_TOGGLE
+group,Insert After Current,insert_after_current,Whether new windows in a group spawn after current or at group tail,bool,true,GROUPS,group general,INPUT_TOGGLE
+group,Focus Removed Window,focus_removed_window,Whether Hyprland should focus on the window that has just been moved out of the group,bool,true,GROUPS,group general,INPUT_TOGGLE
+group,Drag Into Group,drag_into_group,Whether dragging a window into a unlocked group will merge them.,int,1,GROUPS,group general,INPUT_INT_SELECT,"0,1,2","Disabled,Enabled,Only when dragging into the group bar"
+group,Merge Groups On Drag,merge_groups_on_drag,Whether window groups can be dragged into other groups,bool,true,GROUPS,group general,INPUT_TOGGLE
+group,Merge Groups On Groupbar,merge_groups_on_groupbar,Whether one group will be merged with another when dragged into its groupbar,bool,true,GROUPS,group general,INPUT_TOGGLE
+group,Merge Floated Into Tiled On Groupbar,merge_floated_into_tiled_on_groupbar,Whether dragging a floating window into a tiled window groupbar will merge them,bool,false,GROUPS,group general,INPUT_TOGGLE
+group,Group On Move To Workspace,group_on_movetoworkspace,Whether using movetoworkspace[silent] will merge the window into the workspace’s solitary unlocked group,bool,false,GROUPS,group general,INPUT_TOGGLE
+group,Active Group Border,col.border_active,Active group border color,gradient,0x66ffff00,GROUPS,group general,INPUT_STR
+group,Inactive Group Border,col.border_inactive,Inactive (out of focus) group border color,gradient,0x66777700,GROUPS,group general,INPUT_STR
+group,Active Locked Group Border,col.border_locked_active,Active locked group border color,gradient,0x66ff5500,GROUPS,group general,INPUT_STR
+group,Inactive Locked Group Border,col.border_locked_inactive,Inactive locked group border color,gradient,0x66775500,GROUPS,group general,INPUT_STR

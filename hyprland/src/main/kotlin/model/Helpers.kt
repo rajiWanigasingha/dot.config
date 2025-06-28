@@ -60,6 +60,10 @@ object Helpers {
                 require(value.size == 2) { value = listOf(0, 0) }
             }
         }
+
+        @SerialName("COLOR")
+        @Serializable
+        data class ColorVal(var value: String) : HyprValue()
     }
 
     fun validateHyprlandTypesForValidHyprValues(value: String, type: HyprlandTypes): HyprValue? {
@@ -83,9 +87,9 @@ object Helpers {
             }
 
             HyprlandTypes.COLOR -> {
-                val valueOf = value.takeIf { checkColor(it) }?.let { return@let it }
+                val valueOf = parseColorToRgba(value)?.let { return@let it }
 
-                return valueOf?.let { return@let HyprValue.StrVal(it) }
+                return valueOf?.let { return@let HyprValue.ColorVal(it) }
             }
 
             HyprlandTypes.VEC2 -> {
@@ -134,23 +138,54 @@ object Helpers {
         }
     }
 
-    private fun checkColor(input: String): Boolean {
+    private fun parseColorToRgba(input: String): String? {
+        val rgbaHexPattern = Regex("""rgba\(([0-9a-fA-F]{8})\)""")
+        val rgbaDecimalPattern = Regex("""rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d*\.?\d+)\s*\)""")
+        val rgbHexPattern = Regex("""rgb\(([0-9a-fA-F]{6})\)""")
+        val rgbDecimalPattern = Regex("""rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)""")
+        val legacyArgbPattern = Regex("""0x([0-9a-fA-F]{8})""")
 
-        val rgbaHexPattern = Regex("""rgba\([0-9a-fA-F]{8}\)""")
-        val rgbaDecimalPattern = Regex("""rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(\d*(\.\d+)?)\s*\)""")
+        return when {
+            rgbaHexPattern.matches(input) -> {
+                val hex = rgbaHexPattern.find(input)!!.groupValues[1]
+                val r = hex.substring(0, 2).toInt(16)
+                val g = hex.substring(2, 4).toInt(16)
+                val b = hex.substring(4, 6).toInt(16)
+                val a = hex.substring(6, 8).toInt(16) / 255.0
+                "rgba($r, $g, $b, $a)"
+            }
 
-        val rgbHexPattern = Regex("""rgb\([0-9a-fA-F]{6}\)""")
-        val rgbDecimalPattern = Regex("""rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)""")
+            rgbaDecimalPattern.matches(input) -> {
+                val (r, g, b, a) = rgbaDecimalPattern.find(input)!!.destructured
+                "rgba(${r.toInt()}, ${g.toInt()}, ${b.toInt()}, ${a.toDouble()})"
+            }
 
-        val legacyArgbPattern = Regex("""0x[0-9a-fA-F]{8}""")
+            rgbHexPattern.matches(input) -> {
+                val hex = rgbHexPattern.find(input)!!.groupValues[1]
+                val r = hex.substring(0, 2).toInt(16)
+                val g = hex.substring(2, 4).toInt(16)
+                val b = hex.substring(4, 6).toInt(16)
+                "rgba($r, $g, $b, 1.0)"
+            }
 
+            rgbDecimalPattern.matches(input) -> {
+                val (r, g, b) = rgbDecimalPattern.find(input)!!.destructured
+                "rgba(${r.toInt()}, ${g.toInt()}, ${b.toInt()}, 1.0)"
+            }
 
-        return rgbaHexPattern.matches(input) ||
-                rgbaDecimalPattern.matches(input) ||
-                rgbHexPattern.matches(input) ||
-                rgbDecimalPattern.matches(input) ||
-                legacyArgbPattern.matches(input)
+            legacyArgbPattern.matches(input) -> {
+                val hex = legacyArgbPattern.find(input)!!.groupValues[1]
+                val a = hex.substring(0, 2).toInt(16) / 255.0
+                val r = hex.substring(2, 4).toInt(16)
+                val g = hex.substring(4, 6).toInt(16)
+                val b = hex.substring(6, 8).toInt(16)
+                "rgba($r, $g, $b, $a)"
+            }
+
+            else -> null
+        }
     }
+
 
     private fun getBoolean(value: String): Boolean? {
         return when (value) {
