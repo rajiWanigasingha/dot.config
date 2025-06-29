@@ -59,7 +59,8 @@ export enum HyprlandUIType {
     INPUT_FLOAT = "INPUT_FLOAT",
     INPUT_INT_SELECT = "INPUT_INT_SELECT",
     INPUT_VEC = "INPUT_VEC",
-    INPUT_COLOR = "INPUT_COLOR"
+    INPUT_COLOR = "INPUT_COLOR",
+    INPUT_GRADIANT = "INPUT_GRADIANT"
 }
 
 export enum MainPageActionStatus {

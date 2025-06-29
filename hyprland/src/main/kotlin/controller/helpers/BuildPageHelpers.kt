@@ -71,6 +71,8 @@ object BuildPageHelpers {
             InputComponents.TypesOfInputs.INPUT_VEC -> return ValidationObj()
 
             InputComponents.TypesOfInputs.INPUT_COLOR -> return ValidationObj()
+
+            InputComponents.TypesOfInputs.INPUT_GRADIANT -> return ValidationObj()
         }
     }
 
@@ -227,6 +229,21 @@ object BuildPageHelpers {
 
                 val inputUI = InputComponents.InputColor(
                     value = (content.value as Helpers.HyprValue.ColorVal).value,
+                    placeholder = content.description,
+                    typeOfHyprland = content.typeOfHyprland,
+                    validation = validateOption,
+                    validationError = ""
+                )
+
+                return inputUI
+            }
+
+            InputComponents.TypesOfInputs.INPUT_GRADIANT -> {
+                val validateOption =
+                    createValidationObject(validation = validate, typeOfInput = InputComponents.TypesOfInputs.INPUT_GRADIANT)
+
+                val inputUI = InputComponents.InputGradiant(
+                    value = (content.value as Helpers.HyprValue.GradiantVal).value,
                     placeholder = content.description,
                     typeOfHyprland = content.typeOfHyprland,
                     validation = validateOption,

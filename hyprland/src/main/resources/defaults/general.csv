@@ -1,17 +1,17 @@
 category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
-general,border_size,border_size,size of the border around windows,int,1,GAPS_AND_BORDERS,Borders,INPUT_INT
-general,no_border_on_floating,no_border_on_floating,disable borders for floating windows,bool,false,GAPS_AND_BORDERS,Borders,INPUT_TOGGLE
-general,gaps_in,gaps_in,"gaps between windows, also supports css style gaps (top, right, bottom, left -> 5,10,15,20)",int,5,GAPS_AND_BORDERS,Gaps,INPUT_INT
-general,gaps_out,gaps_out,"gaps between windows and monitor edges, also supports css style gaps (top, right, bottom, left -> 5,10,15,20)",int,20,GAPS_AND_BORDERS,Gaps,INPUT_INT
-general,gaps_workspaces,gaps_workspaces,gaps between workspaces. Stacks with gaps_out.,int,0,GAPS_AND_BORDERS,Gaps,INPUT_INT
-general,col.inactive_border,col.inactive_border,border color for inactive windows,gradient,0xff444444,GAPS_AND_BORDERS,Borders,INPUT_STR
-general,col.active_border,col.active_border,border color for the active window,gradient,0xffffffff,GAPS_AND_BORDERS,Borders,INPUT_STR
-general,col.nogroup_border,col.nogroup_border,inactive border color for window that cannot be added to a group (see denywindowfromgroup dispatcher),gradient,0xffffaaff,GAPS_AND_BORDERS,Borders,INPUT_STR
-general,col.nogroup_border_active,col.nogroup_border_active,active border color for window that cannot be added to a group,gradient,0xffff00ff,GAPS_AND_BORDERS,Borders,INPUT_STR
-general,layout,layout,which layout to use. ,str,dwindle,LAYOUT_GENERAL,general,INPUT_STR_SELECT,"dwindle,master","Dwindle,Master"
-general,no_focus_fallback,no_focus_fallback,"if true, will not fall back to the next available window when moving focus in a direction where no window was found",bool,false
-general,resize_on_border,resize_on_border,enables resizing windows by clicking and dragging on borders and gaps,bool,false,""
-general,extend_border_grab_area,extend_border_grab_area,"extends the area around the border where you can click and drag on, only used when general:resize_on_border is on.",int,15
-general,hover_icon_on_border,hover_icon_on_border,"show a cursor icon when hovering over borders, only used when general:resize_on_border is on.",bool,true
-general,allow_tearing,allow_tearing,master switch for allowing tearing to occur. See the Tearing page.,bool,false
-general,resize_corner,resize_corner,"force floating windows to use a specific corner when being resized (1-4 going clockwise from top left, 0 to disable)",int,0
+general,Border Size,border_size,size of the border around windows,int,1,GAPS_AND_BORDERS,Borders,INPUT_INT
+general,No Border On Floating,no_border_on_floating,disable borders for floating windows,bool,false,GAPS_AND_BORDERS,Borders,INPUT_TOGGLE
+general,Gaps In Between,gaps_in,"gaps between windows, also supports css style gaps (top, right, bottom, left -> 5,10,15,20)",int,5,GAPS_AND_BORDERS,Gaps,INPUT_INT
+general,Gaps Out,gaps_out,"gaps between windows and monitor edges, also supports css style gaps (top, right, bottom, left -> 5,10,15,20)",int,20,GAPS_AND_BORDERS,Gaps,INPUT_INT
+general,Workspaces Gaps,gaps_workspaces,gaps between workspaces. Stacks with gaps_out.,int,0,GAPS_AND_BORDERS,Gaps,INPUT_INT
+general,Color Of Inactive Border,col.inactive_border,border color for inactive windows,gradient,0xff444444,GAPS_AND_BORDERS,Borders,INPUT_GRADIANT
+general,Color Of Active Border,col.active_border,border color for the active window,gradient,0xffffffff,GAPS_AND_BORDERS,Borders,INPUT_GRADIANT
+general,Color Of No Group Border,col.nogroup_border,inactive border color for window that cannot be added to a group (see denywindowfromgroup dispatcher),gradient,0xffffaaff,GAPS_AND_BORDERS,Borders,INPUT_GRADIANT
+general,Color Of No Group Border Active,col.nogroup_border_active,active border color for window that cannot be added to a group,gradient,0xffff00ff,GAPS_AND_BORDERS,Borders,INPUT_GRADIANT
+general,Workspace Layout,layout,which layout to use. ,str,dwindle,LAYOUT_GENERAL,general,INPUT_STR_SELECT,"dwindle,master","Dwindle,Master"
+general,No Focus Fallback,no_focus_fallback,"if true, will not fall back to the next available window when moving focus in a direction where no window was found",bool,false
+general,Resize On Border,resize_on_border,enables resizing windows by clicking and dragging on borders and gaps,bool,false,""
+general,Extend Border Grab Area,extend_border_grab_area,"extends the area around the border where you can click and drag on, only used when general:resize_on_border is on.",int,15
+general,Hover Icon On Border,hover_icon_on_border,"show a cursor icon when hovering over borders, only used when general:resize_on_border is on.",bool,true
+general,Allow Tearing,allow_tearing,master switch for allowing tearing to occur. See the Tearing page.,bool,false
+general,Resize Corner,resize_corner,"force floating windows to use a specific corner when being resized (1-4 going clockwise from top left, 0 to disable)",int,0

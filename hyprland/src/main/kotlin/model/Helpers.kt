@@ -3,8 +3,11 @@ package org.dot.config.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.hyprconfig.helpers.HyprlandTypes
+import org.slf4j.LoggerFactory
 
 object Helpers {
+
+    private val logger = LoggerFactory.getLogger(javaClass.name)
 
     private val modifierKeys = listOf(
         "SHIFT",
@@ -64,6 +67,10 @@ object Helpers {
         @SerialName("COLOR")
         @Serializable
         data class ColorVal(var value: String) : HyprValue()
+
+        @SerialName("GRADIANT")
+        @Serializable
+        data class GradiantVal(var value: String) : HyprValue()
     }
 
     fun validateHyprlandTypesForValidHyprValues(value: String, type: HyprlandTypes): HyprValue? {
@@ -112,7 +119,43 @@ object Helpers {
 
             HyprlandTypes.GRADIENT -> {
 
-                return value.let { return@let HyprValue.StrVal(it) }
+                val typeOfColor = detectGradientType(value)
+
+                val gradiant = mutableListOf<String>()
+
+                when (typeOfColor.first()) {
+                    "RGBA" -> gradiant.addAll(parseGradient(value))
+                    "RGB" -> gradiant.addAll(parseGradientRGB(value))
+                    "RGBA_HEX" -> gradiant.addAll(parseGradient(value ,true))
+                    "RGB_HEX" -> gradiant.addAll(parseGradientRGB(value ,true))
+                    else -> gradiant.addAll(value.split(" "))
+                }
+
+                val gradiantColor = mutableListOf<String>()
+
+                if (gradiant.size >= 2) {
+                    """-?\d+deg""".toRegex().matches(gradiant.last()).takeIf { it }?.let {
+                        val angle = gradiant.last()
+
+                        val rgb = gradiant.dropLast(1)
+
+                        rgb.forEach {
+                            parseColorToRgba(it).takeIf { rgb -> rgb != null }?.let { rgb -> gradiantColor.add(rgb) }
+                        }
+
+                        gradiantColor.add(angle)
+                    } ?: run {
+                        gradiant.forEach {
+                            parseColorToRgba(it).takeIf { rgb -> rgb != null }?.let { rgb -> gradiantColor.add(rgb) }
+                        }
+                    }
+                } else  {
+                    gradiant.forEach {
+                        parseColorToRgba(it).takeIf { rgb -> rgb != null }?.let { rgb -> gradiantColor.add(rgb) }
+                    }
+                }
+
+                return gradiantColor.joinToString(" ").let { return@let HyprValue.GradiantVal(it) }
             }
 
             HyprlandTypes.FONT_WEIGHT -> {
@@ -152,7 +195,8 @@ object Helpers {
                 val g = hex.substring(2, 4).toInt(16)
                 val b = hex.substring(4, 6).toInt(16)
                 val a = hex.substring(6, 8).toInt(16) / 255.0
-                "rgba($r, $g, $b, $a)"
+                val alpha = String.format("%.2f", a).toFloat()
+                "rgba($r, $g, $b, $alpha)"
             }
 
             rgbaDecimalPattern.matches(input) -> {
@@ -186,6 +230,47 @@ object Helpers {
         }
     }
 
+    fun detectGradientType(input: String): Set<String> {
+        val rgbaPattern = Regex("""rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*[\d.]+\s*\)""")
+        val rgbPattern = Regex("""rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)""")
+        val rgbaPatternWithHex = Regex("""rgba\([0-9a-fA-F]{8}\)""")
+        val rgbPatternWithHex = Regex("""rgb\([0-9a-fA-F]{6}\)""")
+        val argbHexPattern = Regex("""0x[0-9a-fA-F]{8}""")
+        val anglePattern = Regex("""\b\d+deg\b""")
+
+        val types = mutableSetOf<String>()
+
+        if (rgbaPattern.containsMatchIn(input)) types += "RGBA"
+        if (rgbPattern.containsMatchIn(input)) types += "RGB"
+        if (rgbaPatternWithHex.containsMatchIn(input)) types += "RGBA_HEX"
+        if (rgbPatternWithHex.containsMatchIn(input)) types += "RGB_HEX"
+        if (argbHexPattern.containsMatchIn(input)) types += "ARGB_HEX"
+        if (anglePattern.containsMatchIn(input)) types += "ANGLE"
+
+        return types
+    }
+
+    private fun parseGradient(input: String ,hex: Boolean = false): List<String> {
+
+        if (hex) {
+            val regex = Regex("""rgba\([0-9a-fA-F]{8}\)|[-+]?\d+deg""")
+            return regex.findAll(input).map { it.value }.toList()
+        }
+
+        val regex = Regex("""rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|[-+]?\d+deg""")
+        return regex.findAll(input).map { it.value }.toList()
+    }
+
+    private fun parseGradientRGB(input: String ,hex: Boolean = false): List<String> {
+
+        if (hex) {
+            val regex = Regex("""rgb\([0-9a-fA-F]{6}\)|[-+]?\d+deg""")
+            return regex.findAll(input).map { it.value }.toList()
+        }
+
+        val regex = Regex("""rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)|[-+]?\d+deg""")
+        return regex.findAll(input).map { it.value }.toList()
+    }
 
     private fun getBoolean(value: String): Boolean? {
         return when (value) {

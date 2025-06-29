@@ -16,5 +16,7 @@ object ErrorsBasicInputComponent {
 
     class InputColorInvalidType() : IllegalArgumentException("Value that trying to set into input color filed is not a color value")
 
+    class InputGradiantInvalidType() : IllegalArgumentException("Value that trying to set into input gradiant of colors filed is not a gradiant colors value")
+
     class UpdateMainPageStandedCategoryCouldNotFound(name: String ,category: String ,type: HyprlandTypes) : Exception("Couldn't update because this $name settings didn't exist or something didn't match $category ,$type")
 }

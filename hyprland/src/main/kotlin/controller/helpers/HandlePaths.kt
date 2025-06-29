@@ -115,7 +115,7 @@ class HandlePaths {
             Sidebar.ActionLinks.WORKSPACE_RULES -> TODO()
             Sidebar.ActionLinks.WINDOW_RULES -> TODO()
             Sidebar.ActionLinks.GROUPS -> listOf("group.csv" ,"groupBar.csv")
-            Sidebar.ActionLinks.GAPS_AND_BORDERS -> listOf("general.csv")
+            Sidebar.ActionLinks.GAPS_AND_BORDERS -> listOf("general.csv" ,"generalSnap.csv")
             Sidebar.ActionLinks.WINDOW_DECORATION -> TODO()
             Sidebar.ActionLinks.BLUR -> TODO()
             Sidebar.ActionLinks.SHADOW -> TODO()

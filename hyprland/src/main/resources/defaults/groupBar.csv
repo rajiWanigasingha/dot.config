@@ -18,10 +18,10 @@ group:groupbar,Gradient Rounding,gradient_rounding,How much to round the gradien
 group:groupbar,Round Only Edges,round_only_edges,Round only the indicator edges of the entire groupbar,bool,true,GROUPS,group bar,INPUT_TOGGLE
 group:groupbar,Gradient Round Only Edges,gradient_round_only_edges,Round only the gradient edges of the entire groupbar,bool,true,GROUPS,group bar,INPUT_TOGGLE
 group:groupbar,Text Color,text_color,Controls the group bar text color,color,0xffffffff,GROUPS,group bar,INPUT_COLOR
-group:groupbar,Color Active,col.active,Active group bar background color,gradient,0x66ffff00,GROUPS,group bar,INPUT_STR
-group:groupbar,Color Inactive,col.inactive,Inactive (out of focus) group bar background color,gradient,0x66777700,GROUPS,group bar,INPUT_STR
-group:groupbar,Color Locked Active,col.locked_active,Active locked group bar background color,gradient,0x66ff5500,GROUPS,group bar,INPUT_STR
-group:groupbar,Color Locked Inactive,col.locked_inactive,Inactive locked group bar background color,gradient,0x66775500,GROUPS,group bar,INPUT_STR
+group:groupbar,Color Active,col.active,Active group bar background color,gradient,0x66ffff00,GROUPS,group bar,INPUT_GRADIANT
+group:groupbar,Color Inactive,col.inactive,Inactive (out of focus) group bar background color,gradient,0x66777700,GROUPS,group bar,INPUT_GRADIANT
+group:groupbar,Color Locked Active,col.locked_active,Active locked group bar background color,gradient,0x66ff5500,GROUPS,group bar,INPUT_GRADIANT
+group:groupbar,Color Locked Inactive,col.locked_inactive,Inactive locked group bar background color,gradient,0x66775500,GROUPS,group bar,INPUT_GRADIANT
 group:groupbar,Gaps In,gaps_in,Gap size between gradients,int,2,GROUPS,group bar,INPUT_INT
 group:groupbar,Gaps Out,gaps_out,Gap size between gradients and window,int,2,GROUPS,group bar,INPUT_INT
 group:groupbar,Keep Upper Gap,keep_upper_gap,Add or remove upper gap,bool,true,GROUPS,group bar,INPUT_TOGGLE

@@ -98,6 +98,10 @@ class SidebarController {
                 val value =
                     Helpers.validateHyprlandTypesForValidHyprValues(value = it.value, type = type)
 
+//                if (type == HyprlandTypes.GRADIENT) {
+//                    logger.info("$value")
+//                }
+
                 val inputTypes = InputComponents.TypesOfInputs.valueOf(it.method)
 
                 if (value == null) {
@@ -111,6 +115,7 @@ class SidebarController {
                         InputComponents.TypesOfInputs.INPUT_INT_SELECT -> throw ErrorsBasicInputComponent.InputIntInvalidType()
                         InputComponents.TypesOfInputs.INPUT_VEC -> throw ErrorsBasicInputComponent.InputVecInvalidType()
                         InputComponents.TypesOfInputs.INPUT_COLOR -> throw ErrorsBasicInputComponent.InputColorInvalidType()
+                        InputComponents.TypesOfInputs.INPUT_GRADIANT -> throw ErrorsBasicInputComponent.InputColorInvalidType()
                     }
                 }
 

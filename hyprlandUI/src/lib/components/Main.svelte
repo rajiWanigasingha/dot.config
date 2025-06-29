@@ -13,7 +13,6 @@
 	import InputInt from './basicInputs/InputInt.svelte';
 	import InputSelectInt from './basicInputs/InputSelectInt.svelte';
 	import InputStr from './basicInputs/InputStr.svelte';
-	// $inspect(uiStore.activeTabSettings)
 </script>
 
 <div>
@@ -69,11 +68,12 @@
 				<InputVec ui={main.inputUI} data={main.data} />
 			{:else if main.inputUI.type === HyprlandUIType.INPUT_COLOR}
 				<InputColor ui={main.inputUI} data={main.data} />
+			{:else if main.inputUI.type === HyprlandUIType.INPUT_GRADIANT}
+				<InputGradiant ui={main.inputUI} data={main.data} />
 			{:else}
 				<InputStr ui={main.inputUI} data={main.data} />
 				<div class="divider m-0"></div>
 			{/if}
 		{/each}
-		<InputGradiant />
 	</div>
 </div>

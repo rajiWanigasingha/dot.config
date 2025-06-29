@@ -24,6 +24,7 @@ object InputComponents {
         INPUT_INT_SELECT,
         INPUT_VEC,
         INPUT_COLOR,
+        INPUT_GRADIANT
     }
 
     @Serializable
@@ -145,6 +146,16 @@ object InputComponents {
     @Serializable
     @SerialName("INPUT_COLOR")
     data class InputColor(
+        val value: String,
+        override val placeholder: String,
+        override val validation: ValidationObj,
+        override val validationError: String,
+        override val typeOfHyprland: HyprlandTypes
+    ) : InputShouldHave
+
+    @Serializable
+    @SerialName("INPUT_GRADIANT")
+    data class InputGradiant(
         val value: String,
         override val placeholder: String,
         override val validation: ValidationObj,
