@@ -74,6 +74,26 @@ class SidebarController {
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
+            Sidebar.ActionLinks.WINDOW_DECORATION -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.BLUR -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.SHADOW -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.GRAPHICS -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
             else -> TODO()
         }
     }
@@ -97,10 +117,6 @@ class SidebarController {
 
                 val value =
                     Helpers.validateHyprlandTypesForValidHyprValues(value = it.value, type = type)
-
-//                if (type == HyprlandTypes.GRADIENT) {
-//                    logger.info("$value")
-//                }
 
                 val inputTypes = InputComponents.TypesOfInputs.valueOf(it.method)
 

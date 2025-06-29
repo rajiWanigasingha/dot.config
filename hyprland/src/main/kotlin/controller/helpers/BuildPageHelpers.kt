@@ -33,7 +33,7 @@ object BuildPageHelpers {
             InputComponents.TypesOfInputs.INPUT_RANGE -> {
 
                 val minAndMax =
-                    validation.split(",").map { it.toFloatOrNull() ?: return ValidationObj() }
+                    validation.split(",").map { it.trim().toFloatOrNull() ?: return ValidationObj() }
 
                 if (minAndMax.size != 2) return ValidationObj()
 

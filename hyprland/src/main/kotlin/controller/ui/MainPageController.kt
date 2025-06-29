@@ -196,14 +196,54 @@ class MainPageController {
                 return update
             }
 
-            Sidebar.ActionLinks.WINDOW_DECORATION -> TODO()
-            Sidebar.ActionLinks.BLUR -> TODO()
-            Sidebar.ActionLinks.SHADOW -> TODO()
+            Sidebar.ActionLinks.WINDOW_DECORATION, Sidebar.ActionLinks.BLUR, Sidebar.ActionLinks.SHADOW -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("decoration.csv", "decorationBlur.csv", "decorationShadow.csv"),
+                        settingsStructure = listOf("decoration {", "blur {", "}", "shadow {", "}", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/decoration.conf",
+                    )
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.ANIMATIONS -> TODO()
             Sidebar.ActionLinks.ENV -> TODO()
             Sidebar.ActionLinks.AUTOSTART -> TODO()
             Sidebar.ActionLinks.MISC -> TODO()
-            Sidebar.ActionLinks.GRAPHICS -> TODO()
+            Sidebar.ActionLinks.GRAPHICS -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    if (data.category == "xwayland") {
+                        createHyprlandText(
+                            listOfPaths = listOf("xwayland.csv"),
+                            settingsStructure = listOf("xwayland {", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/xwayland.conf",
+                        )
+                    } else if(data.category == "render") {
+                        createHyprlandText(
+                            listOfPaths = listOf("render.csv"),
+                            settingsStructure = listOf("render {", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/render.conf",
+                        )
+                    } else if (data.category == "opengl") {
+                        createHyprlandText(
+                            listOfPaths = listOf("openGl.csv"),
+                            settingsStructure = listOf("opengl {", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/openGL.conf",
+                        )
+                    }
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.ECOSYSTEM -> TODO()
             Sidebar.ActionLinks.EXPERIMENT -> TODO()
             Sidebar.ActionLinks.DEBUG -> TODO()
