@@ -12,7 +12,7 @@
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
 
 	let initValue = $state(ui.value as number);
-	let initRangeValue = $state((ui.value as number) + 1.0);
+	let Increment = $state('0');
 
 	let errorValidation = $state('');
 	let errorFromServer = $derived(() => {
@@ -34,7 +34,6 @@
 			updateChange.error.error !== ''
 		) {
 			initValue = ui.value as number;
-			initRangeValue = (ui.value as number) + 1.0;
 		}
 	});
 
@@ -58,6 +57,8 @@
 
 		websocketConnection.sendActionToMainUpdate(actionLink, message);
 	}
+
+	$inspect(ui.validation.range);
 </script>
 
 <div class="flex w-full flex-col gap-3">
@@ -75,13 +76,13 @@
 	<div>
 		<input
 			type="range"
-			min="0.0"
-			max="2.0"
-			bind:value={initRangeValue}
+			min={ui.validation.range!![0]}
+			max={ui.validation.range!![1]}
+			bind:value={initValue}
 			step="0.01"
 			class="range w-full"
 			onchange={(e) => {
-				initValue = Number(Number(Number(e.currentTarget.value) - 1.0).toFixed(2));
+				initValue = Number(Number(e.currentTarget.value).toFixed(2));
 				changeUpdate(uiStore.activeSidebar!!, initValue);
 			}}
 		/>
@@ -91,8 +92,7 @@
 		<button
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
-				initRangeValue = Number((initRangeValue - 0.01).toFixed(2));
-				initValue = Number((initRangeValue - 1.0).toFixed(2));
+				initValue = Number((initValue - 0.01 - Number(Increment)).toFixed(2));
 				changeUpdate(uiStore.activeSidebar!!, initValue);
 			}}
 		>
@@ -104,8 +104,7 @@
 		<button
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
-				initRangeValue = Number((initRangeValue + 0.01).toFixed(2));
-				initValue = Number((initRangeValue - 1.0).toFixed(2));
+				initValue = Number((initValue + 0.01 + Number(Increment)).toFixed(2));
 				changeUpdate(uiStore.activeSidebar!!, initValue);
 			}}
 		>
@@ -113,6 +112,46 @@
 				><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" /></svg
 			>
 		</button>
+	</div>
+	<div class="collapse-plus collapse mx-0 border-0 px-0 focus:border-0">
+		<input type="checkbox" />
+		<div class="collapse-title mx-0 px-0 text-sm font-semibold">Increment Custome Value Amount</div>
+		<div class="collapse-content mx-0 px-0 text-sm">
+			<div class="join w-full">
+				<!-- svelte-ignore a11y_consider_explicit_label -->
+				<button
+					class="join-item btn btn-primary w-1/5"
+					onclick={() => (Increment = (Number(Increment) - 0.1).toFixed(2))}
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+						><path fill="currentColor" d="M6 13v-2h12v2z" /></svg
+					>
+				</button>
+				<input
+					type="text"
+					class="join-item input w-3/5 text-center text-xs focus:border-0"
+					bind:value={Increment}
+					oninput={(e) => {
+						if (isNaN(Number(e.currentTarget.value))) {
+							if (e.currentTarget.value[e.currentTarget.value.length - 1] !== '.')
+								Increment = e.currentTarget.value.replace(/[^\d.]/g, '');
+						} else {
+							Increment = e.currentTarget.value;
+							if (Increment[0] === '.') Increment = Increment.slice(1);
+						}
+					}}
+				/>
+				<!-- svelte-ignore a11y_consider_explicit_label -->
+				<button
+					class="join-item btn btn-primary w-1/5"
+					onclick={() => (Increment = Number(Increment + 0.1).toFixed(2))}
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+						><path fill="currentColor" d="M11 21v-8H3v-2h8V3h2v8h8v2h-8v8z" /></svg
+					>
+				</button>
+			</div>
+		</div>
 	</div>
 </div>
 

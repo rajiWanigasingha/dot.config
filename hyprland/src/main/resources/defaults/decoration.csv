@@ -1,12 +1,12 @@
-category,displayName,settingsName,description,type,value
-decoration,Corner Rounding,rounding,rounded corners’ radius (in layout px),int,0
-decoration,Rounding Power,rounding_power,adjusts the curve used for rounding corners; larger is smoother; 2.0 is a circle; 4.0 is a squircle; [2.0 - 10.0],float,2.0
-decoration,Active Opacity,active_opacity,opacity of active windows. [0.0 - 1.0],float,1.0
-decoration,Inactive Opacity,inactive_opacity,opacity of inactive windows. [0.0 - 1.0],float,1.0
-decoration,Fullscreen Opacity,fullscreen_opacity,opacity of fullscreen windows. [0.0 - 1.0],float,1.0
-decoration,Dim Inactive,dim_inactive,enables dimming of inactive windows,bool,false
-decoration,Dim Strength,dim_strength,how much inactive windows should be dimmed [0.0 - 1.0],float,0.5
-decoration,Dim Special,dim_special,how much to dim the rest of the screen by when a special workspace is open. [0.0 - 1.0],float,0.2
-decoration,Dim Around,dim_around,how much the dimaround window rule should dim by. [0.0 - 1.0],float,0.4
-decoration,Screen Shader,screen_shader,a path to a custom shader to be applied at the end of rendering. See examples/screenShader.frag for an example.,str,""
-decoration,Border Part of Window,border_part_of_window,whether the window border should be a part of the window,bool,true
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+decoration,Corner Rounding,rounding,rounded corners’ radius (in layout px),int,0,WINDOW_DECORATION,decoration,INPUT_INT
+decoration,Rounding Power,rounding_power,adjusts the curve used for rounding corners; larger is smoother; 2.0 is a circle; 4.0 is a squircle.,float,2.0,WINDOW_DECORATION,decoration,INPUT_RANGE,"2.0,10.0"
+decoration,Active Opacity,active_opacity,opacity of active windows. ,float,1.0,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Inactive Opacity,inactive_opacity,opacity of inactive windows. ,float,1.0,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Fullscreen Opacity,fullscreen_opacity,opacity of fullscreen windows. ,float,1.0,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Dim Inactive,dim_inactive,enables dimming of inactive windows,bool,false,WINDOW_DECORATION,decoration,INPUT_TOGGLE
+decoration,Dim Strength,dim_strength,how much inactive windows should be dimmed,float,0.5,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Dim Special,dim_special,how much to dim the rest of the screen by when a special workspace is open.,float,0.2,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Dim Around,dim_around,how much the dimaround window rule should dim by.,float,0.4,WINDOW_DECORATION,decoration,INPUT_RANGE,"0.0,1.0"
+decoration,Screen Shader,screen_shader,a path to a custom shader to be applied at the end of rendering. See examples/screenShader.frag for an example.,str,"",WINDOW_DECORATION,decoration,INPUT_STR
+decoration,Border Part of Window,border_part_of_window,whether the window border should be a part of the window,bool,true,WINDOW_DECORATION,decoration,INPUT_TOGGLE

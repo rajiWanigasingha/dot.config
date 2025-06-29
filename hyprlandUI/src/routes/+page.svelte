@@ -8,8 +8,6 @@
 			websocketConnection.connectToMain();
 		}
 	});
-
-	$inspect(updateChange);
 </script>
 
 <div class="grid min-h-screen w-full grid-cols-12">

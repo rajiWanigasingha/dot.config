@@ -1,10 +1,10 @@
-category,displayName,settingsName,description,type,value
-render,Explicit Sync,explicit_sync,Whether to enable explicit sync support; requires a Hyprland restart;,int,2
-render,Explicit Sync KMS,explicit_sync_kms,Whether to enable explicit sync support for the KMS layer; requires explicit_sync to be enabled;,int,2
-render,Direct Scanout,direct_scanout,Enables direct scanout; attempts to reduce lag when there is only one fullscreen application on a screen; recommended to set false if fullscreen app shows graphical glitches;,int,0
-render,Expand Undersized Textures,expand_undersized_textures,Whether to expand undersized textures along the edge; or rather stretch the entire texture,bool,true
-render,XP Mode,xp_mode,Disables back buffer and bottom layer rendering,bool,false
-render,CTM Animation,ctm_animation,Whether to enable a fade animation for CTM changes (hyprsunset); 2 means “auto” which disables them on Nvidia,int,2
-render,Color Management FS Passthrough,cm_fs_passthrough,Passthrough color settings for fullscreen apps when possible;,int,2
-render,Color Management Enabled,cm_enabled,Whether the color management pipeline should be enabled or not; requires a restart of Hyprland to fully take effect,bool,true
-render,Send Content Type,send_content_type,Report content type to allow monitor profile autoswitch; may result in a black screen during the switch,bool,true
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+render,Explicit Sync,explicit_sync,Whether to enable explicit sync support; requires a Hyprland restart;,int,2,GRAPHICS,Render,INPUT_INT
+render,Explicit Sync KMS,explicit_sync_kms,Whether to enable explicit sync support for the KMS layer; requires explicit_sync to be enabled;,int,2,GRAPHICS,Render,INPUT_INT
+render,Direct Scanout,direct_scanout,Enables direct scanout; attempts to reduce lag when there is only one fullscreen application on a screen; recommended to set false if fullscreen app shows graphical glitches;,int,0,GRAPHICS,Render,INPUT_INT
+render,Expand Undersized Textures,expand_undersized_textures,Whether to expand undersized textures along the edge; or rather stretch the entire texture,bool,true,GRAPHICS,Render,INPUT_TOGGLE
+render,XP Mode,xp_mode,Disables back buffer and bottom layer rendering,bool,false,GRAPHICS,Render,INPUT_TOGGLE
+render,CTM Animation,ctm_animation,Whether to enable a fade animation for CTM changes (hyprsunset); 2 means “auto” which disables them on Nvidia,int,2,GRAPHICS,Render,INPUT_INT
+render,Color Management FS Passthrough,cm_fs_passthrough,Passthrough color settings for fullscreen apps when possible;,int,2,GRAPHICS,Render,INPUT_INT_SELECT,"0,1,2","Off,Always,Hdr Only"
+render,Color Management Enabled,cm_enabled,Whether the color management pipeline should be enabled or not; requires a restart of Hyprland to fully take effect,bool,true,GRAPHICS,Render,INPUT_TOGGLE
+render,Send Content Type,send_content_type,Report content type to allow monitor profile autoswitch; may result in a black screen during the switch,bool,true,GRAPHICS,Render,INPUT_TOGGLE

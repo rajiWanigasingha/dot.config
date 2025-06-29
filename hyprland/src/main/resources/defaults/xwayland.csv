@@ -1,5 +1,5 @@
-category,displayName,settingsName,description,type,value
-xwayland,Enabled,enabled,Allow running applications using X11,bool,1
-xwayland,Use Nearest Neighbor,use_nearest_neighbor,Uses the nearest neighbor filtering for XWayland apps; making them pixelated rather than blurry,bool,true
-xwayland,Force Zero Scaling,force_zero_scaling,Forces a scale of 1 on XWayland windows on scaled displays.,bool,false
-xwayland,Create Abstract Socket,create_abstract_socket,Create the abstract Unix domain socket for XWayland connections; (restart required; Linux only),bool,false
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+xwayland,Enabled,enabled,Allow running applications using X11,bool,1,GRAPHICS,Xwayland,INPUT_TOGGLE
+xwayland,Use Nearest Neighbor,use_nearest_neighbor,Uses the nearest neighbor filtering for XWayland apps; making them pixelated rather than blurry,bool,true,GRAPHICS,Xwayland,INPUT_TOGGLE
+xwayland,Force Zero Scaling,force_zero_scaling,Forces a scale of 1 on XWayland windows on scaled displays.,bool,false,GRAPHICS,Xwayland,INPUT_TOGGLE
+xwayland,Create Abstract Socket,create_abstract_socket,Create the abstract Unix domain socket for XWayland connections; (restart required; Linux only),bool,false,GRAPHICS,Xwayland,INPUT_TOGGLE
