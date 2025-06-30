@@ -118,8 +118,6 @@ class SidebarController {
         }
     }
 
-    fun getHelpUI(actionLinks: Sidebar.ActionLinks, validate: String) {}
-
     private fun createPageUI(
         actionLinks: Sidebar.ActionLinks,
         pageSettings: List<String>

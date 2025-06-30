@@ -13,6 +13,7 @@ import io.ktor.server.websocket.timeout
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.dot.config.controller.Initialize
+import org.dot.config.view.ui.handleHelpUI
 import org.dot.config.view.ui.handleUI
 import org.dot.config.view.ui.mainUI
 import org.slf4j.event.Level
@@ -42,5 +43,6 @@ fun Application.module() {
     routing {
         handleUI()
         mainUI()
+        handleHelpUI()
     }
 }

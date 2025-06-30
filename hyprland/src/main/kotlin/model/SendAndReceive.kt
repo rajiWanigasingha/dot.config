@@ -80,4 +80,24 @@ object SendAndReceive {
         val code: MainErrorCodes,
         val errorMessage: String
     )
+
+
+    // Help Action Receive And Send Message
+    @Serializable
+    data class ReceiveHelp(
+        val actionLink: Sidebar.ActionLinks,
+        val name: String,
+        val category: String
+    )
+
+    @Serializable
+    enum class HelpErrorCodes {
+        SERIALIZABLE ,NO_HELP_FOUND
+    }
+
+    @Serializable
+    data class SendHelpError(
+        val code: HelpErrorCodes,
+        val errorMessage: String
+    )
 }
