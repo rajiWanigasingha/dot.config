@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, uiStore, type ReceviePageConnection, type Receive, type SendSideBarActions, type ReceiveMainPage, type ReceiveMainUpdateConnection, type SendMainUpdatesActionLink, type ReceiveMainUpdateActions, MainPageActionStatus, type SendMainStandedUpdate, updateChange } from "$lib"
+import { ActionLinks, ActionType, uiStore, type ReceviePageConnection, type Receive, type SendSideBarActions, type ReceiveMainPage, type ReceiveMainUpdateConnection, type SendMainUpdatesActionLink, type ReceiveMainUpdateActions, MainPageActionStatus, type SendMainStandedUpdate, updateChange, type SendHelpRequest, type SendHelp } from "$lib"
 
 class WebSocketConnection {
 
@@ -7,6 +7,8 @@ class WebSocketConnection {
     pageConnection = $state(null as WebSocket | null)
 
     mainConnection = $state(null as WebSocket | null)
+
+    helpConnection = $state(null as WebSocket | null)
 
     connectToPage() {
 
@@ -110,6 +112,36 @@ class WebSocketConnection {
         }
     }
 
+    connectToHelp() {
+        const ws = new WebSocket(`${this.url}/help`)
+
+        this.helpConnection = ws
+
+        ws.onmessage = (message) => {
+
+            const receiveData = JSON.parse(message.data) as Receive
+
+            switch (receiveData.actionType) {
+
+                case ActionType.CONNECT: {
+                    console.log(receiveData)
+                    break;
+                }
+
+                case ActionType.HELP: {
+
+                    const data = receiveData.payload as string
+
+                    console.log(receiveData)
+
+                    uiStore.setHelpMd(data)
+
+                    break;
+                }
+            }
+        }
+    }
+
     sendActionToPage(actionLink: ActionLinks) {
 
         const message: SendSideBarActions = {
@@ -143,6 +175,17 @@ class WebSocketConnection {
         updateChange.setError({ name: updateMessage.name, category: updateMessage.category, error: '' })
 
         this.mainConnection?.send(JSON.stringify(message))
+    }
+
+    sendActionToHelp(item: SendHelpRequest) {
+        const message: SendHelp = {
+            actionType: ActionType.HELP,
+            payload: item
+        }
+
+        console.log(message)
+
+        this.helpConnection?.send(JSON.stringify(message))
     }
 
 }

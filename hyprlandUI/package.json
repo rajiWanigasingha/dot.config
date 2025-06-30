@@ -42,6 +42,7 @@
 	"dependencies": {
 		"cmpstr": "^3.0.1",
 		"daisyui": "^5.0.43",
-		"install": "^0.13.0"
+		"install": "^0.13.0",
+		"marked": "^16.0.0"
 	}
 }

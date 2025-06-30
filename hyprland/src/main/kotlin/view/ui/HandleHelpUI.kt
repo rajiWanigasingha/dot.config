@@ -49,6 +49,8 @@ fun Route.handleHelpUI() {
                     )
                 )
 
+                Logger.info("Send markdown file")
+
             }.onFailure { exception ->
                 when (exception) {
 

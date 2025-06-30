@@ -93,3 +93,15 @@ export interface SendMainStandedUpdate {
     type: HyprlandTypes,
     category: string
 }
+
+
+export interface SendHelp {
+    actionType: ActionType
+    payload: SendHelpRequest
+}
+
+export interface SendHelpRequest {
+    actionLink: ActionLinks,
+    name: string,
+    category: string
+}

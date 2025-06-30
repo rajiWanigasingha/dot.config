@@ -1,4 +1,4 @@
-import type { ActionLinks, MainPageInputs, MainPageSettings, SidebarUI } from "$lib";
+import { websocketConnection, type ActionLinks, type MainPageInputData, type MainPageInputs, type MainPageSettings, type SidebarUI } from "$lib";
 
 export const uiStore = $state({
 	sidebar: [] as SidebarUI[],
@@ -6,6 +6,10 @@ export const uiStore = $state({
 	activeSidebar: null as ActionLinks | null,
 	activeTabSettings: [] as MainPageSettings[],
 	activeMainPageTab: '',
+	activeHelp: '',
+	openHelp: null as null | MainPageInputData,
+	helpMd: '',
+
 
 	setSidebar(data: SidebarUI[]) {
 		this.sidebar.push(...data);
@@ -39,5 +43,32 @@ export const uiStore = $state({
 		this.mainPage = [];
 		this.activeMainPageTab = '';
 		this.activeTabSettings = [];
+	},
+
+	setActiveHelp(name: string) {
+		this.activeHelp = name
+	},
+
+	clearHelp() {
+		this.activeHelp = ''
+	},
+
+	setOpenHelp(data: MainPageInputData) {
+		this.openHelp = data
+
+		websocketConnection.sendActionToHelp({
+			name: data.settingsName,
+			category: data.category,
+			actionLink: uiStore.activeSidebar!!
+		})
+	},
+
+	clearOpen() {
+		this.openHelp = null
+	},
+
+	setHelpMd(md: string) {
+		this.helpMd = md
 	}
+
 });
