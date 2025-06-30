@@ -6,12 +6,13 @@
 		if (uiStore.getSidebar().length === 0) {
 			websocketConnection.connectToPage();
 			websocketConnection.connectToMain();
+			websocketConnection.connectToHelp()
 		}
 	});
 </script>
 
 <div class="grid min-h-screen w-full grid-cols-12">
-	<section class="bg-base-100 col-span-3 min-h-screen" id="sidebar">
+	<section class="bg-base-200/50 col-span-3 min-h-screen" id="sidebar">
 		<Sidebar />
 	</section>
 

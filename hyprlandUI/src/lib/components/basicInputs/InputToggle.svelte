@@ -30,9 +30,7 @@
 			{data.description.replaceAll(';', ',')}
 		</p>
 	</div>
-	<label
-		class="toggle toggle-xl text-base-conten"
-	>
+	<label class="toggle toggle-xl text-base-conten">
 		<input
 			type="checkbox"
 			class="hidden"
@@ -65,3 +63,4 @@
 		</svg>
 	</label>
 </div>
+

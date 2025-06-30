@@ -57,8 +57,6 @@
 
 		websocketConnection.sendActionToMainUpdate(actionLink, message);
 	}
-
-	$inspect(ui.validation.range);
 </script>
 
 <div class="flex w-full flex-col gap-3">

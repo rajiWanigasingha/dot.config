@@ -3,9 +3,8 @@
 </script>
 
 <div>
-	<div class="flex flex-row items-center justify-between px-4 pt-2">
+	<div class="flex flex-row items-center justify-between px-2 py-1">
 		<div class="flex flex-row items-center gap-2">
-			<img src="/favicon.png" alt="" srcset="" class="size-5" />
 			<p class="text-xs font-semibold">Dot.Config</p>
 		</div>
 		<div class="flex flex-row gap-3">
