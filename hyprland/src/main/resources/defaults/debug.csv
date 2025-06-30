@@ -1,16 +1,15 @@
-category,displayName,settingsName,description,type,value
-debug,Overlay,overlay,Print the debug performance overlay; Disable VFR for accurate results,bool,false
-debug,Damage Blink,damage_blink,(epilepsy warning!) flash areas updated with damage tracking,bool,false
-debug,Disable Logs,disable_logs,Disable logging to a file,bool,true
-debug,Disable Time,disable_time,Disables time logging,bool,true
-debug,Damage Tracking,damage_tracking,Redraw only the needed bits of the display; Do not change; (default: full - 2) monitor - 1; none - 0,int,2
-debug,Enable Stdout Logs,enable_stdout_logs,Enables logging to stdout,bool,false
-debug,Manual Crash,manual_crash,Set to 1 and then back to 0 to crash Hyprland,int,0
-debug,Suppress Errors,suppress_errors,If true; do not display config file parsing errors,bool,false
-debug,Watchdog Timeout,watchdog_timeout,Sets the timeout in seconds for watchdog to abort processing of a signal of the main thread; Set to 0 to disable,int,5
-debug,Disable Scale Checks,disable_scale_checks,Disables verification of the scale factors; Will result in pixel alignment and rounding errors,bool,false
-debug,Error Limit,error_limit,Limits the number of displayed config file parsing errors,int,5
-debug,Error Position,error_position,Sets the position of the error bar; top - 0; bottom - 1,int,0
-debug,Colored Stdout Logs,colored_stdout_logs,Enables colors in the stdout logs,bool,true
-debug,Pass,pass,Enables render pass debugging,bool,false
-debug,Full CM Proto,full_cm_proto,Claims support for all cm proto features (requires restart),bool,false
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+debug,Overlay,overlay,Print the debug performance overlay; Disable VFR for accurate results,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Damage Blink,damage_blink,(epilepsy warning!) flash areas updated with damage tracking,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Disable Logs,disable_logs,Disable logging to a file,bool,true,DEBUG,debug,INPUT_TOGGLE
+debug,Disable Time,disable_time,Disables time logging,bool,true,DEBUG,debug,INPUT_TOGGLE
+debug,Damage Tracking,damage_tracking,Redraw only the needed bits of the display; Do not change; (default: full - 2) monitor - 1; none - 0,int,2,DEBUG,debug,INPUT_INT_SELECT,"0,1,2","None,Monitor,Full"
+debug,Enable Stdout Logs,enable_stdout_logs,Enables logging to stdout,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Manual Crash,manual_crash,Set to 1 and then back to 0 to crash Hyprland,int,0,DEBUG,debug,INPUT_INT
+debug,Suppress Errors,suppress_errors,If true; do not display config file parsing errors,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Disable Scale Checks,disable_scale_checks,Disables verification of the scale factors; Will result in pixel alignment and rounding errors,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Error Limit,error_limit,Limits the number of displayed config file parsing errors,int,5,DEBUG,debug,INPUT_INT
+debug,Error Position,error_position,Sets the position of the error bar.,int,0,DEBUG,debug,INPUT_INT_SELECT,"0,1","Top,Bottom"
+debug,Colored Stdout Logs,colored_stdout_logs,Enables colors in the stdout logs,bool,true,DEBUG,debug,INPUT_TOGGLE
+debug,Pass,pass,Enables render pass debugging,bool,false,DEBUG,debug,INPUT_TOGGLE
+debug,Full CM Proto,full_cm_proto,Claims support for all cm proto features (requires restart),bool,false,DEBUG,debug,INPUT_TOGGLE

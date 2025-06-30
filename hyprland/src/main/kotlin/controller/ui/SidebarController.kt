@@ -94,6 +94,26 @@ class SidebarController {
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
+            Sidebar.ActionLinks.MISC -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.ECOSYSTEM -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.EXPERIMENT -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.DEBUG -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
             else -> TODO()
         }
     }

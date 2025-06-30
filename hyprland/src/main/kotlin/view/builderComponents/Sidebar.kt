@@ -93,7 +93,7 @@ object Sidebar {
             navigationSettings = listOf(
                 NavigationSettings(
                     icon = "layoutGeneral",
-                    name = "General Layout",
+                    name = "General Layout And Layers",
                     actionLink = ActionLinks.LAYOUT_GENERAL
                 ),
                 NavigationSettings(

@@ -1,36 +1,36 @@
-category,displayName,settingsName,description,type,value
-misc,Disable Hyprland Logo,disable_hyprland_logo,Disables the random Hyprland logo / anime girl background.,bool,false
-misc,Disable Splash Rendering,disable_splash_rendering,Disables the Hyprland splash rendering.,bool,false
-misc,Splash Text Color,col.splash,Changes the color of the splash text.,color,0xffffffff
-misc,Font Family,font_family,Set the global default font to render system messages.,string,Sans
-misc,Splash Font Family,splash_font_family,Changes the font used to render the splash text.,string,
-misc,Force Default Wallpaper,force_default_wallpaper,Enforce a default wallpaper (-1 means random).,int,-1
-misc,Variable Frame Rate,vfr,Controls the VFR status of Hyprland.,bool,true
-misc,Variable Refresh Rate,vrr,Controls VRR mode [0/1/2/3].,int,0
-misc,Mouse Move Enables DPMS,mouse_move_enables_dpms,Wake monitors on mouse movement.,bool,false
-misc,Key Press Enables DPMS,key_press_enables_dpms,Wake monitors on key press.,bool,false
-misc,Always Follow on DnD,always_follow_on_dnd,Mouse focus follows during drag and drop.,bool,true
-misc,Layers Hog Keyboard Focus,layers_hog_keyboard_focus,Layers keep keyboard focus on mouse move.,bool,true
-misc,Animate Manual Resizes,animate_manual_resizes,Animate window resizing or moving.,bool,false
-misc,Animate Mouse Window Dragging,animate_mouse_windowdragging,Animate dragging windows by mouse.,bool,false
-misc,Disable Auto Reload,disable_autoreload,Disable config auto reload.,bool,false
-misc,Enable Swallow,enable_swallow,Enable window swallowing.,bool,false
-misc,Swallow Regex,swallow_regex,Regex for windows to swallow.,str,
-misc,Swallow Exception Regex,swallow_exception_regex,Regex for exceptions to swallowing.,str,
-misc,Focus on Activate,focus_on_activate,Focus app when it requests activation.,bool,false
-misc,Mouse Move Focuses Monitor,mouse_move_focuses_monitor,Switch focus to monitor under mouse.,bool,true
-misc,Render Ahead of Time,render_ahead_of_time,Lower latency by rendering ahead (buggy).,bool,false
-misc,Render Ahead Safezone,render_ahead_safezone,Milliseconds of safezone for ahead rendering.,int,1
-misc,Allow Session Lock Restore,allow_session_lock_restore,Restart lockscreen after crash.,bool,false
-misc,Background Color,background_color,Background color when Hyprland logo is disabled.,color,0x111111
-misc,Close Special on Empty,close_special_on_empty,Close special workspace if empty.,bool,true
-misc,New Window Takes Over Fullscreen,new_window_takes_over_fullscreen,New tiled window fullscreen policy [0/1/2].,int,0
-misc,Exit Window Retains Fullscreen,exit_window_retains_fullscreen,Keep fullscreen on next window.,bool,false
-misc,Initial Workspace Tracking,initial_workspace_tracking,Track workspace where windows were invoked [0/1/2].,int,1
-misc,Middle Click Paste,middle_click_paste,Enable middle-click-paste (primary selection).,bool,true
-misc,Render Unfocused FPS,render_unfocused_fps,Max FPS for unfocused windows.,int,15
-misc,Disable XDG Env Checks,disable_xdg_env_checks,Suppress XDG environment warning.,bool,false
-misc,Disable QtUtils Check,disable_hyprland_qtutils_check,Suppress Hyprland QtUtils warning.,bool,false
-misc,Lockdead Screen Delay,lockdead_screen_delay,Delay before fallback screen (in ms).,int,1000
-misc,Enable ANR Dialog,enable_anr_dialog,Show app not responding dialog.,bool,true
-misc,ANR Missed Pings,anr_missed_pings,Missed pings before ANR dialog appears.,int,1
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+misc,Disable Hyprland Logo,disable_hyprland_logo,Disables the random Hyprland logo / anime girl background.,bool,false,LAYOUT_GENERAL,general,INPUT_TOGGLE
+misc,Disable Splash Rendering,disable_splash_rendering,Disables the Hyprland splash rendering.,bool,false,LAYOUT_GENERAL,general,INPUT_TOGGLE
+misc,Splash Text Color,col.splash,Changes the color of the splash text.,color,0xffffffff,LAYOUT_GENERAL,general,INPUT_COLOR
+misc,Font Family,font_family,Set the global default font to render system messages.,string,Sans,MISC,misc,INPUT_STR
+misc,Splash Font Family,splash_font_family,Changes the font used to render the splash text.,string,,LAYOUT_GENERAL,general,INPUT_STR
+misc,Force Default Wallpaper,force_default_wallpaper,Enforce any of the 3 default wallpapers. Setting this to 0 or 1 disables the anime background. -1 means “random”,int,-1,LAYOUT_GENERAL,general,INPUT_INT
+misc,Variable Frame Rate,vfr,Controls the VFR status of Hyprland.,bool,true,MISC,misc,INPUT_TOGGLE
+misc,Variable Refresh Rate,vrr,Controls VRR mode.,int,0,MISC,misc,INPUT_INT_SELECT,"0,1,2,3","Off,On,Fullscreen Only,Fullscreen with video or game content type"
+misc,Mouse Move Enables DPMS,mouse_move_enables_dpms,Wake monitors on mouse movement.,bool,false,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+misc,Key Press Enables DPMS,key_press_enables_dpms,Wake monitors on key press.,bool,false,KEYBOARD,,INPUT_TOGGLE
+misc,Always Follow on Drag And Drop,always_follow_on_dnd,Mouse focus follows during drag and drop.,bool,true,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+misc,Layers Hog Keyboard Focus,layers_hog_keyboard_focus,Layers keep keyboard focus on mouse move.,bool,true,LAYOUT_GENERAL,general,INPUT_TOGGLE
+misc,Animate Manual Resizes,animate_manual_resizes,Animate window resizing or moving.,bool,false,WINDOW_DECORATION,decoration,INPUT_TOGGLE
+misc,Animate Mouse Window Dragging,animate_mouse_windowdragging,Animate dragging windows by mouse.,bool,false,WINDOW_DECORATION,decoration,INPUT_TOGGLE
+misc,Disable Auto Reload,disable_autoreload,Disable config auto reload.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Enable Swallow,enable_swallow,Enable window swallowing.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Swallow Regex,swallow_regex,Regex for windows to swallow.,str,,MISC,misc,INPUT_STR
+misc,Swallow Exception Regex,swallow_exception_regex,Regex for exceptions to swallowing.,str,,MISC,misc,INPUT_STR
+misc,Focus on Activate,focus_on_activate,Focus app when it requests activation.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Mouse Move Focuses Monitor,mouse_move_focuses_monitor,Switch focus to monitor under mouse.,bool,true,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+misc,Render Ahead of Time,render_ahead_of_time,Lower latency by rendering ahead (buggy).,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Render Ahead Safezone,render_ahead_safezone,Milliseconds of safezone for ahead rendering.Recommended be in between 1 and 2,int,1,MISC,misc,INPUT_INT
+misc,Allow Session Lock Restore,allow_session_lock_restore,Restart lockscreen after crash.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Background Color,background_color,Background color when Hyprland logo is disabled.,color,0x111111,LAYOUT_GENERAL,general,INPUT_COLOR
+misc,Close Special on Empty,close_special_on_empty,Close special workspace if empty.,bool,true,MISC,misc,INPUT_TOGGLE
+misc,New Window Takes Over Fullscreen,new_window_takes_over_fullscreen,"if there is a fullscreen or maximized window, decide whether a new tiled window opened should replace it, stay behind or disable the fullscreen/maximized state",int,0,MISC,misc,INPUT_INT_SELECT,"0,1,2","Behind,Take Over,Unfullscreen/UnMaxize"
+misc,Exit Window Retains Fullscreen,exit_window_retains_fullscreen,Keep fullscreen on next window.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Initial Workspace Tracking,initial_workspace_tracking,Track workspace where windows were invoked.,int,1,LAYOUT_GENERAL,general,INPUT_INT_SELECT,"0,1,2","Disable,Single Shot,Persistent"
+misc,Middle Click Paste,middle_click_paste,Enable middle-click-paste (primary selection).,bool,true,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE
+misc,Render Unfocused FPS,render_unfocused_fps,Max FPS for unfocused windows.,int,15,LAYOUT_GENERAL,general,INPUT_INT
+misc,Disable XDG Env Checks,disable_xdg_env_checks,Suppress XDG environment warning.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Disable QtUtils Check,disable_hyprland_qtutils_check,Suppress Hyprland QtUtils warning.,bool,false,MISC,misc,INPUT_TOGGLE
+misc,Lockdead Screen Delay,lockdead_screen_delay,Delay before fallback screen (in ms).,int,1000,MISC,misc,INPUT_INT
+misc,Enable ANR Dialog,enable_anr_dialog,Show app not responding dialog.,bool,true,MISC,misc,INPUT_TOGGLE
+misc,ANR Missed Pings,anr_missed_pings,Missed pings before ANR dialog appears.,int,1,MISC,misc,INPUT_INT

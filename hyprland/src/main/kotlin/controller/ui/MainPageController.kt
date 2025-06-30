@@ -95,25 +95,39 @@ class MainPageController {
 
                 if (update) {
 
-                    createHyprlandText(
-                        listOfPaths = listOf(
-                            "inputs.csv",
-                            "inputsTouchpad.csv",
-                            "inputsTouchDevice.csv",
-                            "inputsTablet.csv"
-                        ),
-                        settingsStructure = listOf(
-                            "input {",
-                            "touchpad {",
-                            "}",
-                            "touchdevice {",
-                            "}",
-                            "tablet {",
-                            "}",
-                            "}"
-                        ),
-                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/inputs.conf",
-                    )
+                    if (data.category != "misc") {
+                        createHyprlandText(
+                            listOfPaths = listOf(
+                                "inputs.csv",
+                                "inputsTouchpad.csv",
+                                "inputsTouchDevice.csv",
+                                "inputsTablet.csv"
+                            ),
+                            settingsStructure = listOf(
+                                "input {",
+                                "touchpad {",
+                                "}",
+                                "touchdevice {",
+                                "}",
+                                "tablet {",
+                                "}",
+                                "}"
+                            ),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/inputs.conf",
+                        )
+                    } else {
+                        createHyprlandText(
+                            listOfPaths = listOf(
+                                "misc.csv",
+                            ),
+                            settingsStructure = listOf(
+                                "misc {",
+                                "}"
+                            ),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/misc.conf",
+                        )
+                    }
+
                 }
 
                 return update
@@ -123,12 +137,19 @@ class MainPageController {
                 val update = updateStandedInDatabase(data)
 
                 if (update) {
-
-                    createHyprlandText(
-                        listOfPaths = listOf("general.csv", "generalSnap.csv"),
-                        settingsStructure = listOf("general {", "snap {", "}", "}"),
-                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/general.conf",
-                    )
+                    if (data.category != "misc") {
+                        createHyprlandText(
+                            listOfPaths = listOf("general.csv", "generalSnap.csv"),
+                            settingsStructure = listOf("general {", "snap {", "}", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/general.conf",
+                        )
+                    } else {
+                        createHyprlandText(
+                            listOfPaths = listOf("misc.csv"),
+                            settingsStructure = listOf("misc {", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/misc.conf",
+                        )
+                    }
                 }
 
                 return update
@@ -201,11 +222,19 @@ class MainPageController {
 
                 if (update) {
 
-                    createHyprlandText(
-                        listOfPaths = listOf("decoration.csv", "decorationBlur.csv", "decorationShadow.csv"),
-                        settingsStructure = listOf("decoration {", "blur {", "}", "shadow {", "}", "}"),
-                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/decoration.conf",
-                    )
+                    if (data.category != "misc") {
+                        createHyprlandText(
+                            listOfPaths = listOf("decoration.csv", "decorationBlur.csv", "decorationShadow.csv"),
+                            settingsStructure = listOf("decoration {", "blur {", "}", "shadow {", "}", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/decoration.conf",
+                        )
+                    } else {
+                        createHyprlandText(
+                            listOfPaths = listOf("misc.csv"),
+                            settingsStructure = listOf("misc {", "}"),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/misc.conf",
+                        )
+                    }
                 }
 
                 return update
@@ -214,39 +243,97 @@ class MainPageController {
             Sidebar.ActionLinks.ANIMATIONS -> TODO()
             Sidebar.ActionLinks.ENV -> TODO()
             Sidebar.ActionLinks.AUTOSTART -> TODO()
-            Sidebar.ActionLinks.MISC -> TODO()
+            Sidebar.ActionLinks.MISC -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+                    createHyprlandText(
+                        listOfPaths = listOf("misc.csv"),
+                        settingsStructure = listOf("misc {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/misc.conf",
+                    )
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.GRAPHICS -> {
                 val update = updateStandedInDatabase(data)
 
                 if (update) {
 
-                    if (data.category == "xwayland") {
-                        createHyprlandText(
-                            listOfPaths = listOf("xwayland.csv"),
-                            settingsStructure = listOf("xwayland {", "}"),
-                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/xwayland.conf",
-                        )
-                    } else if(data.category == "render") {
-                        createHyprlandText(
-                            listOfPaths = listOf("render.csv"),
-                            settingsStructure = listOf("render {", "}"),
-                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/render.conf",
-                        )
-                    } else if (data.category == "opengl") {
-                        createHyprlandText(
-                            listOfPaths = listOf("openGl.csv"),
-                            settingsStructure = listOf("opengl {", "}"),
-                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/openGL.conf",
-                        )
+                    when (data.category) {
+                        "xwayland" -> {
+                            createHyprlandText(
+                                listOfPaths = listOf("xwayland.csv"),
+                                settingsStructure = listOf("xwayland {", "}"),
+                                pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/xwayland.conf",
+                            )
+                        }
+
+                        "render" -> {
+                            createHyprlandText(
+                                listOfPaths = listOf("render.csv"),
+                                settingsStructure = listOf("render {", "}"),
+                                pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/render.conf",
+                            )
+                        }
+
+                        "opengl" -> {
+                            createHyprlandText(
+                                listOfPaths = listOf("openGl.csv"),
+                                settingsStructure = listOf("opengl {", "}"),
+                                pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/openGL.conf",
+                            )
+                        }
                     }
                 }
 
                 return update
             }
 
-            Sidebar.ActionLinks.ECOSYSTEM -> TODO()
-            Sidebar.ActionLinks.EXPERIMENT -> TODO()
-            Sidebar.ActionLinks.DEBUG -> TODO()
+            Sidebar.ActionLinks.ECOSYSTEM -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+                    createHyprlandText(
+                        listOfPaths = listOf("ecosystem.csv"),
+                        settingsStructure = listOf("ecosystem {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/ecosystem.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.EXPERIMENT -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+                    createHyprlandText(
+                        listOfPaths = listOf("experimental.csv"),
+                        settingsStructure = listOf("experimental {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/experimental.conf",
+                    )
+                }
+
+                return update
+            }
+
+            Sidebar.ActionLinks.DEBUG -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+                    createHyprlandText(
+                        listOfPaths = listOf("debug.csv"),
+                        settingsStructure = listOf("debug {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/debug.conf",
+                    )
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.VARIABLES -> TODO()
         }
 

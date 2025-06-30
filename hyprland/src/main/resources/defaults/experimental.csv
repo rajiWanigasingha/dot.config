@@ -1,2 +1,2 @@
-category,displayName,settingsName,description,type,value
-experimental,Enable Color Management V4,xx_color_management_v4,Enable color management protocol,bool,"""false"""
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+experimental,Enable Color Management V4,xx_color_management_v4,Enable color management protocol,bool,"""false""",EXPERIMENT,exp,INPUT_TOGGLE
