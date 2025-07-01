@@ -12,7 +12,7 @@
 	});
 </script>
 
-<Toaster position="bottom-center" richColors/>
+<Toaster position="bottom-center" richColors />
 
 <div class="grid min-h-screen w-full grid-cols-12">
 	<section class="bg-base-200/50 col-span-3 min-h-screen" id="sidebar">

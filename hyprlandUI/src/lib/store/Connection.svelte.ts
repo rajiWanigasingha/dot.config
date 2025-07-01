@@ -28,6 +28,8 @@ class WebSocketConnection {
 
                     uiStore.setSidebar(data.payload)
 
+                    websocketConnection.sendActionToPage(data.payload[0].navigationSettings[0].actionLink)
+
                     break;
                 }
 

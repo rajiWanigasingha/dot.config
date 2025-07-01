@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { SidebarIcon, uiStore, websocketConnection } from '$lib';
+	import { tick } from 'svelte';
 </script>
 
 <div>
