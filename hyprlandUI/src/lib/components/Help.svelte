@@ -2,7 +2,9 @@
 	import { uiStore } from '$lib/store/UIStore.svelte';
 	import type { MainPageInputData } from '$lib';
 	import { marked } from 'marked';
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
+	import { open } from '@tauri-apps/plugin-shell';
+	import { toast } from 'svelte-sonner';
 
 	let markdown = $state(null as null | HTMLDivElement);
 
@@ -20,22 +22,51 @@
 		setTimeout(() => uiStore.clearHelp(), 1600);
 	}
 
+	function openLink(link: string) {
+		open(link);
+		toast.success('This Link Open In Your Browser');
+	}
+
 	$effect(() => {
 		if (markdown && uiStore.helpMd.trim()) {
-			tick(); 
-			Array.from(markdown.children).forEach(item => {
-                switch (item.tagName) {
-                    case "H4" : {
-                        item.className = "text-sm"
-                        break;
-                    } 
+			tick();
+			Array.from(markdown.children).forEach((item) => {
+				switch (item.tagName) {
+					case 'H4': {
+						item.className = 'text-sm';
+						break;
+					}
 
-                    case "P" : {
-                        item.className = "text-xs font-medium"
-                        break;
-                    }
-                }
-            })
+					case 'P': {
+						item.className = 'text-xs font-light';
+
+						Array.from(item.children).forEach((a) => {
+							if (a.tagName === 'A') {
+								a.className = 'text-blue-200 hover:text-blue-300';
+								const link = (a as HTMLAnchorElement).href;
+								a.addEventListener('click', (e) => {
+									e.preventDefault();
+									openLink(link);
+								});
+							}
+						});
+
+						break;
+					}
+
+					case 'PRE': {
+						item.className = '';
+						item.children[0].className = 'text-xs font-light';
+						break;
+					}
+
+					case 'UL': {
+						Array.from(item.children).forEach((li) => {
+							li.className = 'text-xs text-light';
+						});
+					}
+				}
+			});
 		}
 	});
 </script>
@@ -52,7 +83,7 @@
 					/></svg
 				>
 			</button>
-			<p class="text-xs font-semibold capitalize">Mouse And Touchpad Help</p>
+			<p class="text-xs font-semibold capitalize">{uiStore.activeSidebar?.toLocaleLowerCase().replaceAll("_" ," ")} Help</p>
 		</div>
 		<div>
 			<!-- svelte-ignore a11y_consider_explicit_label -->

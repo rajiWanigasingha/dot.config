@@ -40,9 +40,11 @@
 		"vite-plugin-devtools-json": "^0.2.0"
 	},
 	"dependencies": {
+		"@tauri-apps/plugin-shell": "~2",
 		"cmpstr": "^3.0.1",
 		"daisyui": "^5.0.43",
 		"install": "^0.13.0",
-		"marked": "^16.0.0"
+		"marked": "^16.0.0",
+		"svelte-sonner": "^1.0.5"
 	}
 }

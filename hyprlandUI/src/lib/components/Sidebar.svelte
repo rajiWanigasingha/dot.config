@@ -41,7 +41,10 @@
 								<a
 									href="#"
 									class={actions.actionLink === uiStore.activeSidebar ? 'menu-active' : ''}
-									onclick={() => websocketConnection.sendActionToPage(actions.actionLink)}
+									onclick={() => {
+										websocketConnection.sendActionToPage(actions.actionLink);
+										uiStore.openHelp = null;
+									}}
 								>
 									<div>
 										{@html SidebarIcon(actions.icon)}

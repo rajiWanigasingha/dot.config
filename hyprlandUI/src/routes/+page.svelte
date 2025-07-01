@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { Sidebar, Main, uiStore, websocketConnection, updateChange } from '$lib';
 	import Help from '$lib/components/Help.svelte';
+	import { Toaster } from 'svelte-sonner';
 
 	$effect(() => {
 		if (uiStore.getSidebar().length === 0) {
 			websocketConnection.connectToPage();
 			websocketConnection.connectToMain();
-			websocketConnection.connectToHelp()
+			websocketConnection.connectToHelp();
 		}
 	});
 </script>
+
+<Toaster position="bottom-center" richColors/>
 
 <div class="grid min-h-screen w-full grid-cols-12">
 	<section class="bg-base-200/50 col-span-3 min-h-screen" id="sidebar">
