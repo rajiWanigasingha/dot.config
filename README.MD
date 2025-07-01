@@ -30,8 +30,8 @@ So it will support your existing hyprland settings and let you make changes to h
 
 This project only supports ***version 49 of hyprland*** and if you try this in any other version, it will break the hyprland.
 
-[!WARNING]   
-> ONLY VERSION 49 IS SUPPORTED
+> [!CAUTION]
+> FOR NOW ONLY HYPRLAND VERSION 49 SUPPORTED 
 
 ###### Support Settings
 
