@@ -1,10 +1,11 @@
 ## Dot.Config Project
 
 This is a project that aims to making editing and creating new or existing hyprland settings in a graphical settings app.
-
+This will work with your existing hyprland config (For now only work in hyprland v49) and allow you to edit everything in real time.
+This is still in early development but will get better and support all settings of hyprland.
 
 ![screen1.png](docs/screenshot/screen1.png)
-![screen2.jpg](docs/screenshot/screen2.jpg)
+![screen2.png](docs/screenshot/screen2.png)
 ![screen3.jpg](docs/screenshot/screen3.jpg)
 ![screen4.jpg](docs/screenshot/screen4.jpg)
 
@@ -28,8 +29,9 @@ So it will support your existing hyprland settings and let you make changes to h
 ##### Support
 
 This project only supports ***version 49 of hyprland*** and if you try this in any other version, it will break the hyprland.
-    
->[!WARNING] ONLY VERSION 49 IS SUPPORTED
+
+[!WARNING]   
+> ONLY VERSION 49 IS SUPPORTED
 
 ###### Support Settings
 
