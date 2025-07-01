@@ -71,18 +71,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "rajiWanigasingha"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;rajiWanigasingha&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/rajiWanigasingha/dot.config.git",
-    "accountId": "bde270c7-a7fc-4d3b-ac94-9ea170117419"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/rajiWanigasingha/dot.config.git&quot;,
+    &quot;accountId&quot;: &quot;bde270c7-a7fc-4d3b-ac94-9ea170117419&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -102,7 +102,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/rajindawanigasingha/dot.config/hyprland",
+    "last_opened_file_path": "/home/rajindawanigasingha/dot.config",
     "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
