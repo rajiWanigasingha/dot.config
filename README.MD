@@ -9,6 +9,10 @@ This is still in early development but will get better and support all settings 
 ![screen3.jpg](docs/screenshot/screen3.jpg)
 ![screen4.jpg](docs/screenshot/screen4.jpg)
 
+> [!CAUTION]
+> This porject is in development,
+> Do not build this project your self without any experiance working with tauri ,kotlin. This could break.
+
 ### Development
 
 This project is under active development. Many features are missing and many reactors are waiting to be done.
@@ -58,3 +62,7 @@ Not Working yet but will get support soon
 - [ ] auto strat / env
 - [ ] animations / curves
 - [ ] variables
+
+### Build Steps
+
+- This Will be update as soon as posible after all testing are done.
