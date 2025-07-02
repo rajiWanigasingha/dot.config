@@ -14,6 +14,6 @@ data class RulesForWindow(
 
 @Serializable
 data class WindowRulesModel(
-    val rules: List<RulesForWindow>,
+    val rules: String,
     val params: List<String>
 )

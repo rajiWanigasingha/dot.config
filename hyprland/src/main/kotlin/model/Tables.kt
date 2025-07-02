@@ -168,7 +168,7 @@ object Tables {
 
     @Serializable
     data class WindowRules(
-        val rules: List<Pair<String, String>>,
+        val rules: String,
         val params: List<String>
     )
 

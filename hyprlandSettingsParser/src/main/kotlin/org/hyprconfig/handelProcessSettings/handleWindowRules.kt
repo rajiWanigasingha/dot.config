@@ -28,7 +28,7 @@ internal fun handleWindowRules(windows: List<String>): List<WindowRulesModel> {
 
         val processRules = it.split("#")[0].split("=").getOrNull(1)?.trim()?.split(",", limit = 2) ?: return@forEach
 
-        val rules = processRules.getOrNull(0)?.trim()?.validateRules() ?: return@forEach
+        val rules = processRules.getOrNull(0) ?: return@forEach
 
         val params = processRules.getOrNull(1)?.split(",")?.map { param -> param.trim() } ?: return@forEach
 
@@ -43,17 +43,17 @@ internal fun handleWindowRules(windows: List<String>): List<WindowRulesModel> {
 
     windowStore.forEach {
 
-        var rule = ""
+//        var rule = ""
+//
+//        it.rules.forEach { rules ->
+//            if (rule == "") {
+//                rule = "${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
+//            } else {
+//                rule += " ${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
+//            }
+//        }
 
-        it.rules.forEach { rules ->
-            if (rule == "") {
-                rule = "${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
-            } else {
-                rule += " ${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
-            }
-        }
-
-        windowRule.add("windowrule = $rule ,${it.params.joinToString(",")}".insertVariables())
+        windowRule.add("windowrule = ${it.rules} ,${it.params.joinToString(",")}".insertVariables())
     }
 
     Path.of(windowRulesPath).writeText(windowRule.joinToString("\n"))
@@ -61,6 +61,11 @@ internal fun handleWindowRules(windows: List<String>): List<WindowRulesModel> {
     return windowStore.toList()
 }
 
+/**
+ * There is a bug in here
+ *
+ * If there are two rules like suppressevent to maximize because maximize has it oven values, it will first match it and make 'suppressevent' this to remove from values braking it all.
+ */
 private fun String.validateRules(): List<RulesForWindow> {
 
     val rule = this.split(" ").map { it.trim() }

@@ -197,13 +197,13 @@ object Initialize {
 
         windowRulesSettings?.forEach {
 
-            val rules = mutableListOf<Pair<String , String>>()
-
-            it.rules.forEach { rule -> rules.add(Pair(rule.keyword ,rule.value ?: "")) }
+//            val rules = mutableListOf<Pair<String , String>>()
+//
+//            it.rules.forEach { rule -> rules.add(Pair(rule.keyword ,rule.value ?: "")) }
 
             allWindowRulesSettings.add(
                 Tables.WindowRules(
-                    rules = rules.toList(),
+                    rules = it.rules,
                     params = it.params
                 )
             )
@@ -417,7 +417,7 @@ object Initialize {
                     )
 
                     else -> {
-                        TODO()
+                        return@forEach
                     }
                 }
 
