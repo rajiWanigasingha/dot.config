@@ -38,4 +38,4 @@ echo "Sleep for 10"
 sleep 10
 
 echo "Starting Ui"
-"$FOLDERUI/AppRun"
+"$FOLDERUI/usr/bin/app"
