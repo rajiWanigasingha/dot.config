@@ -4,6 +4,13 @@ This is a project that aims to making editing and creating new or existing hyprl
 This will work with your existing hyprland config (For now only work in hyprland v49) and allow you to edit everything in real time.
 This is still in early development but will get better and support all settings of hyprland.
 
+![screen1.png](docs/screenshot/screen1.png)
+![screen2.png](docs/screenshot/screen2.png)
+![screen3.jpg](docs/screenshot/screen3.jpg)
+![screen4.jpg](docs/screenshot/screen4.jpg)
+
+This is a video
+
 [show.mkv](docs/video/show.mkv)
 
 > [!CAUTION]

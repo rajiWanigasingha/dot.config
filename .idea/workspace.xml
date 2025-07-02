@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development" />
+    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development">
+      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/screenshot/screen5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/screenshot/screen6.jpg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,21 +95,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build hyprland.executor": "Run",
-    "Gradle.hyprland [build].executor": "Run",
-    "Gradle.hyprland [clean].executor": "Run",
-    "Gradle.hyprlandSettingsParser [publishToMavenLocal].executor": "Run",
-    "Kotlin.ApplicationKt.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/rajindawanigasingha/dot.config",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build hyprland.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprland [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprland [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprlandSettingsParser [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.ApplicationKt.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rajindawanigasingha/dot.config&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/hyprland/src/main/kotlin/controller/helpers" />
