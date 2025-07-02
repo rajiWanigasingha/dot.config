@@ -1,0 +1,8 @@
+[Desktop Entry]
+Categories=
+Comment=A Tauri App
+Exec=app
+Icon=app
+Name=hyprlandui
+Terminal=false
+Type=Application
