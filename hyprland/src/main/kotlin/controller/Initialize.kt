@@ -304,8 +304,11 @@ object Initialize {
     ) {
 
         nameOfFile.forEach {
+            val resourceStream = object {}.javaClass.getResourceAsStream("/defaults/${it.first}.csv")
+                ?: throw IllegalStateException("Resource not found: ${it.first}.csv")
+
             var standedDefaultDF =
-                DataFrame.readCsv(File(object {}.javaClass.getResource("/defaults/${it.first}.csv")!!.toURI()) , colTypes = mapOf("validate" to ColType.String))
+                DataFrame.readCsv(resourceStream , colTypes = mapOf("validate" to ColType.String))
 
             val property =
                 settingsModel::class.memberProperties.find { data -> data.name == it.second } as? KProperty1<SettingsModel, *>
