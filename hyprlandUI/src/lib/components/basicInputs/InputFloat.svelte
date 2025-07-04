@@ -1,12 +1,11 @@
 <script lang="ts">
 	import {
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type ActionLinks,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
@@ -44,14 +43,12 @@
 			}
 		}
 
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${num}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 </script>
 
@@ -75,13 +72,12 @@
 				}}
 				onkeypress={(e) => {
 					if (e.key.toLocaleLowerCase() == 'enter') {
-
-						errorValidation = ''
+						errorValidation = '';
 
 						if (value === undefined || value.toString() === '') {
 							errorValidation = "Number Can't Be Empty";
 						} else {
-							changeUpdate(uiStore.activeSidebar!!, value);
+							changeUpdate(sidebarState.sidebarState.sidebarActive, value);
 						}
 					}
 				}}
@@ -94,7 +90,7 @@
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
 				value = value - 0.1;
-				changeUpdate(uiStore.activeSidebar!!, value);
+				changeUpdate(sidebarState.sidebarState.sidebarActive, value);
 			}}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -106,7 +102,7 @@
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
 				value = value + 0.1;
-				changeUpdate(uiStore.activeSidebar!!, value);
+				changeUpdate(sidebarState.sidebarState.sidebarActive, value);
 			}}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

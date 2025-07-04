@@ -1,8 +1,3 @@
-export * from "./store/UIStore.svelte"
-export * from "./types/SidebarTypes"
-export * from "./types/SindAndReciveTypes"
-export * from "./types/ConnectionTypes"
-
 export { default as Sidebar } from "./components/Sidebar.svelte"
 export { default as Main } from "./components/Main.svelte"
 export { default as Help } from "./components/Help.svelte"
@@ -18,6 +13,17 @@ export { default as InputVec } from "./components/basicInputs/InputVec.svelte"
 
 export { default as SidebarIcon } from "./svgs/SidebarSvgs.svelte"
 
-export { websocketConnection } from "./store/Connection.svelte"
-
+export * from "./types/ConnectionTypes"
 export * from "./store/UIChange.svelte"
+
+export * from "./store/sidebar/sidebarConnection.svelte"
+export * from "./store/sidebar/sidebarState.svelte"
+export * from "./types/pagesTypes/pageTypes"
+
+export * from "./store/mainInput/mainConnection.svelte"
+export * from "./store/mainInput/mainState.svelte"
+export * from "./types/mainTypes/MainType"
+
+export * from "./store/help/helpState.svelte"
+export * from "./store/help/helpConnection.svelte"
+export * from "./types/helpTypes/helpTypes"

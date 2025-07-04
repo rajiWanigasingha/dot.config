@@ -66,5 +66,4 @@ export enum HyprlandUIType {
 export enum MainPageActionStatus {
     SUCCESS = "SUCCESS",
     ERROR = "ERROR",
-    MESSAGE = "MESSAGE"
 }

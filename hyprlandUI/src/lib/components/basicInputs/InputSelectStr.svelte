@@ -2,12 +2,11 @@
 	import { CmpStr, type CmpStrResult } from 'cmpstr';
 	import {
 		ActionLinks,
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
@@ -41,14 +40,12 @@
 			}
 		}
 
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${str}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 
 	function updateSelectingValue(value: string) {
@@ -184,7 +181,10 @@
 							selected = filterSelect[0];
 							search = '';
 							open = false;
-							changeUpdate(uiStore.activeSidebar!!, (ui.valueOptions as string[])[selected.index]);
+							changeUpdate(
+								sidebarState.sidebarState.sidebarActive,
+								(ui.valueOptions as string[])[selected.index]
+							);
 						}
 					}}
 				/>

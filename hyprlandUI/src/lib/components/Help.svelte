@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { uiStore } from '$lib/store/UIStore.svelte';
-	import type { MainPageInputData } from '$lib';
+	import { helpState, mainPageState, sidebarState, type MainPageActionInputData } from '$lib';
 	import { marked } from 'marked';
 	import { tick } from 'svelte';
 	import { open } from '@tauri-apps/plugin-shell';
@@ -8,18 +7,29 @@
 
 	let markdown = $state(null as null | HTMLDivElement);
 
-	// @ts-ignore
-	function scrollIntoView(target, data: MainPageInputData) {
-		const el = document.querySelector(target.getAttribute('href')) as HTMLDivElement;
-		if (!el) return;
+	function scrollIntoView(target: EventTarget & HTMLAnchorElement, data: MainPageActionInputData) {
+		const targetLink = target.getAttribute('href');
+
+		if (targetLink === null) {
+			toast.warning("Sorry, Couldn't Find This Settings");
+			return;
+		}
+
+		const el = document.querySelector(targetLink) as HTMLDivElement;
+
+		if (!el) {
+			toast.warning("Sorry, Couldn't Find This Settings");
+			return;
+		}
+
 		el.scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
 			inline: 'nearest'
 		});
-		uiStore.setActiveHelp(data.settingsName);
-		uiStore.setOpenHelp(data);
-		setTimeout(() => uiStore.clearHelp(), 1600);
+
+		helpState.setActiveHelp(data.settingsName, data);
+		setTimeout(() => helpState.setActiveHelp(null, data), 1600);
 	}
 
 	function openLink(link: string) {
@@ -28,7 +38,7 @@
 	}
 
 	$effect(() => {
-		if (markdown && uiStore.helpMd.trim()) {
+		if (markdown && helpState.helpstate.helpMd !== null) {
 			tick();
 			Array.from(markdown.children).forEach((item) => {
 				switch (item.tagName) {
@@ -83,7 +93,9 @@
 					/></svg
 				>
 			</button>
-			<p class="text-xs font-semibold capitalize">{uiStore.activeSidebar?.toLocaleLowerCase().replaceAll("_" ," ")} Help</p>
+			<p class="text-xs font-semibold capitalize">
+				{sidebarState.sidebarState.sidebarActive.replaceAll('_', ' ')} Help
+			</p>
 		</div>
 		<div>
 			<!-- svelte-ignore a11y_consider_explicit_label -->
@@ -114,9 +126,9 @@
 	</div>
 	<div class="divider m-0"></div>
 	<div class="max-h-[94vh] overflow-y-auto">
-		{#if uiStore.openHelp === null}
+		{#if !helpState.helpstate.show}
 			<ul class="menu rounded-box w-full">
-				{#each uiStore.mainPage as helpTags}
+				{#each mainPageState.mainInputState.mainPageData as helpTags}
 					<li>
 						<h2 class="menu-title capitalize">{helpTags.tab}</h2>
 						<ul>
@@ -127,8 +139,8 @@
 										href="#{setting.data.settingsName}"
 										onclick={(e) => {
 											e.preventDefault();
-											if (helpTags.tab !== uiStore.activeMainPageTab) {
-												uiStore.setActiveTab(helpTags.tab);
+											if (helpTags.tab !== mainPageState.get().tab) {
+												mainPageState.setTabs(helpTags.tab);
 											}
 											const target = e.currentTarget;
 											setTimeout(() => {
@@ -148,23 +160,24 @@
 			<div class="flex flex-col gap-2">
 				<div class="flex flex-row items-start gap-3 px-4 pt-2">
 					<!-- svelte-ignore a11y_consider_explicit_label -->
-					<button class="cursor-pointer" onclick={() => uiStore.clearOpen()}>
+					<button class="cursor-pointer" onclick={() => helpState.setShow(false)}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
 							><path fill="currentColor" d="m9 18l-6-6l6-6l1.4 1.4L6.8 11H21v2H6.8l3.6 3.6z" /></svg
 						>
 					</button>
 					<div class="flex flex-col gap-1">
-						<p class="text-sm font-semibold">{uiStore.openHelp.name}</p>
+						<p class="text-sm font-semibold">{helpState.getActiveHelp()?.name}</p>
 						<p class="text-base-content/60 text-xs font-medium">
 							Hyprland Settings <span class="font-bold"
-								>{uiStore.openHelp.category}:{uiStore.openHelp.settingsName}</span
+								>{helpState.getActiveHelp()?.category}:{helpState.getActiveHelp()
+									?.settingsName}</span
 							>
 						</p>
 					</div>
 				</div>
 				<div class="divider m-0"></div>
 				<div class="prose prose-invert max-w-none px-4" bind:this={markdown}>
-					{@html marked(uiStore.helpMd)}
+					{@html marked(helpState.helpstate?.helpMd ?? '')}
 				</div>
 			</div>
 		{/if}

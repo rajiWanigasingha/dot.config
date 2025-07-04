@@ -1,12 +1,11 @@
 <script lang="ts">
 	import {
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type ActionLinks,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
@@ -28,14 +27,12 @@
 	});
 
 	function changeUpdate(actionLink: ActionLinks, num1: number, num2: number) {
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${num1}, ${num2}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 </script>
 
@@ -51,7 +48,7 @@
 			<!-- svelte-ignore a11y_consider_explicit_label -->
 			<button
 				class="btn btn-circle btn-sm btn-success btn-soft"
-				onclick={() => changeUpdate(uiStore.activeSidebar!!, value[0], value[1])}
+				onclick={() => changeUpdate(sidebarState.sidebarState.sidebarActive, value[0], value[1])}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 					><path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" /></svg

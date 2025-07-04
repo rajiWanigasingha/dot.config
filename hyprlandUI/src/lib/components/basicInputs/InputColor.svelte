@@ -1,12 +1,11 @@
 <script lang="ts">
 	import {
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type ActionLinks,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 	import { onMount } from 'svelte';
 	import ColorPicker from 'svelte-awesome-color-picker';
@@ -75,14 +74,12 @@
 	}
 
 	function changeUpdate(actionLink: ActionLinks, rgb: string) {
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${rgb}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 </script>
 
@@ -151,8 +148,10 @@
 		<button
 			class="btn btn-success btn-soft w-full"
 			onclick={() =>
-				changeUpdate(uiStore.activeSidebar!!, `rgba(${rgb.r} ,${rgb.g} ,${rgb.b} ,${rgb.a})`)}
-			>Apply This Color</button
+				changeUpdate(
+					sidebarState.sidebarState.sidebarActive,
+					`rgba(${rgb.r} ,${rgb.g} ,${rgb.b} ,${rgb.a})`
+				)}>Apply This Color</button
 		>
 	</div>
 </div>

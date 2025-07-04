@@ -2,24 +2,21 @@
 	import {
 		ActionLinks,
 		HyprlandTypes,
-		uiStore,
-		websocketConnection,
+		mainConn,
+		sidebarState,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 
 	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
 
 	function updateToggle(actionLink: ActionLinks, toggle: boolean) {
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${toggle}`,
 			type: HyprlandTypes.BOOL,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 </script>
 
@@ -34,7 +31,8 @@
 		<input
 			type="checkbox"
 			class="hidden"
-			onclick={(e) => updateToggle(uiStore.activeSidebar!!, e.currentTarget.checked)}
+			onclick={(e) =>
+				updateToggle(sidebarState.sidebarState.sidebarActive, e.currentTarget.checked)}
 			checked={ui.value as boolean}
 		/>
 		<svg
@@ -63,4 +61,3 @@
 		</svg>
 	</label>
 </div>
-

@@ -1,7 +1,15 @@
 <script lang="ts">
+	import { helpConn, mainConn, sidebarConn } from '$lib';
 	import '../app.css';
-
 	let { children } = $props();
+
+	$effect(() => {
+		if (sidebarConn.websocketSidebar === null) {
+			sidebarConn;
+			helpConn;
+			mainConn;
+		}
+	});
 </script>
 
 <div class="flex min-h-screen w-full flex-row bg-transparent">

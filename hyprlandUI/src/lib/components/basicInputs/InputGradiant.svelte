@@ -1,12 +1,11 @@
 <script lang="ts">
 	import {
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type ActionLinks,
 		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageInputUI
 	} from '$lib';
 	import { onMount } from 'svelte';
 	import ColorPicker from 'svelte-awesome-color-picker';
@@ -166,14 +165,12 @@
 	});
 
 	function changeUpdate(actionLink: ActionLinks, gradiant: string) {
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${gradiant}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 
 	function decToHex(value: number): string {
@@ -210,7 +207,10 @@
 						return;
 					}
 
-					changeUpdate(uiStore.activeSidebar!!, `${gradiantHex.join(' ')} ${angle}deg`);
+					changeUpdate(
+						sidebarState.sidebarState.sidebarActive,
+						`${gradiantHex.join(' ')} ${angle}deg`
+					);
 				}}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

@@ -1,6 +1,10 @@
 <script lang="ts">
-	import { SidebarIcon, uiStore, websocketConnection } from '$lib';
-	import { tick } from 'svelte';
+	import {
+		helpState,
+		sidebarConn,
+		SidebarIcon,
+		sidebarState,
+	} from '$lib';
 </script>
 
 <div>
@@ -32,19 +36,21 @@
 	<div class="divider m-0"></div>
 	<div class="max-h-[94vh] overflow-y-auto">
 		<ul class="menu rounded-box w-full">
-			{#each uiStore.sidebar as sidebar}
+			{#each sidebarState.sidebarState.sidebarItems as item}
 				<li>
-					<h2 class="menu-title">{sidebar.componentTitle}</h2>
+					<h2 class="menu-title">{item.componentTitle}</h2>
 					<ul>
-						{#each sidebar.navigationSettings as actions}
+						{#each item.navigationSettings as actions}
 							<!-- svelte-ignore a11y_invalid_attribute -->
 							<li>
 								<a
 									href="#"
-									class={actions.actionLink === uiStore.activeSidebar ? 'menu-active' : ''}
+									class={actions.actionLink === sidebarState.sidebarState.sidebarActive
+										? 'menu-active'
+										: ''}
 									onclick={() => {
-										websocketConnection.sendActionToPage(actions.actionLink);
-										uiStore.openHelp = null;
+										sidebarConn.loadMainPage(actions.actionLink);
+										helpState.setShow(false);
 									}}
 								>
 									<div>

@@ -1,15 +1,14 @@
 <script lang="ts">
 	import {
-		uiStore,
+		mainConn,
+		sidebarState,
 		updateChange,
-		websocketConnection,
 		type ActionLinks,
-		type MainPageInputData,
-		type MainPageInputUI,
-		type SendMainStandedUpdate
+		type MainPageActionInputData,
+		type MainPageActionInputUI
 	} from '$lib';
 
-	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
+	let { ui, data }: { ui: MainPageActionInputUI; data: MainPageActionInputData } = $props();
 
 	let initValue = $state(ui.value as number);
 	let Increment = $state('0');
@@ -48,14 +47,12 @@
 			return;
 		}
 
-		const message: SendMainStandedUpdate = {
+		mainConn.update(actionLink, {
 			name: data.settingsName,
 			value: `${range}`,
 			type: data.typeOfHyprland,
 			category: data.category
-		};
-
-		websocketConnection.sendActionToMainUpdate(actionLink, message);
+		});
 	}
 </script>
 
@@ -81,7 +78,7 @@
 			class="range w-full"
 			onchange={(e) => {
 				initValue = Number(Number(e.currentTarget.value).toFixed(2));
-				changeUpdate(uiStore.activeSidebar!!, initValue);
+				changeUpdate(sidebarState.sidebarState.sidebarActive, initValue);
 			}}
 		/>
 	</div>
@@ -91,7 +88,7 @@
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
 				initValue = Number((initValue - 0.01 - Number(Increment)).toFixed(2));
-				changeUpdate(uiStore.activeSidebar!!, initValue);
+				changeUpdate(sidebarState.sidebarState.sidebarActive, initValue);
 			}}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -103,7 +100,7 @@
 			class="btn btn-outline join-item hover:bg-secondary hover:text-secondary-content hover:border-base-content w-1/2 hover:border-1"
 			onclick={() => {
 				initValue = Number((initValue + 0.01 + Number(Increment)).toFixed(2));
-				changeUpdate(uiStore.activeSidebar!!, initValue);
+				changeUpdate(sidebarState.sidebarState.sidebarActive, initValue);
 			}}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

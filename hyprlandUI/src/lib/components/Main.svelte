@@ -1,12 +1,13 @@
 <script lang="ts">
 	import {
+		helpState,
 		HyprlandUIType,
 		InputFloat,
 		InputRange,
 		InputSelectStr,
 		InputToggle,
 		InputVec,
-		uiStore
+		mainPageState
 	} from '$lib';
 	import InputColor from './basicInputs/InputColor.svelte';
 	import InputGradiant from './basicInputs/InputGradiant.svelte';
@@ -18,14 +19,14 @@
 <div>
 	<div class="flex flex-row items-center justify-between px-4 py-1">
 		<div role="tablist" class="tabs tabs-border">
-			{#if uiStore.mainPage.length > 1}
-				{#each uiStore.mainPage as main}
+			{#if mainPageState.mainInputState.mainPageTabs.length > 1}
+				{#each mainPageState.mainInputState.mainPageTabs as tabs}
 					<!-- svelte-ignore a11y_missing_attribute -->
-					<button onclick={() => uiStore.setActiveTab(main.tab)}>
+					<button onclick={() => mainPageState.setTabs(tabs)}>
 						<a
 							role="tab"
-							class="tab capitalize {uiStore.activeMainPageTab === main.tab ? 'tab-active' : ''}"
-							>{main.tab}</a
+							class="tab capitalize {mainPageState.get().tab === tabs ? 'tab-active' : ''}"
+							>{tabs}</a
 						>
 					</button>
 				{/each}
@@ -44,43 +45,47 @@
 		</div>
 	</div>
 	<div class="divider m-0"></div>
-	<div class="flex max-h-[94vh] flex-col gap-6 overflow-y-auto px-8 py-8">
-		{#each uiStore.activeTabSettings as main (main.data.settingsName + main.data.category)}
-			<div
-				id={main.data.settingsName}
-				class=" p-4 {main.data.settingsName === uiStore.activeHelp ? 'custom_pules' : ''}"
-			>
-				{#if main.inputUI.type === HyprlandUIType.INPUT_TOGGLE}
-					<InputToggle ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_RANGE}
-					<InputRange ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_INT}
-					<InputInt ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_FLOAT}
-					<InputFloat ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_STR_SELECT}
-					<InputSelectStr ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_INT_SELECT}
-					<InputSelectInt ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_VEC}
-					<InputVec ui={main.inputUI} data={main.data} />
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_COLOR}
-					<InputColor ui={main.inputUI} data={main.data} />
-				{:else if main.inputUI.type === HyprlandUIType.INPUT_GRADIANT}
-					<InputGradiant ui={main.inputUI} data={main.data} />
-				{:else}
-					<InputStr ui={main.inputUI} data={main.data} />
-					<div class="divider m-0"></div>
-				{/if}
-			</div>
-		{/each}
-	</div>
+	{#if mainPageState.mainInputState.activeStandedInputs}
+		<div class="flex max-h-[94vh] flex-col gap-6 overflow-y-auto px-8 py-8">
+			{#each mainPageState.get().settings as main (main.data.settingsName + main.data.category)}
+				<div
+					id={main.data.settingsName}
+					class=" p-4 {main.data.settingsName === helpState.helpstate.activeHelp
+						? 'custom_pules'
+						: ''}"
+				>
+					{#if main.inputUI.type === HyprlandUIType.INPUT_TOGGLE}
+						<InputToggle ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_RANGE}
+						<InputRange ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_INT}
+						<InputInt ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_FLOAT}
+						<InputFloat ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_STR_SELECT}
+						<InputSelectStr ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_INT_SELECT}
+						<InputSelectInt ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_VEC}
+						<InputVec ui={main.inputUI} data={main.data} />
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_COLOR}
+						<InputColor ui={main.inputUI} data={main.data} />
+					{:else if main.inputUI.type === HyprlandUIType.INPUT_GRADIANT}
+						<InputGradiant ui={main.inputUI} data={main.data} />
+					{:else}
+						<InputStr ui={main.inputUI} data={main.data} />
+						<div class="divider m-0"></div>
+					{/if}
+				</div>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style>

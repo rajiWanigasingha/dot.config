@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development">
-      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/screenshot/screen5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/screenshot/screen6.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
