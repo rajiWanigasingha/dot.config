@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { helpConn, mainConn, sidebarConn } from '$lib';
+	import { Toaster } from 'svelte-sonner';
 	import '../app.css';
 	let { children } = $props();
 
@@ -10,10 +12,14 @@
 			mainConn;
 		}
 	});
+
+	goto('/hyprland/standedInputs');
 </script>
 
+<Toaster position="bottom-center" richColors={true} theme="dark" />
+
 <div class="flex min-h-screen w-full flex-row bg-transparent">
-	<div class="bg-base-100 flex max-h-screen min-h-screen w-[50px] flex-col">
+	<div class="bg-base-100 flex max-h-screen min-h-screen w-[50px] flex-col z-30">
 		<div
 			class="border-base-content/15 flex items-center justify-center border-b-2 p-[7.5px] pb-[14.5px]"
 		>

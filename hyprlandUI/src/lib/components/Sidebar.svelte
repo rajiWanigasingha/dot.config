@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		helpState,
-		sidebarConn,
-		SidebarIcon,
-		sidebarState,
-	} from '$lib';
+	import { Nav, SidebarIcon, sidebarState } from '$lib';
 </script>
 
 <div>
@@ -49,8 +44,7 @@
 										? 'menu-active'
 										: ''}
 									onclick={() => {
-										sidebarConn.loadMainPage(actions.actionLink);
-										helpState.setShow(false);
+										Nav(actions.actionLink);
 									}}
 								>
 									<div>

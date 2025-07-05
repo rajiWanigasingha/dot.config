@@ -12,6 +12,9 @@ export { default as InputStr } from "./components/basicInputs/InputStr.svelte"
 export { default as InputVec } from "./components/basicInputs/InputVec.svelte"
 
 export { default as SidebarIcon } from "./svgs/SidebarSvgs.svelte"
+export { default as GetIcons } from "./svgs/icons.svelte"
+
+export { default as TitleBar } from "./components/common/titleBar.svelte"
 
 export * from "./types/ConnectionTypes"
 export * from "./store/UIChange.svelte"
@@ -27,3 +30,5 @@ export * from "./types/mainTypes/MainType"
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
 export * from "./types/helpTypes/helpTypes"
+
+export { default as Nav } from "./helpers/navigation"

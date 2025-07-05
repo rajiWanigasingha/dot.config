@@ -4,11 +4,11 @@
 		sidebarState,
 		updateChange,
 		type ActionLinks,
-		type MainPageInputData,
-		type MainPageInputUI
+		type MainPageActionInputData,
+		type MainPageActionInputUI
 	} from '$lib';
 
-	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
+	let { ui, data }: { ui: MainPageActionInputUI; data: MainPageActionInputData } = $props();
 
 	let value = $state(ui.value as number);
 

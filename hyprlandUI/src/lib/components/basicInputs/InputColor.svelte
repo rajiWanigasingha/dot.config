@@ -4,13 +4,13 @@
 		sidebarState,
 		updateChange,
 		type ActionLinks,
-		type MainPageInputData,
-		type MainPageInputUI
+		type MainPageActionInputData,
+		type MainPageActionInputUI
 	} from '$lib';
 	import { onMount } from 'svelte';
 	import ColorPicker from 'svelte-awesome-color-picker';
 
-	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
+	let { ui, data }: { ui: MainPageActionInputUI; data: MainPageActionInputData } = $props();
 
 	let divEl: HTMLDivElement;
 	let width = $state(0);

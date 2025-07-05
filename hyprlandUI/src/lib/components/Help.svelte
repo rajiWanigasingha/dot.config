@@ -94,7 +94,7 @@
 				>
 			</button>
 			<p class="text-xs font-semibold capitalize">
-				{sidebarState.sidebarState.sidebarActive.replaceAll('_', ' ')} Help
+				{sidebarState.sidebarState.sidebarActive.toLocaleLowerCase().replaceAll('_', ' ')} Help
 			</p>
 		</div>
 		<div>
@@ -148,7 +148,7 @@
 											}, 200);
 										}}
 									>
-										<p class="text-sm">{setting.data.name}</p>
+										<p class="text-xs">{setting.data.name}</p>
 									</a>
 								</li>
 							{/each}

@@ -1,16 +1,8 @@
 <script lang="ts">
-	import { Sidebar, Main, updateChange } from '$lib';
-	import Help from '$lib/components/Help.svelte';
-	import { Toaster } from 'svelte-sonner';
+	import { Help, Main, updateChange } from '$lib';
 </script>
 
-<Toaster position="bottom-center" richColors={true} theme="dark" />
-
-<div class="grid min-h-screen w-full grid-cols-12">
-	<section class="bg-base-200/50 col-span-3 min-h-screen" id="sidebar">
-		<Sidebar />
-	</section>
-
+<div class="grid min-h-screen w-full grid-cols-9">
 	<section
 		class="bg-base-200
 		{updateChange.update !== null && updateChange.update !== false ? 'border-sweep-left-right' : ''}  

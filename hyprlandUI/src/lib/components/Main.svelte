@@ -22,7 +22,12 @@
 			{#if mainPageState.mainInputState.mainPageTabs.length > 1}
 				{#each mainPageState.mainInputState.mainPageTabs as tabs}
 					<!-- svelte-ignore a11y_missing_attribute -->
-					<button onclick={() => mainPageState.setTabs(tabs)}>
+					<button
+						onclick={() => {
+							mainPageState.setTabs(tabs);
+							helpState.setShow(false);
+						}}
+					>
 						<a
 							role="tab"
 							class="tab capitalize {mainPageState.get().tab === tabs ? 'tab-active' : ''}"
