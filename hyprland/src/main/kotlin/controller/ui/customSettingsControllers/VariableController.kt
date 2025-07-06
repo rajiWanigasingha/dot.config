@@ -1,0 +1,4 @@
+package org.dot.config.controller.ui.customSettingsControllers
+
+class VariableController {
+}
