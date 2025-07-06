@@ -26,9 +26,13 @@ export * from "./types/pagesTypes/pageTypes"
 export * from "./store/mainInput/mainConnection.svelte"
 export * from "./store/mainInput/mainState.svelte"
 export * from "./types/mainTypes/MainType"
+export * from "./store/mainInput/variableState.svelte"
 
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
 export * from "./types/helpTypes/helpTypes"
 
 export { default as Nav } from "./helpers/navigation"
+
+export * from "./types/customActionTypes/variables"
+export * from "./store/mainInput/variableConnection.svelte"

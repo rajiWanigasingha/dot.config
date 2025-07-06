@@ -64,10 +64,8 @@ object InputAndOutput {
     )
 
     @Serializable
-    data class UpdateSettingsStandedCategories(
+    data class VariableUI(
         val name: String,
-        val value: String,
-        val type: HyprlandTypes,
-        val category: String
+        val value: String
     )
 }

@@ -209,4 +209,10 @@ object Tables {
         val path: String,
         val time: String
     )
+
+    @Serializable
+    data class Variables(
+        val name: String,
+        val value: String
+    )
 }

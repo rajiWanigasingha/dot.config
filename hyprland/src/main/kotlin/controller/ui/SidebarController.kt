@@ -9,6 +9,11 @@ import org.dot.config.view.basicComponents.InputComponents
 import org.dot.config.view.builderComponents.Sidebar
 import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.hyprconfig.helpers.HyprlandTypes
+import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.forEach
+import org.jetbrains.kotlinx.dataframe.api.print
+import org.jetbrains.kotlinx.dataframe.io.ColType
+import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.slf4j.LoggerFactory
 
 class SidebarController {
@@ -114,8 +119,28 @@ class SidebarController {
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
-            else -> TODO()
+            else -> {
+                throw Exception("This Is A Bug Should Not Reach This Part")
+            }
         }
+    }
+
+    fun getVariableUI(): List<InputAndOutput.VariableUI> {
+
+        val variableUI = mutableListOf<InputAndOutput.VariableUI>()
+
+        val variables = DataFrame.readCsv("${System.getProperty("user.home")}/.dot.config/data/variable.csv" ,colTypes = mapOf("name" to ColType.String ,"value" to ColType.String))
+
+        variables.forEach { row ->
+            variableUI.add(
+                InputAndOutput.VariableUI(
+                    name = row["name"].toString(),
+                    value = row["value"].toString()
+                )
+            )
+        }
+
+        return variableUI.toList()
     }
 
     private fun createPageUI(

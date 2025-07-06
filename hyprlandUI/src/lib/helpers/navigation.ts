@@ -7,7 +7,7 @@ export default function navigation(actionLink: ActionLinks) {
     switch (actionLink) {
         case ActionLinks.VARIABLES: {
             goto("/hyprland/custom/variables")
-            sidebarState.setSidebarActive(actionLink)
+            sidebarConn.loadMainPage(actionLink)
             break
         }
 

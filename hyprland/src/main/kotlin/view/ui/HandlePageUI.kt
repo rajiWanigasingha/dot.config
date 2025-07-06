@@ -8,6 +8,7 @@ import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.serialization.SerializationException
 import org.dot.config.controller.ui.SidebarController
 import org.dot.config.model.SendAndReceive
+import org.dot.config.view.builderComponents.Sidebar
 import org.dot.config.view.errors.ErrorWebsocket
 import org.slf4j.LoggerFactory
 
@@ -40,12 +41,27 @@ fun Route.handleUI() {
 
                 if (message.actionType != SendAndReceive.ActionType.SIDE_BAR) throw ErrorWebsocket.InvalidActionTypeForPages()
 
-                val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
+                when (message.payload.actionLink) {
 
-                sendSerialized(data = SendAndReceive.Send(
-                    actionType = SendAndReceive.ActionType.MAIN,
-                    payload = ui
-                ))
+                    Sidebar.ActionLinks.VARIABLES -> {
+                        val ui = sidebarService.getVariableUI()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_VARIABLES,
+                            payload = ui
+                        ))
+                    }
+
+                     else -> {
+                         val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
+
+                         sendSerialized(data = SendAndReceive.Send(
+                             actionType = SendAndReceive.ActionType.MAIN,
+                             payload = ui
+                         ))
+
+                     }
+                }
 
             }.onFailure { exception ->
                 when (exception) {

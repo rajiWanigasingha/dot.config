@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, mainPageState, sidebarState, type MainPageActions, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError } from "$lib"
+import { ActionLinks, ActionType, mainPageState, sidebarState, variableState, type MainPageActions, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
 import { toast } from "svelte-sonner"
 
 class SideBarConnection {
@@ -45,6 +45,23 @@ class SideBarConnection {
                     mainPageState.setMainPageData(data)
 
                     toast.success(`Requested Settings Has Been Loaded`)
+
+                    break;
+                }
+
+                case ActionType.MAIN_VARIABLES: {
+                    const data = reciveFrom.payload as VariablesReciveUI[]
+
+
+                    if (this.idelSidebarAction === null) {
+                        toast.error("Could Not Load These Settings. Try To Reload The Appliaction")
+                        break
+                    }
+
+                    sidebarState.setSidebarActive(this.idelSidebarAction)
+                    variableState.setVariables(data)
+
+                    toast.success(`Variable Settings Has Been Loaded`)
 
                     break;
                 }

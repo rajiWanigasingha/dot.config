@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES
     }
 
     @Serializable
@@ -99,5 +99,24 @@ object SendAndReceive {
     data class SendHelpError(
         val code: HelpErrorCodes,
         val errorMessage: String
+    )
+
+    // Variable Receives And Sends Message
+    @Serializable
+    enum class VariableAction {
+        ADD ,UPDATE
+    }
+
+    @Serializable
+    data class AddVariable(
+        val name: String,
+        val value: String
+    )
+
+    @Serializable
+    data class UpdateVariable(
+        val name: String,
+        val updateName: String,
+        val updateValue: String
     )
 }

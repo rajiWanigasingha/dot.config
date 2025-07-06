@@ -1,8 +1,17 @@
-import type { ActionType, SidebarUI } from "$lib"
+import type { ActionLinks, ActionType } from "$lib"
 
 export interface ReceivePageAction {
     actionType: ActionType
     payload: any
+}
+
+export interface SidebarUI {
+    componentTitle: string,
+    navigationSettings: {
+        icon: string,
+        name: string,
+        actionLink: ActionLinks
+    }[]
 }
 
 export interface ReceviePageInitialValue {

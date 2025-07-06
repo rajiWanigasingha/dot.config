@@ -1,6 +1,7 @@
 package org.dot.config.controller.services
 
 import kotlinx.datetime.Instant
+import org.dot.config.model.Tables
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.forEach
 import org.jetbrains.kotlinx.dataframe.api.print
@@ -45,6 +46,28 @@ class WriteIntoHyprland {
         }
 
         return settings
+    }
+
+    fun writeVariables(variables: DataFrame<*>): String {
+
+        val variableSettings = mutableListOf<Tables.Variables>()
+
+        variables.forEach { row ->
+            variableSettings.add(
+                Tables.Variables(
+                    name = row["name"].toString(),
+                    value = row["value"].toString()
+                )
+            )
+        }
+
+        val newHyprlandSettings = mutableListOf<String>()
+
+        variableSettings.forEach {
+            newHyprlandSettings.add("${it.name} = ${it.value}")
+        }
+
+        return newHyprlandSettings.joinToString("\n")
     }
 
     fun updateTime(hyprlandPath: String) {

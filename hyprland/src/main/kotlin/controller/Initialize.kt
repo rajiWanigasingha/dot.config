@@ -285,6 +285,24 @@ object Initialize {
 
         layerDf.writeCsv("$path/layerRules.csv")
 
+        // Create Variable Structure Of Hyprland
+        val variableRulesSettings = settingsModel.variables
+
+        val allVariableSettings = mutableListOf<Tables.Variables>()
+
+        variableRulesSettings?.forEach {
+            allVariableSettings.add(
+                Tables.Variables(
+                    name = it.name,
+                    value = it.value
+                )
+            )
+        }
+
+        val variableDf = allVariableSettings.toDataFrame()
+
+        variableDf.writeCsv("$path/variable.csv")
+
         // Create Time Of Updates
         val parsedTime = settingsModel.storeInfo
 
