@@ -4,9 +4,17 @@ import { ActionLinks, helpState, sidebarConn, sidebarState } from "$lib";
 
 export default function navigation(actionLink: ActionLinks) {
 
+    console.log(actionLink)
+
     switch (actionLink) {
         case ActionLinks.VARIABLES: {
             goto("/hyprland/custom/variables")
+            sidebarConn.loadMainPage(actionLink)
+            break
+        }
+
+        case ActionLinks.AUTOSTART: {
+            goto("/hyprland/custom/execute")
             sidebarConn.loadMainPage(actionLink)
             break
         }

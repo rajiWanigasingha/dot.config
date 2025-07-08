@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { GetIcons, TitleBar, variableConn, variableState } from '$lib';
 	import { tick } from 'svelte';
+	import { toast } from 'svelte-sonner';
 	import { slide } from 'svelte/transition';
 
 	const icons = [GetIcons('add'), GetIcons('search')];

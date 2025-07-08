@@ -52,6 +52,15 @@ fun Route.handleUI() {
                         ))
                     }
 
+                    Sidebar.ActionLinks.AUTOSTART -> {
+                        val ui = sidebarService.getAutoStart()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_AUTOSTART,
+                            payload = ui
+                        ))
+                    }
+
                      else -> {
                          val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 

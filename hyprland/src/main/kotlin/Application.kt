@@ -16,6 +16,7 @@ import org.dot.config.controller.Initialize
 import org.dot.config.view.ui.handleHelpUI
 import org.dot.config.view.ui.handleUI
 import org.dot.config.view.ui.mainUI
+import org.dot.config.view.ui.updateCustomUI.handleExecutes
 import org.dot.config.view.ui.updateCustomUI.handleVariables
 import org.slf4j.event.Level
 import kotlin.time.Duration.Companion.seconds
@@ -47,5 +48,6 @@ fun Application.module() {
         handleHelpUI()
 
         handleVariables()
+        handleExecutes()
     }
 }

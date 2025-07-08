@@ -27,6 +27,8 @@ export * from "./store/mainInput/mainConnection.svelte"
 export * from "./store/mainInput/mainState.svelte"
 export * from "./types/mainTypes/MainType"
 export * from "./store/mainInput/variableState.svelte"
+export * from "./store/mainInput/autostart/autoStartState.svelte"
+export * from "./store/mainInput/autostart/autoStartConnection.svelte"
 
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
@@ -36,3 +38,4 @@ export { default as Nav } from "./helpers/navigation"
 
 export * from "./types/customActionTypes/variables"
 export * from "./store/mainInput/variableConnection.svelte"
+export * from "./types/customActionTypes/autostart"

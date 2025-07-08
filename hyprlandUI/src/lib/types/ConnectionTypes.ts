@@ -6,7 +6,8 @@ export enum ActionType {
     CONNECT = "CONNECT",
     DISCONNECT = "DISCONNECT",
     ERROR = "ERROR",
-    MAIN_VARIABLES = "MAIN_VARIABLES"
+    MAIN_VARIABLES = "MAIN_VARIABLES",
+    MAIN_AUTOSTART = "MAIN_AUTOSTART"
 }
 
 export enum ActionLinks {

@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART
     }
 
     @Serializable
@@ -118,5 +118,30 @@ object SendAndReceive {
         val name: String,
         val updateName: String,
         val updateValue: String
+    )
+
+    // Execute Receive and send
+    @Serializable
+    enum class ExecuteActions {
+        ADD ,UPDATE ,DELETE
+    }
+
+    @Serializable
+    data class Executes(
+        val actions: ExecuteActions,
+        val keyword: String,
+        val command: String,
+        val oldCommand: String?
+    )
+
+    @Serializable
+    enum class ExecuteStateCommand {
+        EMPTY_COMMAND ,SUCCESS ,ADD_NEW_ERROR ,UPDATE_ERROR ,DELETE_ERROR
+    }
+
+    @Serializable
+    data class ExecuteStatus(
+        val status: ExecuteStateCommand,
+        val message: String
     )
 }

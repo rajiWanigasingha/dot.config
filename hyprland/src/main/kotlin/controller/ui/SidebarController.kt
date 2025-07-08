@@ -143,6 +143,24 @@ class SidebarController {
         return variableUI.toList()
     }
 
+    fun getAutoStart(): List<Tables.AutoStart> {
+
+        val autoStartUI = mutableListOf<Tables.AutoStart>()
+
+        val autoStart = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/autoStart.csv" ,colTypes = mapOf("keyword" to ColType.String ,"command" to ColType.String))
+
+        autoStart.forEach { row ->
+            autoStartUI.add(
+                Tables.AutoStart(
+                    keyword = row["keyword"].toString(),
+                    command = row["command"].toString()
+                )
+            )
+        }
+
+        return autoStartUI.toList()
+    }
+
     private fun createPageUI(
         actionLinks: Sidebar.ActionLinks,
         pageSettings: List<String>

@@ -70,6 +70,28 @@ class WriteIntoHyprland {
         return newHyprlandSettings.joinToString("\n")
     }
 
+    fun writeAutoStart(autoStart: DataFrame<*>): String {
+
+        val autoStartSettings = mutableListOf<Tables.AutoStart>()
+
+        autoStart.forEach { row ->
+            autoStartSettings.add(
+                Tables.AutoStart(
+                    keyword = row["keyword"].toString(),
+                    command = row["command"].toString()
+                )
+            )
+        }
+
+        val newHyprlandSettings = mutableListOf<String>()
+
+        autoStartSettings.forEach {
+            newHyprlandSettings.add("${it.keyword} = ${it.command}")
+        }
+
+        return newHyprlandSettings.joinToString("\n")
+    }
+
     fun updateTime(hyprlandPath: String) {
         val modifiedTime = Path.of(hyprlandPath).getLastModifiedTime().toKotlinInstant()
 
