@@ -61,6 +61,15 @@ fun Route.handleUI() {
                         ))
                     }
 
+                    Sidebar.ActionLinks.ENV -> {
+                        val ui = sidebarService.getEnv()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_ENV,
+                            payload = ui
+                        ))
+                    }
+
                      else -> {
                          val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 

@@ -19,6 +19,12 @@ export default function navigation(actionLink: ActionLinks) {
             break
         }
 
+        case ActionLinks.ENV: {
+            goto("/hyprland/custom/env")
+            sidebarConn.loadMainPage(actionLink)
+            break;
+        }
+
         default: {
             if (page.url.pathname !== "/hyprland/standedInputs") {
                 goto("/hyprland/standedInputs")

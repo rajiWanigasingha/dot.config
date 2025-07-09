@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV
     }
 
     @Serializable
@@ -142,6 +142,31 @@ object SendAndReceive {
     @Serializable
     data class ExecuteStatus(
         val status: ExecuteStateCommand,
+        val message: String
+    )
+
+    // Env Receive and send
+    @Serializable
+    enum class EnvActions {
+        ADD ,UPDATE ,DELETE
+    }
+
+    @Serializable
+    data class Env(
+        val actions: EnvActions,
+        val keyword: String,
+        val value: String,
+        val oldValue: String?
+    )
+
+    @Serializable
+    enum class EnvStateCommand {
+        EMPTY_COMMAND ,SUCCESS ,ADD_NEW_ERROR ,UPDATE_ERROR ,DELETE_ERROR
+    }
+
+    @Serializable
+    data class EnvStatus(
+        val status: EnvStateCommand,
         val message: String
     )
 }

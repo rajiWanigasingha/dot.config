@@ -92,6 +92,28 @@ class WriteIntoHyprland {
         return newHyprlandSettings.joinToString("\n")
     }
 
+    fun writeEnv(env: DataFrame<*>): String {
+
+        val envSettings = mutableListOf<Tables.Env>()
+
+        env.forEach { row ->
+            envSettings.add(
+                Tables.Env(
+                    keyword = row["keyword"].toString(),
+                    value = row["value"].toString()
+                )
+            )
+        }
+
+        val newHyprlandSettings = mutableListOf<String>()
+
+        envSettings.forEach {
+            newHyprlandSettings.add("${it.keyword} = ${it.value}")
+        }
+
+        return newHyprlandSettings.joinToString("\n")
+    }
+
     fun updateTime(hyprlandPath: String) {
         val modifiedTime = Path.of(hyprlandPath).getLastModifiedTime().toKotlinInstant()
 

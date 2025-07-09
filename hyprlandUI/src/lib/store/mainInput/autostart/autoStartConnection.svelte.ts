@@ -53,7 +53,7 @@ class AutoStartConnection {
                             if (this.deleteAutoStart !== null) {
                                 toast.success(result.message)
 
-                                autostartState.setAutoStart(autostartState.getAutoStart().filter(item => item.command !== this.deleteAutoStart?.command))
+                                autostartState.setAutoStart(autostartState.getAutoStart().filter(item => !(item.command === this.deleteAutoStart?.command)))
                             }
 
                             break;

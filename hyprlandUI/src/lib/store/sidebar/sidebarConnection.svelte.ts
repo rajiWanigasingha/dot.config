@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, autostartState, mainPageState, sidebarState, variableState, type AutoStartReceiveUI, type MainPageActions, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
+import { ActionLinks, ActionType, autostartState, envState, mainPageState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type MainPageActions, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
 import { toast } from "svelte-sonner"
 
 class SideBarConnection {
@@ -78,6 +78,23 @@ class SideBarConnection {
                     autostartState.setAutoStart(data)
 
                     toast.success(`Autostart Settings Has Been Loaded`)
+
+                    break;
+                }
+
+                case ActionType.MAIN_ENV: {
+                    const data = reciveFrom.payload as EnvReceiveUI[]
+
+                    if (this.idelSidebarAction === null) {
+                        toast.error("Could Not Load These Settings. Try To Reload The Appliaction")
+                        break
+                    }
+
+                    sidebarState.setSidebarActive(this.idelSidebarAction)
+                    envState.setEnv(data)
+
+
+                    toast.success(`Env Settings Has Been Loaded`)
 
                     break;
                 }

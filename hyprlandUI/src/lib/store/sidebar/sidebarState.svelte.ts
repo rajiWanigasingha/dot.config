@@ -10,7 +10,10 @@ function sidebarStatePage() {
 
         sidebarState,
 
-        setSidebarItmes: (items: SidebarUI[]) => sidebarState.sidebarItems.push(...items),
+        setSidebarItmes: (items: SidebarUI[]) => {
+            sidebarState.sidebarItems = []
+            sidebarState.sidebarItems.push(...items)
+        },
 
         setSidebarActive: (actionLink: ActionLinks) => sidebarState.sidebarActive = actionLink
 

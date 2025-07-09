@@ -161,6 +161,24 @@ class SidebarController {
         return autoStartUI.toList()
     }
 
+    fun getEnv(): List<Tables.Env> {
+
+        val envUI = mutableListOf<Tables.Env>()
+
+        val env = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/env.csv" , colTypes = mapOf("keyword" to ColType.String ,"value" to ColType.String))
+
+        env.forEach { row ->
+            envUI.add(
+                Tables.Env(
+                    keyword = row["keyword"].toString(),
+                    value = row["value"].toString()
+                )
+            )
+        }
+
+        return envUI.toList()
+    }
+
     private fun createPageUI(
         actionLinks: Sidebar.ActionLinks,
         pageSettings: List<String>
