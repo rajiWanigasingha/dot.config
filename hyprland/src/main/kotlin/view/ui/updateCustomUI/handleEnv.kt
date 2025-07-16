@@ -30,7 +30,7 @@ fun Route.handleEnv() {
 
             if (receiveEnv.actionType == SendAndReceive.ActionType.DISCONNECT) {
 
-                close(CloseReason(CloseReason.Codes.GOING_AWAY ,"Close After Actions"))
+                close(CloseReason(CloseReason.Codes.GOING_AWAY, "Close After Actions"))
 
                 logger.warn("Closing Env Websocket Connection")
 

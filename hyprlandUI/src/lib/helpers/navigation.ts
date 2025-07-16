@@ -25,6 +25,12 @@ export default function navigation(actionLink: ActionLinks) {
             break;
         }
 
+        case ActionLinks.KEYBINDS: {
+            goto("/hyprland/custom/keybinds")
+            sidebarConn.loadMainPage(actionLink)
+            break;
+        }
+
         default: {
             if (page.url.pathname !== "/hyprland/standedInputs") {
                 goto("/hyprland/standedInputs")

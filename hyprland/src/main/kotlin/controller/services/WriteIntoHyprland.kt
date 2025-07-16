@@ -114,6 +114,34 @@ class WriteIntoHyprland {
         return newHyprlandSettings.joinToString("\n")
     }
 
+    fun writeKeybind(keybind: DataFrame<*>): String {
+
+        val keybindsSettings = mutableListOf<Tables.KeybindTable>()
+
+        keybind.forEach { row ->
+            keybindsSettings.add(
+                Tables.KeybindTable(
+                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",").mapNotNull { it.trim().toCharArray().getOrNull(0) },
+                    mod = row["mod"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    keys = row["keys"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    description = row["description"].toString(),
+                    dispatcher = row["dispatcher"].toString(),
+                    args = row["args"].toString()
+                )
+            )
+        }
+
+        val hyprlandKey = mutableListOf<String>()
+
+        keybindsSettings.forEach {
+            hyprlandKey.add(
+                "bind${it.flags.joinToString("")} = ${it.mod.joinToString(" ")} ,${it.keys.joinToString(" ")}${if (it.description != "null" && it.description != "") " ,${it.description}" else ""} ,${it.dispatcher}${if (it.args != "null" && it.args != "") " ,${it.args}" else ""}"
+            )
+        }
+
+        return hyprlandKey.joinToString("\n")
+    }
+
     fun updateTime(hyprlandPath: String) {
         val modifiedTime = Path.of(hyprlandPath).getLastModifiedTime().toKotlinInstant()
 

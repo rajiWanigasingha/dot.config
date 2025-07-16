@@ -215,4 +215,11 @@ object Tables {
         val name: String,
         val value: String
     )
+
+    @Serializable
+    data class KeybindDispatcher(
+        val name: String,
+        val command: String,
+        val description: String
+    )
 }

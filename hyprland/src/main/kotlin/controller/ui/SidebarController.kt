@@ -11,7 +11,6 @@ import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.hyprconfig.helpers.HyprlandTypes
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.forEach
-import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.io.ColType
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.slf4j.LoggerFactory
@@ -177,6 +176,28 @@ class SidebarController {
         }
 
         return envUI.toList()
+    }
+
+    fun getKeybinds(): List<Tables.KeybindTable> {
+
+        val keybinds = mutableListOf<Tables.KeybindTable>()
+
+        val keybind = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv" , colTypes = mapOf("flags" to ColType.String ,"mod" to ColType.String ,"keys" to ColType.String ,"description" to ColType.String ,"dispatcher" to ColType.String ,"args" to ColType.String))
+
+        keybind.forEach { row ->
+            keybinds.add(
+                Tables.KeybindTable(
+                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",").mapNotNull { it.trim().toCharArray().getOrNull(0) },
+                    mod = row["mod"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    keys = row["keys"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    description = row["description"].toString(),
+                    dispatcher = row["dispatcher"].toString(),
+                    args = row["args"].toString()
+                )
+            )
+        }
+
+        return keybinds.toList()
     }
 
     private fun createPageUI(

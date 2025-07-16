@@ -8,7 +8,8 @@ export enum ActionType {
     ERROR = "ERROR",
     MAIN_VARIABLES = "MAIN_VARIABLES",
     MAIN_AUTOSTART = "MAIN_AUTOSTART",
-    MAIN_ENV = "MAIN_ENV"
+    MAIN_ENV = "MAIN_ENV",
+    MAIN_KEYBINDS = "MAIN_KEYBINDS"
 }
 
 export enum ActionLinks {

@@ -74,7 +74,7 @@ object Sidebar {
                 NavigationSettings(
                     icon = "bind",
                     name = "Global Shortcuts",
-                    actionLink = ActionLinks.KEYBOARD
+                    actionLink = ActionLinks.KEYBINDS
                 ),
                 NavigationSettings(
                     icon = "monitor",

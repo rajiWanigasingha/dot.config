@@ -40,6 +40,7 @@
 		"vite-plugin-devtools-json": "^0.2.0"
 	},
 	"dependencies": {
+		"@tauri-apps/plugin-dialog": "~2",
 		"@tauri-apps/plugin-shell": "~2",
 		"cmpstr": "^3.0.1",
 		"daisyui": "^5.0.43",

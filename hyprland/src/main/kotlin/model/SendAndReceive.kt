@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS
     }
 
     @Serializable
@@ -168,5 +168,38 @@ object SendAndReceive {
     data class EnvStatus(
         val status: EnvStateCommand,
         val message: String
+    )
+
+    // Keybinds Receive And Send
+    @Serializable
+    enum class KeybindActionStatus {
+        KEYBIND_HELP ,DISPATCHER_HELP ,GET_DISPATCHERS ,CREATE_NEW
+    }
+
+    @Serializable
+    data class KeybindAction(
+        val action: KeybindActionStatus,
+        val dispatcherTitle: String? = null,
+        val data: Tables.KeybindTable? = null
+    )
+
+    @Serializable
+    enum class KeybindErrStatus {
+        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_HELP_PAGE ,EMPTY_PAYLOAD ,EMPTY_DISPATCHERS ,EMPTY_DISPATCHER_COMMAND ,EMPTY_DATA ,NEW_BIND_CREATING_FAILED
+    }
+
+    @Serializable
+    data class KeybindError(
+        val status: KeybindErrStatus,
+        val message: String
+    )
+
+    @Serializable
+    data class KeybindActionResult(
+        val action: KeybindActionStatus,
+        val helpPage: String? = null,
+        val dispatcher: List<Tables.KeybindDispatcher>? = null,
+        val actionStatus: Boolean? = null,
+        val actionMessage: String? = null
     )
 }

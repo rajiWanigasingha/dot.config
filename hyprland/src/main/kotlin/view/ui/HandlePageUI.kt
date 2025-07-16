@@ -70,6 +70,15 @@ fun Route.handleUI() {
                         ))
                     }
 
+                    Sidebar.ActionLinks.KEYBINDS -> {
+                        val ui = sidebarService.getKeybinds()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_KEYBINDS,
+                            payload = ui
+                        ))
+                    }
+
                      else -> {
                          val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 
