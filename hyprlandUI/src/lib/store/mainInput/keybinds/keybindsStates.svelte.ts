@@ -7,7 +7,8 @@ function KeybindsStates() {
         keybinds: [] as KeybindsLoad[],
         dispatchers: [] as Dispatchers[],
         loadDispatcher: '',
-        showSummery: false
+        showSummery: false,
+        updateEdit: null as null | number
     })
 
     let help = $state({
@@ -24,6 +25,14 @@ function KeybindsStates() {
         args: null as string | null
     })
 
+    let editkeyHold = $state(null as null | {
+        flags: string[],
+        mod: string[],
+        key: string[],
+        dispatcher: string | null,
+        args: string | null
+    })
+
     return {
 
         store,
@@ -31,6 +40,8 @@ function KeybindsStates() {
         help,
 
         holdKeybinds,
+
+        editkeyHold,
 
         setKeybinds(binds: KeybindsLoad[]) {
             this.store.keybinds = binds
@@ -93,6 +104,20 @@ function KeybindsStates() {
 
         getHoldKeybinds() {
             return this.holdKeybinds
+        },
+
+        setEditKeyHold(flags: string[], mod: string[], key: string[], dispatcher: string, args: string) {
+            this.editkeyHold = {
+                flags: flags,
+                mod: mod,
+                key: key,
+                dispatcher: dispatcher,
+                args: args
+            }
+        },
+
+        getEditKeyHold() {
+            return this.editkeyHold
         }
     }
 }

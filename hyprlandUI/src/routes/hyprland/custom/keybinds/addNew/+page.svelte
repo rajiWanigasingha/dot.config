@@ -64,6 +64,22 @@
 		}
 	}
 
+	function edit() {
+		if (keybindState.editkeyHold === null) return;
+
+		const updateValue: KeybindsLoad = {
+			flags: keybindState.editkeyHold!!.flags,
+			mod: keybindState.editkeyHold!!.mod,
+			keys: keybindState.editkeyHold!!.key,
+			description: '',
+			dispatcher: keybindState.editkeyHold?.dispatcher ?? '',
+			args: keybindState.editkeyHold?.args ?? ''
+		};
+
+		if (keybindState.store.updateEdit !== null) {
+			keybindConn.update(updateValue, keybindState.store.keybinds[keybindState.store.updateEdit]);
+		}
+	}
 </script>
 
 <div class="grid max-h-screen min-h-screen w-full grid-cols-12 overflow-y-hidden">
@@ -179,79 +195,158 @@
 </div>
 
 {#if keybindState.getSummery()}
-	<dialog class="modal" open={true}>
-		<div class="modal-box bg-base-300 max-w-5xl rounded-md">
-			<h3 class="text-sm font-bold">Keybind Summery</h3>
-			<p class="text-base-content/60 py-1 text-xs font-medium">
-				This is a summery of the keybind that will create
-			</p>
-			<div class="p-2">
-				<div class="overflow-x-auto">
-					<table class="table-zebra border-base-content/10 table border text-xs">
-						<tbody>
-							<tr>
-								<th class="w-32">Mod Key</th>
-								<td>
-									<div>
-										{#each keybindState.getHoldKeybinds().mod as mod}
-											<kbd class="kbd kbd-sm">{mod}</kbd>
-										{/each}
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th class="w-32">Keys</th>
-								<td>
-									<div>
-										{#each keybindState.getHoldKeybinds().key as key}
-											<kbd class="kbd kbd-sm">{key}</kbd>
-										{/each}
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th class="w-32">Flags</th>
-								<td>
-									<div>
-										{#each keybindState.getHoldKeybinds().flags as flag}
-											<div class="badge badge-sm text-xs">{flag}</div>
-										{/each}
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th class="w-32">Dispatcher</th>
-								<td>
-									<div>
-										<div class="badge badge-sm text-xs">
-											{keybindState.getHoldKeybinds().dispatcher}
+	{#if keybindState.getEditKeyHold() !== null}
+		<dialog class="modal" open={true}>
+			<div class="modal-box bg-base-300 max-w-5xl rounded-md">
+				<h3 class="text-sm font-bold">Edit Keybind Summery</h3>
+				<p class="text-base-content/60 py-1 text-xs font-medium">
+					This is a summery of the keybind that will edited
+				</p>
+				<div class="p-2">
+					<div class="overflow-x-auto">
+						<table class="table-zebra border-base-content/10 table border text-xs">
+							<tbody>
+								<tr>
+									<th class="w-32">Mod Key</th>
+									<td>
+										<div>
+											{#each keybindState.getEditKeyHold()!!.mod as mod}
+												<kbd class="kbd kbd-sm">{mod}</kbd>
+											{/each}
 										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th class="w-32">Arguments</th>
-								<td>
-									<div>
-										<div class="text-xs">{keybindState.getHoldKeybinds().args}</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Keys</th>
+									<td>
+										<div>
+											{#each keybindState.getEditKeyHold()!!.key as key}
+												<kbd class="kbd kbd-sm">{key}</kbd>
+											{/each}
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Flags</th>
+									<td>
+										<div>
+											{#each keybindState.getEditKeyHold()!!.flags as flag}
+												<div class="badge badge-sm text-xs">{flag}</div>
+											{/each}
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Dispatcher</th>
+									<td>
+										<div>
+											<div class="badge badge-sm text-xs">
+												{keybindState.getEditKeyHold()!!.dispatcher}
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Arguments</th>
+									<td>
+										<div>
+											<div class="text-xs">{keybindState.getEditKeyHold()!!.args}</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-action flex flex-row justify-between">
+					<form method="dialog">
+						<button
+							class="btn btn-error text-error-content text-xs"
+							onclick={() => keybindState.setSummery(false)}>Discard This</button
+						>
+					</form>
+					<button class="btn btn-warning text-warning-content text-xs" onclick={() => edit()}
+						>Edit Bind</button
+					>
 				</div>
 			</div>
-			<div class="modal-action flex flex-row justify-between">
-				<form method="dialog">
+		</dialog>
+	{:else}
+		<dialog class="modal" open={true}>
+			<div class="modal-box bg-base-300 max-w-5xl rounded-md">
+				<h3 class="text-sm font-bold">Keybind Summery</h3>
+				<p class="text-base-content/60 py-1 text-xs font-medium">
+					This is a summery of the keybind that will create
+				</p>
+				<div class="p-2">
+					<div class="overflow-x-auto">
+						<table class="table-zebra border-base-content/10 table border text-xs">
+							<tbody>
+								<tr>
+									<th class="w-32">Mod Key</th>
+									<td>
+										<div>
+											{#each keybindState.getHoldKeybinds().mod as mod}
+												<kbd class="kbd kbd-sm">{mod}</kbd>
+											{/each}
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Keys</th>
+									<td>
+										<div>
+											{#each keybindState.getHoldKeybinds().key as key}
+												<kbd class="kbd kbd-sm">{key}</kbd>
+											{/each}
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Flags</th>
+									<td>
+										<div>
+											{#each keybindState.getHoldKeybinds().flags as flag}
+												<div class="badge badge-sm text-xs">{flag}</div>
+											{/each}
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Dispatcher</th>
+									<td>
+										<div>
+											<div class="badge badge-sm text-xs">
+												{keybindState.getHoldKeybinds().dispatcher}
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th class="w-32">Arguments</th>
+									<td>
+										<div>
+											<div class="text-xs">{keybindState.getHoldKeybinds().args}</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-action flex flex-row justify-between">
+					<form method="dialog">
+						<button
+							class="btn btn-error text-error-content text-xs"
+							onclick={() => keybindState.setSummery(false)}>Discard This</button
+						>
+					</form>
 					<button
-						class="btn btn-error text-error-content text-xs"
-						onclick={() => keybindState.setSummery(false)}>Discard This</button
+						class="btn btn-success text-success-content text-xs"
+						onclick={() => createNewBind()}>Create Bind</button
 					>
-				</form>
-				<button class="btn btn-success text-success-content text-xs" onclick={() => createNewBind()}
-					>Create Bind</button
-				>
+				</div>
 			</div>
-		</div>
-	</dialog>
+		</dialog>
+	{/if}
 {/if}

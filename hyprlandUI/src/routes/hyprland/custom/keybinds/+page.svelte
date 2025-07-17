@@ -33,10 +33,24 @@
 	</div>
 	<div class="divider m-0"></div>
 	<div class="flex flex-col gap-3 p-8">
-		{#each keybindState.getKeybinds() as binds}
+		{#each keybindState.getKeybinds() as binds, index}
 			<div class="bg-base-300 w-full rounded-md">
 				<div class="bg-base-100 flex w-full flex-row justify-end gap-2 rounded-t-md px-4 py-2">
-					<button class="btn btn-sm btn-warning">{@html GetIcons('edit', 12)} Edit</button>
+					<button
+						class="btn btn-sm btn-warning"
+						onclick={() => {
+							keybindState.setEditKeyHold(
+								binds.flags,
+								binds.mod,
+								binds.keys,
+								binds.dispatcher,
+								binds.args
+							);
+							keybindState.setHelp('KEYBIND_HELP');
+							keybindState.store.updateEdit = index;
+							goto('/hyprland/custom/keybinds/addNew');
+						}}>{@html GetIcons('edit', 12)} Edit</button
+					>
 					<button
 						class="btn btn-sm btn-error"
 						onclick={() => {

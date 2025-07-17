@@ -69,7 +69,21 @@
 
 	let showDispatchers = $state(false);
 
+	let showEditEdipatcher = $state(false);
+
 	$effect(() => {
+		if (keybindState.getEditKeyHold() !== null) {
+			const edit = keybindState.getEditKeyHold()!!;
+
+			mod = edit.mod;
+			key = edit.key;
+			flag = edit.flags;
+
+			shortcut = `${edit.mod.join('+')}+${edit.key.join('+')}`;
+			showDispatchers = false;
+			showEditEdipatcher = true;
+		}
+
 		if (keybindState.holdKeybinds.mod.length > 0 || keybindState.holdKeybinds.key.length > 0) {
 			const keybind = keybindState.getHoldKeybinds();
 
@@ -79,6 +93,7 @@
 
 			shortcut = `${keybind.mod.join('+')}+${keybind.key.join('+')}`;
 
+			showEditEdipatcher = false;
 			showDispatchers = true;
 		}
 	});
@@ -90,12 +105,13 @@
 			class="h-fit cursor-pointer bg-transparent hover:bg-transparent"
 			onclick={() => {
 				keybindState.setHoldKeybinds([], [], []);
+				keybindState.setEditKeyHold([], [], [], '', '');
 				goto('/hyprland/custom/keybinds');
 			}}
 		>
 			{@html GetIcons('arrow_left', 16)}
 		</button>
-		<p class="text-xs font-semibold">Create Keybind</p>
+		<p class="text-xs font-semibold">{showEditEdipatcher ? 'Edit Keybind' : 'Create Keybind'}</p>
 	</div>
 </div>
 
@@ -225,7 +241,14 @@
 	</div>
 
 	<div class="flex flex-col gap-2 py-2">
-		{#if showDispatchers}
+		{#if showEditEdipatcher}
+			<button
+				class="btn btn-warning w-full text-xs"
+				onclick={() => {
+					keybindConn.getDispatchers();
+				}}>Edit Dispatchers</button
+			>
+		{:else if showDispatchers}
 			<button
 				class="btn btn-success w-full text-xs"
 				onclick={() => {

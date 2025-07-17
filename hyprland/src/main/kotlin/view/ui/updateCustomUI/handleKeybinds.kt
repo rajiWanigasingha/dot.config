@@ -246,6 +246,48 @@ fun Route.handleKeybinds() {
                                     )
                                 }
                             }
+
+                            SendAndReceive.KeybindActionStatus.UPDATE -> {
+
+                                if (getAction.payload.keybindUpdate === null) {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.ERROR,
+                                            payload = SendAndReceive.KeybindError(
+                                                status = SendAndReceive.KeybindErrStatus.EMPTY_UPDATE,
+                                                message = "Update data is empty"
+                                            )
+                                        )
+                                    )
+
+                                    return@runCatching
+                                }
+
+                                val edit = keybindController.editKeybind(keybinds = getAction.payload.keybindUpdate.new , oldKeybinds = getAction.payload.keybindUpdate.old)
+
+                                if (edit) {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.MAIN_KEYBINDS,
+                                            payload = SendAndReceive.KeybindActionResult(
+                                                action = SendAndReceive.KeybindActionStatus.UPDATE,
+                                                actionStatus = true,
+                                                actionMessage = "Keybind Edit Is Successfully"
+                                            )
+                                        )
+                                    )
+                                } else {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.ERROR,
+                                            payload = SendAndReceive.KeybindError(
+                                                status = SendAndReceive.KeybindErrStatus.UPDATE_FAILED,
+                                                message = "Could Not Edit The Keybind"
+                                            )
+                                        )
+                                    )
+                                }
+                            }
                         }
                     }
 

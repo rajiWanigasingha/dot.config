@@ -8,6 +8,7 @@ class KeybindsConnection {
     wsKeybind = $state(null as null | WebSocket)
     private newbind = $state(null as null | KeybindsLoad)
     private deleteKey = $state(null as null | { mod: string[], key: string[], flags: string[] })
+    private updateKey = $state(null as null | { new: KeybindsLoad, old: KeybindsLoad })
 
     constructor() {
         this.connection()
@@ -64,6 +65,8 @@ class KeybindsConnection {
                             } else {
                                 toast.error("Couldn't create new keybind")
                             }
+
+                            break;
                         }
 
                         case "DELETE": {
@@ -76,6 +79,42 @@ class KeybindsConnection {
 
                                 keybindState.setKeybinds(filterOutDelete)
                             }
+
+                            break;
+                        }
+
+                        case "UPDATE": {
+                            const success = keybind.actionStatus
+
+                            if (success && this.updateKey !== null) {
+                                toast.success(keybind.actionMessage!!)
+
+                                const update = keybindState.getKeybinds().map(item => {
+                                    if (item.mod === this.updateKey?.old.mod && item.keys === this.updateKey.old.keys && item.flags === this.updateKey.old.flags) {
+                                        return this.updateKey.new
+                                    }
+
+                                    return item
+                                })
+
+
+                                keybindState.setKeybinds(update)
+
+                                keybindState.setSummery(false)
+
+                                keybindState.editkeyHold = null
+
+                                keybindState.setLoadDispatcher('')
+
+                                keybindState.setDispatchers([])
+
+                                goto("/hyprland/custom/keybinds")
+
+                            } else {
+                                toast.error("Couldn't edit keybind")
+                            }
+
+                            break;
                         }
                     }
 
@@ -175,6 +214,23 @@ class KeybindsConnection {
                     mod: mod,
                     key: key,
                     flags: flags
+                }
+            }
+        }))
+    }
+
+    update(newTable: KeybindsLoad, oldTable: KeybindsLoad) {
+        console.log("update Keybind")
+
+        this.updateKey = { new: newTable, old: oldTable }
+
+        this.wsKeybind?.send(JSON.stringify({
+            actionType: ActionType.MAIN_KEYBINDS,
+            payload: {
+                action: "UPDATE",
+                keybindUpdate: {
+                    new: newTable,
+                    old: newTable
                 }
             }
         }))

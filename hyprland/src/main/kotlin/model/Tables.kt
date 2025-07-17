@@ -24,12 +24,12 @@ object Tables {
 
     @Serializable
     data class KeybindTable(
-        val flags: List<Char>,
-        val mod: List<String>,
-        val keys: List<String>,
-        val description: String?,
-        val dispatcher: String,
-        val args: String?,
+        var flags: List<Char>,
+        var mod: List<String>,
+        var keys: List<String>,
+        var description: String?,
+        var dispatcher: String,
+        var args: String?,
     ) {
         init {
 

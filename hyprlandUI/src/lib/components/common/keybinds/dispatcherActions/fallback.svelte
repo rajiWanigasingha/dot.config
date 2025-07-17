@@ -1,7 +1,13 @@
 <script lang="ts">
-	import { keybindState } from '$lib';
+	import { keybindConn, keybindState, type KeybindsLoad } from '$lib';
 
 	let args = $state('');
+
+	$effect(() => {
+		if (keybindState.getEditKeyHold() !== null) {
+			args = keybindState.getEditKeyHold()?.args ?? '';
+		}
+	});
 </script>
 
 <div class="p-4">
@@ -16,11 +22,21 @@
 		<p class="label">Add Argument for dispatchers</p>
 	</fieldset>
 
-	<button
-		class="btn btn-success my-3 w-full text-xs"
-		onclick={() => {
-			keybindState.holdKeybinds.args = args;
-			keybindState.setSummery(true);
-		}}>Create New Keybind</button
-	>
+	{#if keybindState.getEditKeyHold()}
+		<button
+			class="btn btn-warning my-3 w-full text-xs"
+			onclick={() => {
+				keybindState.editkeyHold!!.args = args;
+				keybindState.setSummery(true);
+			}}>Edit This Keybinds</button
+		>
+	{:else}
+		<button
+			class="btn btn-success my-3 w-full text-xs"
+			onclick={() => {
+				keybindState.holdKeybinds.args = args;
+				keybindState.setSummery(true);
+			}}>Create New Keybind</button
+		>
+	{/if}
 </div>

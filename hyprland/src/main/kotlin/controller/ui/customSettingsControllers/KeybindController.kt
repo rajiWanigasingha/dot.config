@@ -5,12 +5,22 @@ import org.dot.config.model.SendAndReceive
 import org.dot.config.model.Tables
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.append
+import org.jetbrains.kotlinx.dataframe.api.convert
 import org.jetbrains.kotlinx.dataframe.api.drop
+import org.jetbrains.kotlinx.dataframe.api.filter
 import org.jetbrains.kotlinx.dataframe.api.forEach
+import org.jetbrains.kotlinx.dataframe.api.last
+import org.jetbrains.kotlinx.dataframe.api.parser
 import org.jetbrains.kotlinx.dataframe.api.print
+import org.jetbrains.kotlinx.dataframe.api.schema
+import org.jetbrains.kotlinx.dataframe.api.toDataFrame
+import org.jetbrains.kotlinx.dataframe.api.update
+import org.jetbrains.kotlinx.dataframe.api.where
+import org.jetbrains.kotlinx.dataframe.api.with
 import org.jetbrains.kotlinx.dataframe.io.ColType
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.jetbrains.kotlinx.dataframe.io.writeCsv
+import org.jetbrains.kotlinx.dataframe.size
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import kotlin.io.path.writeText
@@ -104,6 +114,33 @@ class KeybindController {
         return true
     }
 
+    fun editKeybind(keybinds: Tables.KeybindTable ,oldKeybinds: Tables.KeybindTable): Boolean {
+        logger.info("Edit Keybinds")
+
+        val keybind = readKeybinds().turnIntoValidKotlin()
+
+        val updated = keybind.map {
+            if (it.mod == oldKeybinds.mod && it.keys == oldKeybinds.keys && it.flags == oldKeybinds.flags) {
+                it.copy(
+                    mod = keybinds.mod,
+                    keys = keybinds.keys,
+                    flags = keybinds.flags,
+                    description = keybinds.description,
+                    dispatcher = keybinds.dispatcher,
+                    args = keybinds.args
+                )
+            } else it
+        }
+
+        val updatedKeybinds = updated.toDataFrame().convert { all() }.with { it.toString() }
+
+        writeAllToCsv(updatedKeybinds)
+
+        writeIntoHyprland(data = updatedKeybinds)
+
+        return true
+    }
+
     private fun readKeybinds(): DataFrame<*> {
         return DataFrame.readCsv(
             fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv",
@@ -133,5 +170,24 @@ class KeybindController {
         Path.of(hyprlandPath).writeText(text = value)
 
         WriteIntoHyprland().updateTime(hyprlandPath = hyprlandPath)
+    }
+
+    private fun DataFrame<*>.turnIntoValidKotlin(): MutableList<Tables.KeybindTable> {
+        val keybindsSettings = mutableListOf<Tables.KeybindTable>()
+
+        this.forEach { row ->
+            keybindsSettings.add(
+                Tables.KeybindTable(
+                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",").mapNotNull { it.trim().toCharArray().getOrNull(0) },
+                    mod = row["mod"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    keys = row["keys"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
+                    description = row["description"].toString(),
+                    dispatcher = row["dispatcher"].toString(),
+                    args = row["args"].toString()
+                )
+            )
+        }
+
+        return keybindsSettings
     }
 }

@@ -10,7 +10,7 @@
 				keybindState.setLoadDispatcher('');
 				keybindState.setDispatchers([]);
 				keybindState.holdKeybinds.dispatcher = '';
-				keybindConn.sendHelp("KEYBIND_HELP")
+				keybindConn.sendHelp('KEYBIND_HELP');
 			}}
 		>
 			{@html GetIcons('arrow_left', 16)}
@@ -24,11 +24,20 @@
 <div class="flex max-h-[94vh] min-h-[94vh] flex-col gap-2 overflow-y-auto p-4">
 	{#each keybindState.getDispatcher() as dispatchers}
 		<button
-			class="bg-base-300/60 hover:bg-base-300 w-full cursor-pointer rounded-md p-4 text-start"
+			class="w-full cursor-pointer rounded-md p-4 text-start {keybindState.getEditKeyHold()
+				?.dispatcher === dispatchers.command
+				? 'bg-base-100 hover:bg-base-300 border'
+				: 'bg-base-300/60 hover:bg-base-300'}"
 			onclick={() => {
-				keybindState.setLoadDispatcher(dispatchers.command);
-				keybindConn.sendHelp('DISPATCHER_HELP', dispatchers.command);
-				keybindState.holdKeybinds.dispatcher = dispatchers.command;
+				if (keybindState.getEditKeyHold() !== null) {
+					keybindState.setLoadDispatcher('edit');
+					keybindConn.sendHelp('DISPATCHER_HELP', dispatchers.command);
+					keybindState.editkeyHold!!.dispatcher = dispatchers.command;
+				} else {
+					keybindState.setLoadDispatcher(dispatchers.command);
+					keybindConn.sendHelp('DISPATCHER_HELP', dispatchers.command);
+					keybindState.holdKeybinds.dispatcher = dispatchers.command;
+				}
 			}}
 		>
 			<p class="text-sm font-semibold">{dispatchers.name}</p>

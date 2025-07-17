@@ -21,7 +21,7 @@ export interface ReceiveKeybindAction {
 }
 
 export interface ReceiveKeybindHelp {
-    action: "KEYBIND_HELP" | "DISPATCHER_HELP" | "GET_DISPATCHERS" | "CREATE_NEW" | "DELETE",
+    action: "KEYBIND_HELP" | "DISPATCHER_HELP" | "GET_DISPATCHERS" | "CREATE_NEW" | "DELETE" | "UPDATE",
     helpPage: string | null,
     dispatcher: Dispatchers[] | null,
     actionStatus: boolean | null,
@@ -29,6 +29,6 @@ export interface ReceiveKeybindHelp {
 }
 
 export interface ReceiveKeybindActionError {
-    status: "SERIALIZABLE" | "INVALID_ACTION_TYPE" | "EMPTY_HELP_PAGE" | "EMPTY_PAYLOAD" | "EMPTY_DISPATCHERS" | "EMPTY_DISPATCHER_COMMAND" | "EMPTY_DATA" | "NEW_BIND_CREATING_FAILED" | "EMPTY_DELETE",
+    status: "SERIALIZABLE" | "INVALID_ACTION_TYPE" | "EMPTY_HELP_PAGE" | "EMPTY_PAYLOAD" | "EMPTY_DISPATCHERS" | "EMPTY_DISPATCHER_COMMAND" | "EMPTY_DATA" | "NEW_BIND_CREATING_FAILED" | "EMPTY_DELETE" | "EMPTY_UPDATE" | "UPDATE_FAILED",
     message: string
 }

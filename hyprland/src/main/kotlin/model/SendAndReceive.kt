@@ -173,7 +173,7 @@ object SendAndReceive {
     // Keybinds Receive And Send
     @Serializable
     enum class KeybindActionStatus {
-        KEYBIND_HELP ,DISPATCHER_HELP ,GET_DISPATCHERS ,CREATE_NEW ,DELETE
+        KEYBIND_HELP ,DISPATCHER_HELP ,GET_DISPATCHERS ,CREATE_NEW ,DELETE ,UPDATE
     }
 
     @Serializable
@@ -184,16 +184,23 @@ object SendAndReceive {
     )
 
     @Serializable
+    data class KeybindUpdate(
+        val new: Tables.KeybindTable,
+        val old: Tables.KeybindTable
+    )
+
+    @Serializable
     data class KeybindAction(
         val action: KeybindActionStatus,
         val dispatcherTitle: String? = null,
         val data: Tables.KeybindTable? = null,
-        val delete: KeybindDelete? = null
+        val delete: KeybindDelete? = null,
+        val keybindUpdate: KeybindUpdate? = null
     )
 
     @Serializable
     enum class KeybindErrStatus {
-        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_HELP_PAGE ,EMPTY_PAYLOAD ,EMPTY_DISPATCHERS ,EMPTY_DISPATCHER_COMMAND ,EMPTY_DATA ,NEW_BIND_CREATING_FAILED ,EMPTY_DELETE ,DELETE_FAILS
+        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_HELP_PAGE ,EMPTY_PAYLOAD ,EMPTY_DISPATCHERS ,EMPTY_DISPATCHER_COMMAND ,EMPTY_DATA ,NEW_BIND_CREATING_FAILED ,EMPTY_DELETE ,DELETE_FAILS ,EMPTY_UPDATE ,UPDATE_FAILED
     }
 
     @Serializable
