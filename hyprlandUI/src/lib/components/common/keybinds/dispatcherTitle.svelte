@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GetIcons, keybindState } from '$lib';
+	import { GetIcons, keybindConn, keybindState } from '$lib';
 
 	let { name } = $props();
 </script>
@@ -11,6 +11,8 @@
 			onclick={() => {
 				keybindState.setLoadDispatcher('');
 				keybindState.holdKeybinds.args = '';
+				keybindState.holdKeybinds.dispatcher = ''
+				keybindConn.getDispatchers()
 			}}
 		>
 			{@html GetIcons('arrow_left', 16)}

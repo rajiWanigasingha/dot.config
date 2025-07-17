@@ -10,6 +10,7 @@
 				keybindState.setLoadDispatcher('');
 				keybindState.setDispatchers([]);
 				keybindState.holdKeybinds.dispatcher = '';
+				keybindConn.sendHelp("KEYBIND_HELP")
 			}}
 		>
 			{@html GetIcons('arrow_left', 16)}

@@ -7,6 +7,7 @@ class KeybindsConnection {
     private url = "ws://localhost:8080/keybinds"
     wsKeybind = $state(null as null | WebSocket)
     private newbind = $state(null as null | KeybindsLoad)
+    private deleteKey = $state(null as null | { mod: string[], key: string[], flags: string[] })
 
     constructor() {
         this.connection()
@@ -62,6 +63,18 @@ class KeybindsConnection {
                                 goto("/hyprland/custom/keybinds")
                             } else {
                                 toast.error("Couldn't create new keybind")
+                            }
+                        }
+
+                        case "DELETE": {
+                            const success = keybind.actionStatus
+
+                            if (success) {
+                                toast.success(keybind.actionMessage!!)
+
+                                const filterOutDelete = keybindState.getKeybinds().filter(item => !(item.mod === this.deleteKey?.mod && item.keys === this.deleteKey.key && item.flags === this.deleteKey.flags))
+
+                                keybindState.setKeybinds(filterOutDelete)
                             }
                         }
                     }
@@ -145,6 +158,24 @@ class KeybindsConnection {
             payload: {
                 action: "CREATE_NEW",
                 data: keybind
+            }
+        }))
+    }
+
+    delete(mod: string[], key: string[], flags: string[]) {
+        console.log("Delete Keybind")
+
+        this.deleteKey = { mod: mod, key: key, flags: flags }
+
+        this.wsKeybind?.send(JSON.stringify({
+            actionType: ActionType.MAIN_KEYBINDS,
+            payload: {
+                action: "DELETE",
+                delete: {
+                    mod: mod,
+                    key: key,
+                    flags: flags
+                }
             }
         }))
     }

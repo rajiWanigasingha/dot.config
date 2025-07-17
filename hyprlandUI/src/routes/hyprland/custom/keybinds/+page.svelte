@@ -1,6 +1,14 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
-	import { GetIcons, keybindState } from '$lib';
+	import { GetIcons, keybindConn, keybindState } from '$lib';
+
+	let deletebind = $state(false);
+
+	let deleteKey = $state({
+		mod: [] as string[],
+		key: [] as string[],
+		flags: [] as string[]
+	});
 </script>
 
 <div class="bg-base-200 max-h-screen min-h-screen w-full overflow-y-auto">
@@ -29,7 +37,17 @@
 			<div class="bg-base-300 w-full rounded-md">
 				<div class="bg-base-100 flex w-full flex-row justify-end gap-2 rounded-t-md px-4 py-2">
 					<button class="btn btn-sm btn-warning">{@html GetIcons('edit', 12)} Edit</button>
-					<button class="btn btn-sm btn-error">{@html GetIcons('delete', 12)} Delete</button>
+					<button
+						class="btn btn-sm btn-error"
+						onclick={() => {
+							deletebind = true;
+							deleteKey = {
+								mod: binds.mod,
+								key: binds.keys,
+								flags: binds.flags
+							};
+						}}>{@html GetIcons('delete', 12)} Delete</button
+					>
 				</div>
 				<div class="overflow-x-auto px-4 py-2">
 					<table class="table-zebra table">
@@ -81,3 +99,23 @@
 		{/each}
 	</div>
 </div>
+
+{#if deletebind}
+	<dialog id="my_modal_1" class="modal" open={true}>
+		<div class="modal-box bg-base-300">
+			<h3 class="text-sm font-bold">Delete</h3>
+			<p class="py-4 text-xs">Delete This Keybind. Make Sure Have A Backup For Rollback</p>
+			<div class="modal-action">
+				<button class="btn" onclick={() => (deletebind = false)}>Close</button>
+				<button
+					class="btn btn-error"
+					onclick={() => {
+						keybindConn.delete(deleteKey.mod, deleteKey.key, deleteKey.flags);
+						deletebind = false;
+						deleteKey = { mod: [], key: [], flags: [] };
+					}}>Delete</button
+				>
+			</div>
+		</div>
+	</dialog>
+{/if}

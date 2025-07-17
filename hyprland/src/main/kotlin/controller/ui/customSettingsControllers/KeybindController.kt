@@ -1,10 +1,13 @@
 package org.dot.config.controller.ui.customSettingsControllers
 
 import org.dot.config.controller.services.WriteIntoHyprland
+import org.dot.config.model.SendAndReceive
 import org.dot.config.model.Tables
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.append
+import org.jetbrains.kotlinx.dataframe.api.drop
 import org.jetbrains.kotlinx.dataframe.api.forEach
+import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.io.ColType
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.jetbrains.kotlinx.dataframe.io.writeCsv
@@ -69,17 +72,7 @@ class KeybindController {
     fun createNewBinds(keybinds: Tables.KeybindTable): Boolean {
         logger.info("Creating keybinds")
 
-        val keybind = DataFrame.readCsv(
-            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv",
-            colTypes = mapOf(
-                "flags" to ColType.String,
-                "mod" to ColType.String,
-                "keys" to ColType.String,
-                "description" to ColType.String,
-                "dispatcher" to ColType.String,
-                "args" to ColType.String
-            )
-        )
+        val keybind = readKeybinds()
 
         val newKeybinds = keybind.append(
             keybinds.flags.toString(),
@@ -95,6 +88,34 @@ class KeybindController {
         writeIntoHyprland(data = newKeybinds)
 
         return true
+    }
+
+    fun deleteKeybind(delete: SendAndReceive.KeybindDelete): Boolean {
+        logger.info("Deleting Keybind")
+
+        val keybind = readKeybinds()
+
+        val deleteBinds = keybind.drop { "mod"<String>() == delete.mod.toString() && "keys"<String>() == delete.key.toString() && "flags"<String>() == delete.flags.toString() }
+
+        writeAllToCsv(keybinds = deleteBinds)
+
+        writeIntoHyprland(data = deleteBinds)
+
+        return true
+    }
+
+    private fun readKeybinds(): DataFrame<*> {
+        return DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv",
+            colTypes = mapOf(
+                "flags" to ColType.String,
+                "mod" to ColType.String,
+                "keys" to ColType.String,
+                "description" to ColType.String,
+                "dispatcher" to ColType.String,
+                "args" to ColType.String
+            )
+        )
     }
 
     private fun writeAllToCsv(keybinds: DataFrame<*>) {

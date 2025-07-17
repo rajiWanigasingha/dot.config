@@ -63,6 +63,7 @@
 			keybindConn.createNew(newBind);
 		}
 	}
+
 </script>
 
 <div class="grid max-h-screen min-h-screen w-full grid-cols-12 overflow-y-hidden">

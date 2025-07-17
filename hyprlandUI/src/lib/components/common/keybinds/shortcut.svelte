@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { keybindConn, keybindState } from '$lib';
+	import { goto } from '$app/navigation';
+	import { GetIcons, keybindConn, keybindState } from '$lib';
 
 	const flags = ['l', 'r', 'c', 'g', 'o', 'e', 'n', 'm', 't', 'i', 's', 'd', 'p'];
 
@@ -67,10 +68,35 @@
 	let key = $state([] as string[]);
 
 	let showDispatchers = $state(false);
+
+	$effect(() => {
+		if (keybindState.holdKeybinds.mod.length > 0 || keybindState.holdKeybinds.key.length > 0) {
+			const keybind = keybindState.getHoldKeybinds();
+
+			mod = keybind.mod;
+			key = keybind.key;
+			flag = keybind.flags;
+
+			shortcut = `${keybind.mod.join('+')}+${keybind.key.join('+')}`;
+
+			showDispatchers = true;
+		}
+	});
 </script>
 
 <div class="flex flex-row items-center justify-between px-4 py-[13.5px]">
-	<p class="text-xs font-semibold">Create Keybind</p>
+	<div class="flex flex-row items-center gap-4">
+		<button
+			class="h-fit cursor-pointer bg-transparent hover:bg-transparent"
+			onclick={() => {
+				keybindState.setHoldKeybinds([], [], []);
+				goto('/hyprland/custom/keybinds');
+			}}
+		>
+			{@html GetIcons('arrow_left', 16)}
+		</button>
+		<p class="text-xs font-semibold">Create Keybind</p>
+	</div>
 </div>
 
 <div class="divider m-0"></div>

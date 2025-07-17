@@ -204,8 +204,49 @@ fun Route.handleKeybinds() {
                                     )
                                 }
                             }
-                        }
 
+                            SendAndReceive.KeybindActionStatus.DELETE -> {
+
+                                if (getAction.payload.delete === null) {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.ERROR,
+                                            payload = SendAndReceive.KeybindError(
+                                                status = SendAndReceive.KeybindErrStatus.EMPTY_DELETE,
+                                                message = "Delete data is empty"
+                                            )
+                                        )
+                                    )
+
+                                    return@runCatching
+                                }
+
+                                val delete = keybindController.deleteKeybind(delete = getAction.payload.delete)
+
+                                if (delete) {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.MAIN_KEYBINDS,
+                                            payload = SendAndReceive.KeybindActionResult(
+                                                action = SendAndReceive.KeybindActionStatus.DELETE,
+                                                actionStatus = true,
+                                                actionMessage = "Keybind Deleted Successfully"
+                                            )
+                                        )
+                                    )
+                                } else {
+                                    sendSerialized(
+                                        data = SendAndReceive.Send(
+                                            actionType = SendAndReceive.ActionType.ERROR,
+                                            payload = SendAndReceive.KeybindError(
+                                                status = SendAndReceive.KeybindErrStatus.DELETE_FAILS,
+                                                message = "Could Not Delete The Keybind"
+                                            )
+                                        )
+                                    )
+                                }
+                            }
+                        }
                     }
 
                     SendAndReceive.ActionType.DISCONNECT -> {
