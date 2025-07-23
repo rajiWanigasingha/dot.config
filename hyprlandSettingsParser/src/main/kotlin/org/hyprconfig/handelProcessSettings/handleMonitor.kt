@@ -137,7 +137,7 @@ internal fun handleMonitors(monitors: List<String>): List<MonitorModel> {
             val cm = if (it.cm != null) " ,cm ,${it.cm}" else ""
             val sdrbrightness = if (it.sdrbrightness != null) " ,sdrbrightness ,${it.sdrbrightness}" else ""
             val sdrsaturation = if (it.sdrsaturation != null) " ,sdrsaturation ,${it.sdrsaturation}" else ""
-            val vvr = if (it.vvr != null) " ,vvr ,${it.vvr}" else ""
+            val vvr = if (it.vvr != null) " ,vrr ,${it.vvr}" else ""
             val workspace = if (it.workspace != null) " ,workspace ,${it.workspace}" else ""
 
             monitorHyprlandSettings.add("monitor = ${it.name} ,${it.resolution} ,${it.position} ,${it.scale}${mirror}${bitdepth}${transform}${cm}${sdrbrightness}${sdrsaturation}${vvr}${workspace}".insertVariables())
@@ -161,7 +161,7 @@ private fun String.validatePosition(): String? {
     return when {
         this == "auto" || this.matches("auto-(right|left|up|down)".toRegex()) -> this
         this.matches("-?\\d+x\\d+".toRegex()) -> this
-        else -> null
+        else -> "auto"
     }
 }
 

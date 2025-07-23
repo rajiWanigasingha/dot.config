@@ -9,7 +9,8 @@ export enum ActionType {
     MAIN_VARIABLES = "MAIN_VARIABLES",
     MAIN_AUTOSTART = "MAIN_AUTOSTART",
     MAIN_ENV = "MAIN_ENV",
-    MAIN_KEYBINDS = "MAIN_KEYBINDS"
+    MAIN_KEYBINDS = "MAIN_KEYBINDS",
+    MAIN_MONITOR = "MAIN_MONITOR"
 }
 
 export enum ActionLinks {

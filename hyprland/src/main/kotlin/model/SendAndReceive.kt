@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR
     }
 
     @Serializable
@@ -216,5 +216,39 @@ object SendAndReceive {
         val dispatcher: List<Tables.KeybindDispatcher>? = null,
         val actionStatus: Boolean? = null,
         val actionMessage: String? = null
+    )
+
+
+    // Monitor Send And Receive
+
+    @Serializable
+    enum class MonitorActionType {
+        CHANGE_GENERAL ,DISABLE ,ERROR ,ADD_RESERVED ,MIRROR
+    }
+
+    @Serializable
+    enum class MonitorErrorStatus {
+        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD ,INVALID_MONITOR_ACTION
+    }
+
+    @Serializable
+    data class MonitorAction(
+        val actions: MonitorActionType,
+        val monitor: Tables.MonitorTable,
+        val disable: Boolean? = null,
+        val reset : Boolean? = null
+    )
+
+    @Serializable
+    data class MonitorError(
+        val status: MonitorErrorStatus,
+        val message: String
+    )
+
+    @Serializable
+    data class MonitorActionResults(
+        val action: MonitorActionType,
+        val status: Boolean,
+        val message: String
     )
 }

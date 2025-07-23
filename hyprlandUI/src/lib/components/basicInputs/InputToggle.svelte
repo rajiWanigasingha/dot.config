@@ -4,11 +4,11 @@
 		HyprlandTypes,
 		mainConn,
 		sidebarState,
-		type MainPageInputData,
-		type MainPageInputUI
+		type MainPageActionInputData,
+		type MainPageActionInputUI
 	} from '$lib';
 
-	let { ui, data }: { ui: MainPageInputUI; data: MainPageInputData } = $props();
+	let { ui, data }: { ui: MainPageActionInputUI; data: MainPageActionInputData } = $props();
 
 	function updateToggle(actionLink: ActionLinks, toggle: boolean) {
 		mainConn.update(actionLink, {

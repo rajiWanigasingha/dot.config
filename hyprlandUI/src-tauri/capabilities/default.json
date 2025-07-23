@@ -17,6 +17,14 @@
           "args": [
             "clients"
           ]
+        },
+        {
+          "name": "hyprctl-monitor",
+          "cmd": "hyprctl",
+          "args": [
+            "monitors all",
+            "-j"
+          ]
         }
       ]
     }

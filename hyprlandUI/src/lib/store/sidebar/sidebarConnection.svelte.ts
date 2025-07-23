@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, autostartState, envState, keybindState, mainPageState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
+import { ActionLinks, ActionType, autostartState, envState, keybindState, mainPageState, monitorState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type MonitorData, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
 import { toast } from "svelte-sonner"
 
 class SideBarConnection {
@@ -112,6 +112,23 @@ class SideBarConnection {
 
 
                     toast.success(`Globle Shortcut Settings Has Been Loaded`)
+
+                    break;
+                }
+
+                case ActionType.MAIN_MONITOR: {
+                    const data = reciveFrom.payload as MonitorData[]
+
+                    if (this.idelSidebarAction === null) {
+                        toast.error("Could Not Load These Settings. Try To Reload The Appliaction")
+                        break
+                    }
+
+                    sidebarState.setSidebarActive(this.idelSidebarAction)
+                    monitorState.setMonitor(data)
+
+
+                    toast.success(`Monitor And Display Settings Has Been Loaded`)
 
                     break;
                 }

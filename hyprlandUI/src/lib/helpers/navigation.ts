@@ -31,6 +31,12 @@ export default function navigation(actionLink: ActionLinks) {
             break;
         }
 
+        case ActionLinks.DISPLAY_AND_MONITOR: {
+            goto("/hyprland/custom/monitor")
+            sidebarConn.loadMainPage(actionLink)
+            break;
+        }
+
         default: {
             if (page.url.pathname !== "/hyprland/standedInputs") {
                 goto("/hyprland/standedInputs")

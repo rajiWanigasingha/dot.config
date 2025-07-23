@@ -19,6 +19,7 @@ import org.dot.config.view.ui.mainUI
 import org.dot.config.view.ui.updateCustomUI.handleEnv
 import org.dot.config.view.ui.updateCustomUI.handleExecutes
 import org.dot.config.view.ui.updateCustomUI.handleKeybinds
+import org.dot.config.view.ui.updateCustomUI.handleMonitors
 import org.dot.config.view.ui.updateCustomUI.handleVariables
 import org.slf4j.event.Level
 import kotlin.time.Duration.Companion.seconds
@@ -53,5 +54,6 @@ fun Application.module() {
         handleExecutes()
         handleEnv()
         handleKeybinds()
+        handleMonitors()
     }
 }

@@ -200,6 +200,36 @@ class SidebarController {
         return keybinds.toList()
     }
 
+    fun getMonitors(): List<Tables.MonitorTable> {
+
+        val monitor = mutableListOf<Tables.MonitorTable>()
+
+        val monitorSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/monitor.csv" , colTypes = mapOf("name" to ColType.String ,"disable" to ColType.String ,"addreserved" to ColType.String ,"resolution" to ColType.String ,"position" to ColType.String ,"scale" to ColType.String ,"mirror" to ColType.String ,"bitDepth" to ColType.String ,"transform" to ColType.String ,"cm" to ColType.String ,"sdrsaturation" to ColType.String ,"sdrbrightness" to ColType.String ,"vrr" to ColType.String))
+
+        monitorSettings.forEach { row ->
+            monitor.add(
+                Tables.MonitorTable(
+                    name = row["name"].toString().takeIf { it != "null" }?.let { return@let it } ?: "",
+                    disable = row["disable"].toString().toBoolean(),
+                    addreserved = row["addreserved"].toString().takeIf { it != "null" }?.removePrefix("[")
+                        ?.removeSuffix("]")?.split(",")?.map { it.trim().toInt() },
+                    resolution = row["resolution"].toString(),
+                    position = row["position"].toString(),
+                    scale = row["scale"].toString(),
+                    mirror = row["mirror"].toString().takeIf { it !== "null" }?.let { return@let it },
+                    bitDepth = row["bitDepth"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() },
+                    transform = row["transform"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() },
+                    cm = row["cm"].toString().takeIf { it !== "null" }?.let { return@let it },
+                    sdrsaturation = row["sdrsaturation"].toString().takeIf { it !== "null" }?.let { return@let it.toFloat() },
+                    sdrbrightness = row["sdrbrightness"].toString().takeIf { it !== "null" }?.let { return@let it.toFloat() },
+                    vrr = row["vrr"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() }
+                )
+            )
+        }
+
+        return monitor.toList()
+    }
+
     private fun createPageUI(
         actionLinks: Sidebar.ActionLinks,
         pageSettings: List<String>

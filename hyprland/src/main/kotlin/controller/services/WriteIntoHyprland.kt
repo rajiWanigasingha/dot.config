@@ -4,7 +4,6 @@ import kotlinx.datetime.Instant
 import org.dot.config.model.Tables
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.forEach
-import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.update
 import org.jetbrains.kotlinx.dataframe.api.where
 import org.jetbrains.kotlinx.dataframe.api.with
@@ -140,6 +139,32 @@ class WriteIntoHyprland {
         }
 
         return hyprlandKey.joinToString("\n")
+    }
+
+    fun writeMonitor(monitor: List<Tables.MonitorTable>): String {
+        val hyprlandMonitor = mutableListOf<String>()
+
+        monitor.forEach {
+            if (it.disable) {
+                hyprlandMonitor.add("monitor = ${it.name} ,disable")
+                return@forEach
+            } else if (it.addreserved != null) {
+                hyprlandMonitor.add("monitor = ${it.name} ,addreserved ,${it.addreserved.getOrNull(0) ?: 0} ,${it.addreserved.getOrNull(1) ?: 0} ,${it.addreserved.getOrNull(2) ?: 0} ,${it.addreserved.getOrNull(3) ?: 0}")
+                return@forEach
+            } else {
+                val mirror = if (it.mirror != null) " ,mirror ,${it.mirror}" else ""
+                val bitdepth = if (it.bitDepth != null) " ,bitdepth ,${it.bitDepth}" else ""
+                val transform = if (it.transform != null) " ,transform ,${it.transform}" else ""
+                val cm = if (it.cm != null) " ,cm ,${it.cm}" else ""
+                val sdrbrightness = if (it.sdrbrightness != null) " ,sdrbrightness ,${it.sdrbrightness}" else ""
+                val sdrsaturation = if (it.sdrsaturation != null) " ,sdrsaturation ,${it.sdrsaturation}" else ""
+                val vvr = if (it.vrr != null) " ,vrr ,${it.vrr}" else ""
+
+                hyprlandMonitor.add("monitor = ${it.name} ,${it.resolution} ,${it.position} ,${it.scale}${mirror}${bitdepth}${transform}${cm}${sdrbrightness}${sdrsaturation}${vvr}")
+            }
+        }
+
+        return hyprlandMonitor.joinToString("\n")
     }
 
     fun updateTime(hyprlandPath: String) {

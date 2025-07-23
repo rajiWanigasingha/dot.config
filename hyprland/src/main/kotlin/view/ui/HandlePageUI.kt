@@ -79,6 +79,15 @@ fun Route.handleUI() {
                         ))
                     }
 
+                    Sidebar.ActionLinks.DISPLAY_AND_MONITOR -> {
+                        val ui = sidebarService.getMonitors()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_MONITOR,
+                            payload = ui
+                        ))
+                    }
+
                      else -> {
                          val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 
