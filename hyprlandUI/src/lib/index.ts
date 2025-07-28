@@ -38,6 +38,9 @@ export * from "./store/mainInput/keybinds/keybindsConnection.svelte"
 export * from "./types/monitorTypes/monitorTypes"
 export * from "./store/mainInput/monitor/monitorState.svelte"
 export * from "./store/mainInput/monitor/monitorConnection.svelte"
+export * from "./types/customActionTypes/animation"
+export * from "./store/mainInput/animation/animationState.svelte"
+export * from "./store/mainInput/animation/animationConnection.svelte"
 
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
@@ -78,3 +81,7 @@ export { default as MonitorDisable } from "./components/common/monitor/disable.s
 export { default as MonitorColor } from "./components/common/monitor/color.svelte"
 export { default as MonitorAddReservedArea } from "./components/common/monitor/addreservedArea.svelte"
 export { default as MonitorMirror } from "./components/common/monitor/mirror.svelte"
+
+export { default as AnimationTreeAddNew } from "./components/common/animationTree/new.svelte"
+export { default as AnimationTreeEdit } from "./components/common/animationTree/edit.svelte"
+export { default as AnimationTreeCurve } from "./components/common/animationTree/curves.svelte"

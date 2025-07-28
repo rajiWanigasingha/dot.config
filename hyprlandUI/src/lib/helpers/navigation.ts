@@ -37,6 +37,12 @@ export default function navigation(actionLink: ActionLinks) {
             break;
         }
 
+        case ActionLinks.ANIMATION : {
+            goto("/hyprland/custom/animation")
+            sidebarConn.loadMainPage(actionLink)
+            break
+        }
+
         default: {
             if (page.url.pathname !== "/hyprland/standedInputs") {
                 goto("/hyprland/standedInputs")

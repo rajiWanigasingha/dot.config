@@ -130,10 +130,10 @@ object Tables {
     @Serializable
     data class AnimationTable(
         val name: String,
-        val onOff: Int,
-        val speed: String?,
-        val curve: String?,
-        val style: String?
+        var onOff: Int,
+        var speed: String?,
+        var curve: String?,
+        var style: String?
     ) {
         init {
             require(onOff == 0 || onOff == 1) { "Invalid Animation For Keybind" }

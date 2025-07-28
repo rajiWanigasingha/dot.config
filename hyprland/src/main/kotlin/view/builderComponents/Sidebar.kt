@@ -24,6 +24,7 @@ object Sidebar {
         BLUR,
         SHADOW,
         ANIMATIONS,
+        ANIMATION,
         ENV,
         AUTOSTART,
         MISC,
@@ -153,8 +154,13 @@ object Sidebar {
                 ),
                 NavigationSettings(
                     icon = "animations",
-                    name = "Animations",
+                    name = "Animation Control",
                     actionLink = ActionLinks.ANIMATIONS
+                ),
+                NavigationSettings(
+                    icon = "animationTree",
+                    name = "Animation Tree",
+                    actionLink = ActionLinks.ANIMATION
                 )
             )
         ),

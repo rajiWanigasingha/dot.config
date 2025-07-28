@@ -120,7 +120,8 @@ class WriteIntoHyprland {
         keybind.forEach { row ->
             keybindsSettings.add(
                 Tables.KeybindTable(
-                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",").mapNotNull { it.trim().toCharArray().getOrNull(0) },
+                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",")
+                        .mapNotNull { it.trim().toCharArray().getOrNull(0) },
                     mod = row["mod"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
                     keys = row["keys"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
                     description = row["description"].toString(),
@@ -149,7 +150,13 @@ class WriteIntoHyprland {
                 hyprlandMonitor.add("monitor = ${it.name} ,disable")
                 return@forEach
             } else if (it.addreserved != null) {
-                hyprlandMonitor.add("monitor = ${it.name} ,addreserved ,${it.addreserved.getOrNull(0) ?: 0} ,${it.addreserved.getOrNull(1) ?: 0} ,${it.addreserved.getOrNull(2) ?: 0} ,${it.addreserved.getOrNull(3) ?: 0}")
+                hyprlandMonitor.add(
+                    "monitor = ${it.name} ,addreserved ,${it.addreserved.getOrNull(0) ?: 0} ,${
+                        it.addreserved.getOrNull(
+                            1
+                        ) ?: 0
+                    } ,${it.addreserved.getOrNull(2) ?: 0} ,${it.addreserved.getOrNull(3) ?: 0}"
+                )
                 return@forEach
             } else {
                 val mirror = if (it.mirror != null) " ,mirror ,${it.mirror}" else ""
@@ -165,6 +172,31 @@ class WriteIntoHyprland {
         }
 
         return hyprlandMonitor.joinToString("\n")
+    }
+
+    fun writeBezier(bezier: List<Tables.BezierTable>): String {
+        val curves = mutableListOf<String>()
+
+        bezier.forEach {
+            curves.add(
+                "bezier = ${it.name} ,${it.x0} ,${it.y0} ,${it.x1} ,${it.y1}"
+            )
+        }
+
+        return curves.joinToString("\n")
+    }
+
+    fun writeAnimation(animation: List<Tables.AnimationTable>): String {
+        val animationTree = mutableListOf<String>()
+
+        animation.forEach {
+
+            animationTree.add(
+                "animation = ${it.name}, ${it.onOff}${if (it.speed != null) ", ${it.speed}" else ""}${if (it.curve != null && it.curve != "" && it.curve != "null") ", ${it.curve}" else ""}${if (it.style != null && it.style != "" && it.style != "null") " ,${it.style}" else ""}"
+            )
+        }
+
+        return animationTree.joinToString("\n")
     }
 
     fun updateTime(hyprlandPath: String) {

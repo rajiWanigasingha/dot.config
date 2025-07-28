@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, autostartState, envState, keybindState, mainPageState, monitorState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type MonitorData, type ReceivePageAction, type ReceviePageInitialValue, type RecivePageError, type VariablesReciveUI } from "$lib"
+import { ActionLinks, ActionType, animationState, autostartState, envState, keybindState, mainPageState, monitorState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type MonitorData, type ReceivePageAction, type ReceviePageInitialValue, type ReciveAnimationPayload, type RecivePageError, type VariablesReciveUI } from "$lib"
 import { toast } from "svelte-sonner"
 
 class SideBarConnection {
@@ -129,6 +129,24 @@ class SideBarConnection {
 
 
                     toast.success(`Monitor And Display Settings Has Been Loaded`)
+
+                    break;
+                }
+
+                case ActionType.MAIN_ANIMATION: {
+                    const data = reciveFrom.payload as ReciveAnimationPayload
+
+                    if (this.idelSidebarAction === null) {
+                        toast.error("Could Not Load These Settings. Try To Reload The Appliaction")
+                        break
+                    }
+
+                    sidebarState.setSidebarActive(this.idelSidebarAction)
+                    
+                    animationState.setAnimation(data.animation)
+                    animationState.setCurves(data.bezier)
+
+                    toast.success(`Animation Tree Has Been Loaded`)
 
                     break;
                 }

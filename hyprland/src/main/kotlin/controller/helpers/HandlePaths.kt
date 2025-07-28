@@ -119,7 +119,7 @@ class HandlePaths {
             Sidebar.ActionLinks.WINDOW_DECORATION -> listOf("decoration.csv" ,"misc.csv")
             Sidebar.ActionLinks.BLUR -> listOf("decorationBlur.csv")
             Sidebar.ActionLinks.SHADOW -> listOf("decorationShadow.csv")
-            Sidebar.ActionLinks.ANIMATIONS -> TODO()
+            Sidebar.ActionLinks.ANIMATIONS -> listOf("animations.csv")
             Sidebar.ActionLinks.ENV -> TODO()
             Sidebar.ActionLinks.AUTOSTART -> TODO()
             Sidebar.ActionLinks.MISC -> listOf("misc.csv")
@@ -128,6 +128,7 @@ class HandlePaths {
             Sidebar.ActionLinks.EXPERIMENT -> listOf("experimental.csv")
             Sidebar.ActionLinks.DEBUG -> listOf("debug.csv")
             Sidebar.ActionLinks.VARIABLES -> TODO()
+            Sidebar.ActionLinks.ANIMATION -> TODO()
         }
 
     }

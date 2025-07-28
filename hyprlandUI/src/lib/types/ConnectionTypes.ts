@@ -10,7 +10,8 @@ export enum ActionType {
     MAIN_AUTOSTART = "MAIN_AUTOSTART",
     MAIN_ENV = "MAIN_ENV",
     MAIN_KEYBINDS = "MAIN_KEYBINDS",
-    MAIN_MONITOR = "MAIN_MONITOR"
+    MAIN_MONITOR = "MAIN_MONITOR",
+    MAIN_ANIMATION = "MAIN_ANIMATION"
 }
 
 export enum ActionLinks {
@@ -39,7 +40,8 @@ export enum ActionLinks {
     ECOSYSTEM = "ECOSYSTEM",
     EXPERIMENT = "EXPERIMENT",
     DEBUG = "DEBUG",
-    VARIABLES = "VARIABLES"
+    VARIABLES = "VARIABLES",
+    ANIMATION = "ANIMATION"
 }
 
 

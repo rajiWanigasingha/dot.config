@@ -16,6 +16,7 @@ import org.dot.config.controller.Initialize
 import org.dot.config.view.ui.handleHelpUI
 import org.dot.config.view.ui.handleUI
 import org.dot.config.view.ui.mainUI
+import org.dot.config.view.ui.updateCustomUI.handleAnimationTree
 import org.dot.config.view.ui.updateCustomUI.handleEnv
 import org.dot.config.view.ui.updateCustomUI.handleExecutes
 import org.dot.config.view.ui.updateCustomUI.handleKeybinds
@@ -55,5 +56,6 @@ fun Application.module() {
         handleEnv()
         handleKeybinds()
         handleMonitors()
+        handleAnimationTree()
     }
 }

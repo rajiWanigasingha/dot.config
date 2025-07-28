@@ -88,6 +88,18 @@ fun Route.handleUI() {
                         ))
                     }
 
+                    Sidebar.ActionLinks.ANIMATION -> {
+                        val ui =sidebarService.getAnimation()
+
+                        sendSerialized(data = SendAndReceive.Send(
+                            actionType = SendAndReceive.ActionType.MAIN_ANIMATION,
+                            payload = SendAndReceive.SendAnimationAndBezier(
+                                animation = ui.first,
+                                bezier = ui.second
+                            )
+                        ))
+                    }
+
                      else -> {
                          val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 

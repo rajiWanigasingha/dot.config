@@ -240,7 +240,21 @@ class MainPageController {
                 return update
             }
 
-            Sidebar.ActionLinks.ANIMATIONS -> TODO()
+            Sidebar.ActionLinks.ANIMATIONS -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    createHyprlandText(
+                        listOfPaths = listOf("animations.csv"),
+                        settingsStructure = listOf("animations {", "}"),
+                        pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/animations.conf",
+                    )
+                }
+
+                return update
+            }
+            Sidebar.ActionLinks.ANIMATION -> TODO()
             Sidebar.ActionLinks.ENV -> TODO()
             Sidebar.ActionLinks.AUTOSTART -> TODO()
             Sidebar.ActionLinks.MISC -> {

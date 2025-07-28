@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR ,MAIN_ANIMATION
     }
 
     @Serializable
@@ -248,6 +248,44 @@ object SendAndReceive {
     @Serializable
     data class MonitorActionResults(
         val action: MonitorActionType,
+        val status: Boolean,
+        val message: String
+    )
+
+    //  Animation And Bezier
+    @Serializable
+    data class SendAnimationAndBezier(
+        val animation: List<Tables.AnimationTable>,
+        val bezier: List<Tables.BezierTable>
+    )
+
+    @Serializable
+    enum class AnimationErrorStatus {
+        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD
+    }
+
+    @Serializable
+    data class AnimationError(
+        val status: AnimationErrorStatus,
+        val message: String
+    )
+
+    @Serializable
+    enum class AnimationReceiveActions {
+        ADD_NEW ,ENABLE_OR_DISABLE ,EDIT ,DELETE ,CURVE_ADD ,CURVE_DELETE ,CURVE_EDIT
+    }
+
+    @Serializable
+    data class AnimationReceiveData(
+        val action: AnimationReceiveActions,
+        val animation: Tables.AnimationTable,
+        val bezier: Tables.BezierTable? = null,
+        val bezierOld: Tables.BezierTable? = null,
+    )
+
+    @Serializable
+    data class AnimationActionResults(
+        val action: AnimationReceiveActions,
         val status: Boolean,
         val message: String
     )

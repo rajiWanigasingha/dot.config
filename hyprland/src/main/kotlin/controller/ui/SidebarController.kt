@@ -51,8 +51,6 @@ class SidebarController {
 
             Sidebar.ActionLinks.KEYBOARD -> TODO()
 
-            Sidebar.ActionLinks.KEYBINDS -> TODO()
-
             Sidebar.ActionLinks.LAYOUT_GENERAL -> return createPageUI(
                 actionLinks = actionLinks,
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
@@ -114,6 +112,11 @@ class SidebarController {
             )
 
             Sidebar.ActionLinks.DEBUG -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
+
+            Sidebar.ActionLinks.ANIMATIONS -> return createPageUI(
                 actionLinks = actionLinks,
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
@@ -228,6 +231,43 @@ class SidebarController {
         }
 
         return monitor.toList()
+    }
+
+    fun getAnimation(): Pair<List<Tables.AnimationTable>, List<Tables.BezierTable>> {
+
+        val animation = mutableListOf<Tables.AnimationTable>()
+
+        val animationSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/animation.csv" , colTypes = mapOf("name" to ColType.String ,"onOff" to ColType.Int ,"speed" to ColType.String ,"curve" to ColType.String ,"style" to ColType.String))
+
+        animationSettings.forEach { row ->
+            animation.add(
+                Tables.AnimationTable(
+                    name = row["name"].toString(),
+                    onOff = row["onOff"].toString().toInt(),
+                    speed = row["speed"].toString(),
+                    curve = row["curve"].toString(),
+                    style = row["style"].toString()
+                )
+            )
+        }
+
+        val bezier = mutableListOf<Tables.BezierTable>()
+
+        val bezierSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/bezier.csv" , colTypes = mapOf("name" to ColType.String ,"x0" to ColType.String ,"y0" to ColType.String ,"x1" to ColType.String ,"y1" to ColType.String))
+
+        bezierSettings.forEach { row ->
+            bezier.add(
+                Tables.BezierTable(
+                    name = row["name"].toString(),
+                    x0 = row["x0"].toString(),
+                    y0 = row["y0"].toString(),
+                    x1 = row["x1"].toString(),
+                    y1 = row["y1"].toString(),
+                )
+            )
+        }
+
+        return Pair(animation.toList() ,bezier.toList())
     }
 
     private fun createPageUI(

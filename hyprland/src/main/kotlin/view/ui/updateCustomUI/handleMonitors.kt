@@ -4,6 +4,8 @@ import io.ktor.server.routing.Route
 import io.ktor.server.websocket.receiveDeserialized
 import io.ktor.server.websocket.sendSerialized
 import io.ktor.server.websocket.webSocket
+import io.ktor.websocket.CloseReason
+import io.ktor.websocket.close
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.serialization.SerializationException
 import org.dot.config.controller.ui.customSettingsControllers.MonitorController
@@ -34,6 +36,9 @@ fun Route.handleMonitors() {
                         )
                     )
                     loop = false
+
+                    close(CloseReason(CloseReason.Codes.GOING_AWAY, "Close Websocket"))
+
                     return@runCatching
                 }
 

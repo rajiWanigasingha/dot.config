@@ -1,4 +1,4 @@
-export default function getSidebarSvg(name: string) {
+export default function getSidebarSvg(name: string ,size: number = 24) {
 
     switch (name) {
 
@@ -104,6 +104,10 @@ export default function getSidebarSvg(name: string) {
 
         case "debug" : {
             return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20q-1.356 0-2.493-.666q-1.138-.665-1.822-1.834H5v-1h2.254q-.229-.73-.241-1.49Q7 14.25 7 13.5H5v-1h2q0-.77-.007-1.529q-.007-.76.26-1.471H5v-1h2.685q.369-.652.912-1.161q.544-.51 1.234-.828L8.039 4.709l.669-.67l2.111 2.112q.585-.167 1.175-.167t1.175.167l2.162-2.111l.669.669l-1.804 1.803q.69.318 1.22.824q.53.507.9 1.165H19v1h-2.254q.268.712.26 1.471Q17 11.731 17 12.5h2v1h-2q0 .75-.012 1.51t-.242 1.49H19v1h-2.684q-.685 1.17-1.823 1.835T12 20m-1.692-4.5h3.384v-1h-3.384zm0-4h3.384v-1h-3.384z"/></svg>`
+        }
+
+        case "animationTree" : {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24"><path fill="currentColor" d="M15 21v-3h-4V8H9v3H2V3h7v3h6V3h7v8h-7V8h-2v8h2v-3h7v8z"/></svg>`
         }
 
         default: {
