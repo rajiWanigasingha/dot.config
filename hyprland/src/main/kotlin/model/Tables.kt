@@ -179,6 +179,28 @@ object Tables {
     )
 
     @Serializable
+    data class Workspace(
+        val name: String,
+        val rules: WorkspaceRule
+    )
+
+    @Serializable
+    data class WorkspaceRule(
+        var monitor: String? = null,
+        var default: Boolean? = null,
+        var gapsIn: Int? = null,
+        var gapsOut: Int? = null,
+        var borderSize: Int? = null,
+        var border: Boolean? = null,
+        var shadow: Boolean? = null,
+        var rounding: Boolean? = null,
+        var decorate: Boolean? = null,
+        var persistent: Boolean? = null,
+        var onCreatedEmpty: String? = null,
+        var defaultName: String? = null
+    )
+
+    @Serializable
     data class AutoStart(
         val keyword: String,
         val command: String

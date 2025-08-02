@@ -131,7 +131,10 @@ class SidebarController {
 
         val variableUI = mutableListOf<InputAndOutput.VariableUI>()
 
-        val variables = DataFrame.readCsv("${System.getProperty("user.home")}/.dot.config/data/variable.csv" ,colTypes = mapOf("name" to ColType.String ,"value" to ColType.String))
+        val variables = DataFrame.readCsv(
+            "${System.getProperty("user.home")}/.dot.config/data/variable.csv",
+            colTypes = mapOf("name" to ColType.String, "value" to ColType.String)
+        )
 
         variables.forEach { row ->
             variableUI.add(
@@ -149,7 +152,10 @@ class SidebarController {
 
         val autoStartUI = mutableListOf<Tables.AutoStart>()
 
-        val autoStart = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/autoStart.csv" ,colTypes = mapOf("keyword" to ColType.String ,"command" to ColType.String))
+        val autoStart = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/autoStart.csv",
+            colTypes = mapOf("keyword" to ColType.String, "command" to ColType.String)
+        )
 
         autoStart.forEach { row ->
             autoStartUI.add(
@@ -167,7 +173,10 @@ class SidebarController {
 
         val envUI = mutableListOf<Tables.Env>()
 
-        val env = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/env.csv" , colTypes = mapOf("keyword" to ColType.String ,"value" to ColType.String))
+        val env = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/env.csv",
+            colTypes = mapOf("keyword" to ColType.String, "value" to ColType.String)
+        )
 
         env.forEach { row ->
             envUI.add(
@@ -185,12 +194,23 @@ class SidebarController {
 
         val keybinds = mutableListOf<Tables.KeybindTable>()
 
-        val keybind = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv" , colTypes = mapOf("flags" to ColType.String ,"mod" to ColType.String ,"keys" to ColType.String ,"description" to ColType.String ,"dispatcher" to ColType.String ,"args" to ColType.String))
+        val keybind = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/keybind.csv",
+            colTypes = mapOf(
+                "flags" to ColType.String,
+                "mod" to ColType.String,
+                "keys" to ColType.String,
+                "description" to ColType.String,
+                "dispatcher" to ColType.String,
+                "args" to ColType.String
+            )
+        )
 
         keybind.forEach { row ->
             keybinds.add(
                 Tables.KeybindTable(
-                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",").mapNotNull { it.trim().toCharArray().getOrNull(0) },
+                    flags = row["flags"].toString().removePrefix("[").removeSuffix("]").split(",")
+                        .mapNotNull { it.trim().toCharArray().getOrNull(0) },
                     mod = row["mod"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
                     keys = row["keys"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() },
                     description = row["description"].toString(),
@@ -207,7 +227,24 @@ class SidebarController {
 
         val monitor = mutableListOf<Tables.MonitorTable>()
 
-        val monitorSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/monitor.csv" , colTypes = mapOf("name" to ColType.String ,"disable" to ColType.String ,"addreserved" to ColType.String ,"resolution" to ColType.String ,"position" to ColType.String ,"scale" to ColType.String ,"mirror" to ColType.String ,"bitDepth" to ColType.String ,"transform" to ColType.String ,"cm" to ColType.String ,"sdrsaturation" to ColType.String ,"sdrbrightness" to ColType.String ,"vrr" to ColType.String))
+        val monitorSettings = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/monitor.csv",
+            colTypes = mapOf(
+                "name" to ColType.String,
+                "disable" to ColType.String,
+                "addreserved" to ColType.String,
+                "resolution" to ColType.String,
+                "position" to ColType.String,
+                "scale" to ColType.String,
+                "mirror" to ColType.String,
+                "bitDepth" to ColType.String,
+                "transform" to ColType.String,
+                "cm" to ColType.String,
+                "sdrsaturation" to ColType.String,
+                "sdrbrightness" to ColType.String,
+                "vrr" to ColType.String
+            )
+        )
 
         monitorSettings.forEach { row ->
             monitor.add(
@@ -223,8 +260,10 @@ class SidebarController {
                     bitDepth = row["bitDepth"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() },
                     transform = row["transform"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() },
                     cm = row["cm"].toString().takeIf { it !== "null" }?.let { return@let it },
-                    sdrsaturation = row["sdrsaturation"].toString().takeIf { it !== "null" }?.let { return@let it.toFloat() },
-                    sdrbrightness = row["sdrbrightness"].toString().takeIf { it !== "null" }?.let { return@let it.toFloat() },
+                    sdrsaturation = row["sdrsaturation"].toString().takeIf { it !== "null" }
+                        ?.let { return@let it.toFloat() },
+                    sdrbrightness = row["sdrbrightness"].toString().takeIf { it !== "null" }
+                        ?.let { return@let it.toFloat() },
                     vrr = row["vrr"].toString().takeIf { it !== "null" }?.let { return@let it.toInt() }
                 )
             )
@@ -237,7 +276,16 @@ class SidebarController {
 
         val animation = mutableListOf<Tables.AnimationTable>()
 
-        val animationSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/animation.csv" , colTypes = mapOf("name" to ColType.String ,"onOff" to ColType.Int ,"speed" to ColType.String ,"curve" to ColType.String ,"style" to ColType.String))
+        val animationSettings = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/animation.csv",
+            colTypes = mapOf(
+                "name" to ColType.String,
+                "onOff" to ColType.Int,
+                "speed" to ColType.String,
+                "curve" to ColType.String,
+                "style" to ColType.String
+            )
+        )
 
         animationSettings.forEach { row ->
             animation.add(
@@ -253,7 +301,16 @@ class SidebarController {
 
         val bezier = mutableListOf<Tables.BezierTable>()
 
-        val bezierSettings = DataFrame.readCsv(fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/bezier.csv" , colTypes = mapOf("name" to ColType.String ,"x0" to ColType.String ,"y0" to ColType.String ,"x1" to ColType.String ,"y1" to ColType.String))
+        val bezierSettings = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/bezier.csv",
+            colTypes = mapOf(
+                "name" to ColType.String,
+                "x0" to ColType.String,
+                "y0" to ColType.String,
+                "x1" to ColType.String,
+                "y1" to ColType.String
+            )
+        )
 
         bezierSettings.forEach { row ->
             bezier.add(
@@ -267,7 +324,88 @@ class SidebarController {
             )
         }
 
-        return Pair(animation.toList() ,bezier.toList())
+        return Pair(animation.toList(), bezier.toList())
+    }
+
+    fun getWorkspace(): List<Tables.Workspace> {
+
+        val workspace = mutableListOf<Tables.Workspace>()
+
+        val workspaceSettings = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/workspaceRules.csv",
+            colTypes = mapOf("name" to ColType.String, "rules" to ColType.String)
+        )
+
+        workspaceSettings.forEach { row ->
+
+            val rule = row["rules"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() }
+
+            val workspaceRule = Tables.WorkspaceRule()
+
+            rule.forEach {
+
+                val (key, value) = it.split(":", limit = 2).map { s -> s.trim() }
+
+                when (key) {
+                    "monitor" -> {
+                        workspaceRule.monitor = value
+                    }
+
+                    "default" -> {
+                        workspaceRule.default = value.toBooleanStrictOrNull()
+                    }
+
+                    "gapsin" -> {
+                        workspaceRule.gapsIn = value.toIntOrNull()
+                    }
+
+                    "gapsout" -> {
+                        workspaceRule.gapsOut = value.toIntOrNull()
+                    }
+
+                    "bordersize" -> {
+                        workspaceRule.borderSize = value.toIntOrNull()
+                    }
+
+                    "border" -> {
+                        workspaceRule.border = value.toBooleanStrictOrNull()
+                    }
+
+                    "shadow" -> {
+                        workspaceRule.shadow = value.toBooleanStrictOrNull()
+                    }
+
+                    "rounding" -> {
+                        workspaceRule.rounding = value.toBooleanStrictOrNull()
+                    }
+
+                    "decorate" -> {
+                        workspaceRule.decorate = value.toBooleanStrictOrNull()
+                    }
+
+                    "persistent" -> {
+                        workspaceRule.persistent = value.toBooleanStrictOrNull()
+                    }
+
+                    "on-created-empty" -> {
+                        workspaceRule.onCreatedEmpty = value
+                    }
+
+                    "defaultName" -> {
+                        workspaceRule.defaultName = value
+                    }
+                }
+            }
+
+            workspace.add(
+                Tables.Workspace(
+                    name = row["name"].toString(),
+                    rules = workspaceRule
+                )
+            )
+        }
+
+       return workspace.toList()
     }
 
     private fun createPageUI(

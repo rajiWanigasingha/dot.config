@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR ,MAIN_ANIMATION
+        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR ,MAIN_ANIMATION ,MAIN_WORKSPACE
     }
 
     @Serializable
@@ -286,6 +286,43 @@ object SendAndReceive {
     @Serializable
     data class AnimationActionResults(
         val action: AnimationReceiveActions,
+        val status: Boolean,
+        val message: String
+    )
+
+    // workspace sends and receives
+
+    @Serializable
+    enum class WorkspaceErrorStatus {
+        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD ,EMPTY_DELETE_PAYLOAD
+    }
+
+    @Serializable
+    enum class WorkspaceDeleteOder {
+        ALL ,SINGLE
+    }
+
+    @Serializable
+    data class WorkspaceError(
+        val status: WorkspaceErrorStatus,
+        val message: String
+    )
+
+    @Serializable
+    enum class WorkspaceReceiveActions {
+        EDIT ,DELETE ,ADD
+    }
+
+    @Serializable
+    data class WorkspaceReceiveData(
+        val action: WorkspaceReceiveActions,
+        val data: Tables.Workspace,
+        val delete: WorkspaceDeleteOder? = null
+    )
+
+    @Serializable
+    data class WorkspaceActionResults(
+        val action: WorkspaceReceiveActions,
         val status: Boolean,
         val message: String
     )

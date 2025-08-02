@@ -46,69 +46,94 @@ fun Route.handleUI() {
                     Sidebar.ActionLinks.VARIABLES -> {
                         val ui = sidebarService.getVariableUI()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_VARIABLES,
-                            payload = ui
-                        ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_VARIABLES,
+                                payload = ui
+                            )
+                        )
                     }
 
                     Sidebar.ActionLinks.AUTOSTART -> {
                         val ui = sidebarService.getAutoStart()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_AUTOSTART,
-                            payload = ui
-                        ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_AUTOSTART,
+                                payload = ui
+                            )
+                        )
                     }
 
                     Sidebar.ActionLinks.ENV -> {
                         val ui = sidebarService.getEnv()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_ENV,
-                            payload = ui
-                        ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_ENV,
+                                payload = ui
+                            )
+                        )
                     }
 
                     Sidebar.ActionLinks.KEYBINDS -> {
                         val ui = sidebarService.getKeybinds()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_KEYBINDS,
-                            payload = ui
-                        ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_KEYBINDS,
+                                payload = ui
+                            )
+                        )
                     }
 
                     Sidebar.ActionLinks.DISPLAY_AND_MONITOR -> {
                         val ui = sidebarService.getMonitors()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_MONITOR,
-                            payload = ui
-                        ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_MONITOR,
+                                payload = ui
+                            )
+                        )
                     }
 
                     Sidebar.ActionLinks.ANIMATION -> {
-                        val ui =sidebarService.getAnimation()
+                        val ui = sidebarService.getAnimation()
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.MAIN_ANIMATION,
-                            payload = SendAndReceive.SendAnimationAndBezier(
-                                animation = ui.first,
-                                bezier = ui.second
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_ANIMATION,
+                                payload = SendAndReceive.SendAnimationAndBezier(
+                                    animation = ui.first,
+                                    bezier = ui.second
+                                )
                             )
-                        ))
+                        )
                     }
 
-                     else -> {
-                         val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
+                    Sidebar.ActionLinks.WORKSPACE_RULES -> {
+                        val ui = sidebarService.getWorkspace()
 
-                         sendSerialized(data = SendAndReceive.Send(
-                             actionType = SendAndReceive.ActionType.MAIN,
-                             payload = ui
-                         ))
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_WORKSPACE,
+                                payload = ui
+                            )
+                        )
+                    }
 
-                     }
+                    else -> {
+                        val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
+
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN,
+                                payload = ui
+                            )
+                        )
+
+                    }
                 }
 
             }.onFailure { exception ->
@@ -120,31 +145,35 @@ fun Route.handleUI() {
                     }
 
                     is SerializationException -> {
-                        Logger.error("Couldn't parse into data class" ,exception)
+                        Logger.error("Couldn't parse into data class", exception)
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.ERROR,
-                            payload = SendAndReceive.SendSideBarError(
-                                code = SendAndReceive.PagesErrorCodes.SERIALIZABLE,
-                                errorMessage = exception.message.toString()
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.ERROR,
+                                payload = SendAndReceive.SendSideBarError(
+                                    code = SendAndReceive.PagesErrorCodes.SERIALIZABLE,
+                                    errorMessage = exception.message.toString()
+                                )
                             )
-                        ))
+                        )
                     }
 
                     is ErrorWebsocket.InvalidActionTypeForPages -> {
                         Logger.error(exception.message)
 
-                        sendSerialized(data = SendAndReceive.Send(
-                            actionType = SendAndReceive.ActionType.ERROR,
-                            payload = SendAndReceive.SendSideBarError(
-                                code = SendAndReceive.PagesErrorCodes.INVALID_ACTION_TYPE,
-                                errorMessage = exception.message.toString()
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.ERROR,
+                                payload = SendAndReceive.SendSideBarError(
+                                    code = SendAndReceive.PagesErrorCodes.INVALID_ACTION_TYPE,
+                                    errorMessage = exception.message.toString()
+                                )
                             )
-                        ))
+                        )
                     }
 
                     else -> {
-                        Logger.error(exception.message ,exception)
+                        Logger.error(exception.message, exception)
                         connect = false
                     }
                 }
@@ -155,18 +184,14 @@ fun Route.handleUI() {
 
 /**
  * There is three parts of ui that need to be handles
- *
  * 1. Sidebar
  * 2. Settings config
  * 3. Help
  *
  * Needs to have a common structure of serialized way to receive data.
  *
- * {
- *  action: SIDEBAR, SETTINGS, HELP
- *  payload: T -> any data class of these three
- * }
+ * { action: SIDEBAR, SETTINGS, HELP payload: T -> any data class of these
+ * three }
  *
  * Every message sends and receives should be logged.
- *
  */

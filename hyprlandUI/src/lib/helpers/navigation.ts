@@ -37,10 +37,16 @@ export default function navigation(actionLink: ActionLinks) {
             break;
         }
 
-        case ActionLinks.ANIMATION : {
+        case ActionLinks.ANIMATION: {
             goto("/hyprland/custom/animation")
             sidebarConn.loadMainPage(actionLink)
             break
+        }
+
+        case ActionLinks.WORKSPACE_RULES: {
+            goto("/hyprland/custom/workspace")
+            sidebarConn.loadMainPage(actionLink)
+            break;
         }
 
         default: {

@@ -1,4 +1,4 @@
-import { ActionLinks, ActionType, animationState, autostartState, envState, keybindState, mainPageState, monitorState, sidebarState, variableState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type MonitorData, type ReceivePageAction, type ReceviePageInitialValue, type ReciveAnimationPayload, type RecivePageError, type VariablesReciveUI } from "$lib"
+import { ActionLinks, ActionType, animationState, autostartState, envState, keybindState, mainPageState, monitorState, sidebarState, variableState, workspaceState, type AutoStartReceiveUI, type EnvReceiveUI, type KeybindsLoad, type MainPageActions, type MonitorData, type ReceivePageAction, type ReceviePageInitialValue, type ReciveAnimationPayload, type RecivePageError, type VariablesReciveUI, type WorkspaceRulesPayload } from "$lib"
 import { toast } from "svelte-sonner"
 
 class SideBarConnection {
@@ -142,11 +142,28 @@ class SideBarConnection {
                     }
 
                     sidebarState.setSidebarActive(this.idelSidebarAction)
-                    
+
                     animationState.setAnimation(data.animation)
                     animationState.setCurves(data.bezier)
 
                     toast.success(`Animation Tree Has Been Loaded`)
+
+                    break;
+                }
+
+                case ActionType.MAIN_WORKSPACE: {
+                    const data = reciveFrom.payload as WorkspaceRulesPayload[]
+
+                    if (this.idelSidebarAction === null) {
+                        toast.error("Could Not Load These Settings. Try To Reload The Appliaction")
+                        break
+                    }
+
+                    sidebarState.setSidebarActive(this.idelSidebarAction)
+
+                    workspaceState.setWorkspaceRules(data)
+
+                    toast.success(`Workspace Rules Has Been Loaded`)
 
                     break;
                 }

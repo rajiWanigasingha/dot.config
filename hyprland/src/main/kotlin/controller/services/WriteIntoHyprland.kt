@@ -190,13 +190,41 @@ class WriteIntoHyprland {
         val animationTree = mutableListOf<String>()
 
         animation.forEach {
-
             animationTree.add(
                 "animation = ${it.name}, ${it.onOff}${if (it.speed != null) ", ${it.speed}" else ""}${if (it.curve != null && it.curve != "" && it.curve != "null") ", ${it.curve}" else ""}${if (it.style != null && it.style != "" && it.style != "null") " ,${it.style}" else ""}"
             )
         }
 
         return animationTree.joinToString("\n")
+    }
+
+    fun writeWorkspaceHelper(it: Tables.Workspace): String {
+        val rules = buildString {
+            it.rules.monitor?.let { value -> append(", monitor:$value") }
+            it.rules.default?.let { value -> append(", default:$value") }
+            it.rules.gapsIn?.let { value -> append(", gapsin:$value") }
+            it.rules.gapsOut?.let { value -> append(", gapsout:$value") }
+            it.rules.borderSize?.let { value -> append(", bordersize:$value") }
+            it.rules.border?.let { value -> append(", border:$value") }
+            it.rules.shadow?.let { value -> append(", shadow:$value") }
+            it.rules.rounding?.let { value -> append(", rounding:$value") }
+            it.rules.decorate?.let { value -> append(", decorate:$value") }
+            it.rules.persistent?.let { value -> append(", persistent:$value") }
+            it.rules.onCreatedEmpty?.let { value -> append(", on-created-empty:$value") }
+            it.rules.defaultName?.let { value -> append(", defaultName:$value") }
+        }.trim()
+
+        return rules
+    }
+
+    fun writeWorkspace(workspace: List<Tables.Workspace>): String {
+        val workspaceTable = mutableListOf<String>()
+
+        workspace.forEach {
+            workspaceTable.add("workspace = ${it.name}${writeWorkspaceHelper(it)}")
+        }
+
+        return workspaceTable.joinToString("\n")
     }
 
     fun updateTime(hyprlandPath: String) {

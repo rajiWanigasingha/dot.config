@@ -41,6 +41,9 @@ export * from "./store/mainInput/monitor/monitorConnection.svelte"
 export * from "./types/customActionTypes/animation"
 export * from "./store/mainInput/animation/animationState.svelte"
 export * from "./store/mainInput/animation/animationConnection.svelte"
+export * from "./types/customActionTypes/workspace"
+export * from "./store/mainInput/workspace/workspaceState.svelte"
+export * from "./store/mainInput/workspace/workspaceConnection.svelte"
 
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
@@ -85,3 +88,7 @@ export { default as MonitorMirror } from "./components/common/monitor/mirror.sve
 export { default as AnimationTreeAddNew } from "./components/common/animationTree/new.svelte"
 export { default as AnimationTreeEdit } from "./components/common/animationTree/edit.svelte"
 export { default as AnimationTreeCurve } from "./components/common/animationTree/curves.svelte"
+
+export { default as WorkspaceRulesComponents } from "./components/common/workspace/rules.svelte"
+export { default as WorkspaceRulesDelete } from "./components/common/workspace/deleteRules.svelte"
+export { default as WorkspaceRulesAddNew } from "./components/common/workspace/addRules.svelte"
