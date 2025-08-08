@@ -1,14 +1,14 @@
 category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
-inputs,Keyboard Model,kb_model,Appropriate XKB keymap parameter. See the note below.,str,""
-inputs,Keyboard Layout,kb_layout,Appropriate XKB keymap parameter,str,us
-inputs,Keyboard Variant,kb_variant,Appropriate XKB keymap parameter,str,""
-inputs,Keyboard Options,kb_options,Appropriate XKB keymap parameter,str,""
-inputs,Keyboard Rules,kb_rules,Appropriate XKB keymap parameter,str,""
-inputs,Keyboard File,kb_file,If you prefer; you can use a path to your custom .xkb file.,str,""
-inputs,Numlock by Default,numlock_by_default,Engage numlock by default.,bool,false
-inputs,Resolve Binds by Symbol,resolve_binds_by_sym,Determines how keybinds act when multiple layouts are used. If false; keybinds will always act as if the first specified layout is active. If true; keybinds specified by symbols are activated when you type the respective symbol with the current layout.,bool,false
-inputs,Repeat Rate,repeat_rate,The repeat rate for held-down keys; in repeats per second.,int,25
-inputs,Repeat Delay,repeat_delay,Delay before a held-down key is repeated; in milliseconds.,int,600
+inputs,Keyboard Model,kb_model,Appropriate XKB keymap parameter. See the note below.,str,"",KEYBOARD,keyboard,INPUT_STR
+inputs,Keyboard Layout,kb_layout,Appropriate XKB keymap parameter,str,us,KEYBOARD,keyboard,INPUT_STR
+inputs,Keyboard Variant,kb_variant,Appropriate XKB keymap parameter,str,"",KEYBOARD,keyboard,INPUT_STR
+inputs,Keyboard Options,kb_options,Appropriate XKB keymap parameter,str,"",KEYBOARD,keyboard,INPUT_STR
+inputs,Keyboard Rules,kb_rules,Appropriate XKB keymap parameter,str,"",KEYBOARD,keyboard,INPUT_STR
+inputs,Keyboard File,kb_file,If you prefer; you can use a path to your custom .xkb file.,str,"",KEYBOARD,keyboard,INPUT_STR
+inputs,Numlock by Default,numlock_by_default,Engage numlock by default.,bool,false,KEYBOARD,keyboard,INPUT_TOGGLE
+inputs,Resolve Binds by Symbol,resolve_binds_by_sym,Determines how keybinds act when multiple layouts are used. If false; keybinds will always act as if the first specified layout is active. If true; keybinds specified by symbols are activated when you type the respective symbol with the current layout.,bool,false,KEYBOARD,keyboard,INPUT_TOGGLE
+inputs,Repeat Rate,repeat_rate,The repeat rate for held-down keys; in repeats per second.,int,25,KEYBOARD,keyboard,INPUT_INT
+inputs,Repeat Delay,repeat_delay,Delay before a held-down key is repeated; in milliseconds.,int,600,KEYBOARD,keyboard,INPUT_INT
 inputs,Mouse Sensitivity,sensitivity,Sets the mouse input sensitivity.,float,0.0,MOUSE_AND_TOUCHPAD,mouse,INPUT_RANGE,"-1.0,1.0"
 inputs,Acceleration Profile,accel_profile,Sets the cursor acceleration profile.,str,"",MOUSE_AND_TOUCHPAD,general,INPUT_STR_SELECT,"flat,adaptive,custom","Flat,Adaptive,Custom"
 inputs,Force No Acceleration,force_no_accel,Force no cursor acceleration. This bypasses most of your pointer settings to get as raw of a signal as possible. Enabling this is not recommended due to potential cursor desynchronization.,bool,false,MOUSE_AND_TOUCHPAD,general,INPUT_TOGGLE,""

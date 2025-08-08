@@ -87,9 +87,49 @@ class MainPageController {
                 return update
             }
 
-            Sidebar.ActionLinks.KEYBOARD -> TODO()
-            Sidebar.ActionLinks.KEYBINDS -> TODO()
-            Sidebar.ActionLinks.DISPLAY_AND_MONITOR -> TODO()
+            Sidebar.ActionLinks.KEYBOARD -> {
+                val update = updateStandedInDatabase(data)
+
+                if (update) {
+
+                    if (data.category != "binds") {
+                        createHyprlandText(
+                            listOfPaths = listOf(
+                                "inputs.csv",
+                                "inputsTouchpad.csv",
+                                "inputsTouchDevice.csv",
+                                "inputsTablet.csv"
+                            ),
+                            settingsStructure = listOf(
+                                "input {",
+                                "touchpad {",
+                                "}",
+                                "touchdevice {",
+                                "}",
+                                "tablet {",
+                                "}",
+                                "}"
+                            ),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/inputs.conf",
+                        )
+                    } else {
+                        createHyprlandText(
+                            listOfPaths = listOf(
+                                "binds.csv",
+                            ),
+                            settingsStructure = listOf(
+                                "binds {",
+                                "}"
+                            ),
+                            pathToHyprland = "$user/.config/hypr/hyprConfigAutoGen/binds.conf",
+                        )
+                    }
+
+                }
+
+                return update
+            }
+
             Sidebar.ActionLinks.TOUCH -> {
                 val update = updateStandedInDatabase(data)
 
@@ -254,9 +294,7 @@ class MainPageController {
 
                 return update
             }
-            Sidebar.ActionLinks.ANIMATION -> TODO()
-            Sidebar.ActionLinks.ENV -> TODO()
-            Sidebar.ActionLinks.AUTOSTART -> TODO()
+
             Sidebar.ActionLinks.MISC -> {
                 val update = updateStandedInDatabase(data)
 
@@ -348,7 +386,7 @@ class MainPageController {
                 return update
             }
 
-            Sidebar.ActionLinks.VARIABLES -> TODO()
+            else -> throw Exception("Should Not Reach To This Point. This Is A Bug")
         }
 
     }

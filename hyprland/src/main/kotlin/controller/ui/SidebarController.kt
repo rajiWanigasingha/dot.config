@@ -51,7 +51,10 @@ class SidebarController {
                 pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
             )
 
-            Sidebar.ActionLinks.KEYBOARD -> TODO()
+            Sidebar.ActionLinks.KEYBOARD -> return createPageUI(
+                actionLinks = actionLinks,
+                pageSettings = handlePaths.getPathToUpdate(actionLink = actionLinks)
+            )
 
             Sidebar.ActionLinks.LAYOUT_GENERAL -> return createPageUI(
                 actionLinks = actionLinks,
