@@ -49,6 +49,13 @@ export default function navigation(actionLink: ActionLinks) {
             break;
         }
 
+
+        case ActionLinks.WINDOW_RULES: {
+            goto("/hyprland/custom/window")
+            sidebarConn.loadMainPage(actionLink)
+            break;
+        }
+
         default: {
             if (page.url.pathname !== "/hyprland/standedInputs") {
                 goto("/hyprland/standedInputs")

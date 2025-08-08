@@ -22,17 +22,16 @@ import org.hyprconfig.model.SettingsModel
 import org.hyprconfig.model.XwaylandModel
 import org.hyprconfig.parseHyprland
 import org.jetbrains.kotlinx.dataframe.DataFrame
-import org.jetbrains.kotlinx.dataframe.api.print
+import org.jetbrains.kotlinx.dataframe.api.convert
+import org.jetbrains.kotlinx.dataframe.api.forEach
 import org.jetbrains.kotlinx.dataframe.api.toDataFrame
 import org.jetbrains.kotlinx.dataframe.api.update
 import org.jetbrains.kotlinx.dataframe.api.where
 import org.jetbrains.kotlinx.dataframe.api.with
 import org.jetbrains.kotlinx.dataframe.io.ColType
-import org.jetbrains.kotlinx.dataframe.io.read
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.jetbrains.kotlinx.dataframe.io.writeCsv
 import org.slf4j.LoggerFactory
-import java.io.File
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
@@ -47,24 +46,24 @@ object Initialize {
         Pair("decorationBlur", "decoration"),
         Pair("decorationShadow", "decoration"),
         Pair("animations", "animations"),
-        Pair("inputs" ,"inputs"),
-        Pair("inputsTouchpad" ,"inputs"),
-        Pair("inputsTouchDevice","inputs"),
-        Pair("inputsTablet","inputs"),
-        Pair("cursor","cursor"),
-        Pair("gestures","gestures"),
-        Pair("group","group"),
-        Pair("groupBar","group"),
-        Pair("misc","misc"),
-        Pair("binds","binds"),
-        Pair("xwayland","xwayland"),
-        Pair("openGl","openGL"),
-        Pair("render","render"),
-        Pair("ecosystem","ecosystem"),
-        Pair("dwindle","dwindle"),
-        Pair("master","master"),
-        Pair("debug","debug"),
-        Pair("experimental","experimental")
+        Pair("inputs", "inputs"),
+        Pair("inputsTouchpad", "inputs"),
+        Pair("inputsTouchDevice", "inputs"),
+        Pair("inputsTablet", "inputs"),
+        Pair("cursor", "cursor"),
+        Pair("gestures", "gestures"),
+        Pair("group", "group"),
+        Pair("groupBar", "group"),
+        Pair("misc", "misc"),
+        Pair("binds", "binds"),
+        Pair("xwayland", "xwayland"),
+        Pair("openGl", "openGL"),
+        Pair("render", "render"),
+        Pair("ecosystem", "ecosystem"),
+        Pair("dwindle", "dwindle"),
+        Pair("master", "master"),
+        Pair("debug", "debug"),
+        Pair("experimental", "experimental")
     )
 
     init {
@@ -171,7 +170,12 @@ object Initialize {
                 Tables.MonitorTable(
                     name = it.name,
                     disable = it.disable,
-                    addreserved = if (it.addreserved) listOf(it.addreservedValue?.top ?: 0,it.addreservedValue?.bottom ?: 0,it.addreservedValue?.left ?: 0,it.addreservedValue?.right ?: 0,) else null,
+                    addreserved = if (it.addreserved) listOf(
+                        it.addreservedValue?.top ?: 0,
+                        it.addreservedValue?.bottom ?: 0,
+                        it.addreservedValue?.left ?: 0,
+                        it.addreservedValue?.right ?: 0,
+                    ) else null,
                     resolution = it.resolution,
                     position = it.position,
                     scale = it.scale,
@@ -197,21 +201,84 @@ object Initialize {
 
         windowRulesSettings?.forEach {
 
-//            val rules = mutableListOf<Pair<String , String>>()
-//
-//            it.rules.forEach { rule -> rules.add(Pair(rule.keyword ,rule.value ?: "")) }
+            val staticRules = DataFrame.readCsv(object {}.javaClass.getResourceAsStream("/dispatchers/window/staticRules.csv")!!).convert { all() }.with { rules -> rules.toString() }
+            val dynamicRules = DataFrame.readCsv(object {}.javaClass.getResourceAsStream("/dispatchers/window/dynamicRules.csv")!!).convert { all() }.with { rules -> rules.toString() }
+            val propsRules = DataFrame.readCsv(object {}.javaClass.getResourceAsStream("/dispatchers/window/props.csv")!!).convert { all() }.with { rules -> rules.toString() }
+
+            val rules = mutableListOf<Tables.RulesForWindows>()
+
+            it.rules
+                .trim()
+                .split(" ")
+                .forEach { rule ->
+
+                    var found = false
+
+                    staticRules.forEach { row ->
+                        if (row["name"].toString() == rule) {
+                            found = true
+                            rules.add(Tables.RulesForWindows(name = rule))
+                            return@forEach
+                        }
+                    }
+
+                    if (!found) {
+                        dynamicRules.forEach { row ->
+                            if (row["name"].toString() == rule) {
+                                found = true
+                                rules.add(Tables.RulesForWindows(name = rule))
+                                return@forEach
+                            }
+                        }
+                    }
+
+                    if (!found) {
+                        propsRules.forEach { row ->
+                            if (row["name"].toString() == rule) {
+                                found = true
+                                rules.add(Tables.RulesForWindows(name = rule))
+                                return@forEach
+                            }
+                        }
+                    }
+
+                    if (!found) {
+                        if (rules.last().value == null) {
+                            rules.last().value = rule
+                        } else {
+                            rules.last().value = "${rules.last().value} $rule"
+                        }
+                    }
+                }
 
             allWindowRulesSettings.add(
                 Tables.WindowRules(
-                    rules = it.rules,
+                    rules = rules,
                     params = it.params
                 )
             )
         }
 
-        val windowRulesDf = allWindowRulesSettings.toDataFrame()
+        val windowRuleDF = mutableListOf<Tables.WindowRulesDataFrame>()
 
-        windowRulesDf.writeCsv("$path/windowRules.csv")
+        allWindowRulesSettings.forEach {
+
+            val rules = mutableListOf<String>()
+
+            it.rules.forEach { rule ->
+                val ruleString = "${rule.name}${if (rule.value != null) " ${rule.value}" else ""}"
+                rules.add(ruleString)
+            }
+
+            windowRuleDF.add(
+                Tables.WindowRulesDataFrame(
+                    rules = rules,
+                    params = it.params
+                )
+            )
+        }
+
+        windowRuleDF.toDataFrame().convert { all() }.with { it.toString() }.writeCsv("$path/windowRules.csv")
 
         // Create Workspace Rule Structure Of Hyprland
         val workspaceRulesSettings = settingsModel.workspace
@@ -308,7 +375,7 @@ object Initialize {
 
         val parsedSettings = mutableListOf<Tables.ParsedTime>()
 
-        parsedTime?.forEach { parsedSettings.add(Tables.ParsedTime(it.path ,it.time)) }
+        parsedTime?.forEach { parsedSettings.add(Tables.ParsedTime(it.path, it.time)) }
 
         val parsedDf = parsedSettings.toDataFrame()
 
@@ -326,7 +393,7 @@ object Initialize {
                 ?: throw IllegalStateException("Resource not found: ${it.first}.csv")
 
             var standedDefaultDF =
-                DataFrame.readCsv(resourceStream , colTypes = mapOf("validate" to ColType.String))
+                DataFrame.readCsv(resourceStream, colTypes = mapOf("validate" to ColType.String))
 
             val property =
                 settingsModel::class.memberProperties.find { data -> data.name == it.second } as? KProperty1<SettingsModel, *>
@@ -359,7 +426,7 @@ object Initialize {
                         value = item.value
                     )
 
-                    is CursorModel ->  Tables.StandedHyprlandParsedSettings(
+                    is CursorModel -> Tables.StandedHyprlandParsedSettings(
                         name = item.name,
                         type = item.type,
                         value = item.value

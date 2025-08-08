@@ -1,0 +1,109 @@
+name,actionName,description,actionSupport,help
+bordersize,BorderSize,sets the border size,arg,"bordersize [int] sets the border width in pixels.
+
+Example:
+    bordersize 5"
+rounding,Rounding,sets window corner rounding in pixels,arg,"rounding [int] overrides the default corner rounding.
+
+Example:
+    rounding 10"
+roundingpower,RoundingPower,overrides the rounding power,arg,"roundingpower [float] sets how the rounding curve behaves.
+
+Example:
+    roundingpower 1.2"
+allowsinput,AllowsInput,forces input to XWayland windows,arg,"allowsinput [0 or 1] lets XWayland windows receive input even if they don't request it.
+
+Example:
+    allowsinput 1"
+dimaround,DimAround,dims everything around the window,arg,"dimaround [0 or 1] dims the screen area outside the window (floating windows only).
+
+Example:
+    dimaround 1"
+decorate,Decorate,controls whether window decorations are drawn,arg,"decorate [0 or 1] enables decorations (like borders, shadows).
+
+Example:
+    decorate 1"
+focusonactivate,FocusOnActivate,focuses app on activation request,arg,"focusonactivate [0 or 1] lets Hyprland focus the window when it requests attention.
+
+Example:
+    focusonactivate 1"
+keepaspectratio,KeepAspectRatio,forces aspect ratio on resize,arg,"keepaspectratio [0 or 1] keeps the window's aspect ratio during mouse resizing.
+
+Example:
+    keepaspectratio 1"
+nearestneighbor,NearestNeighbor,forces nearest-neighbor filtering,arg,"nearestneighbor [0 or 1] disables smoothing by forcing pixel-perfect rendering.
+
+Example:
+    nearestneighbor 1"
+noanim,NoAnim,disables animations for the window,arg,"noanim [0 or 1] disables any animation for the window.
+
+Example:
+    noanim 1"
+noblur,NoBlur,disables blur effects for the window,arg,"noblur [0 or 1] disables blur under or around the window.
+
+Example:
+    noblur 1"
+noborder,NoBorder,removes borders for the window,arg,"noborder [0 or 1] hides the window border.
+
+Example:
+    noborder 1"
+nodim,NoDim,disables dimming for the window,arg,"nodim [0 or 1] prevents the window from dimming (e.g., during inactivity).
+
+Example:
+    nodim 1"
+nofocus,NoFocus,disables focus for the window,arg,"nofocus [0 or 1] makes the window unable to receive focus.
+
+Example:
+    nofocus 1"
+nofollowmouse,NoFollowMouse,prevents focus on mouse hover,arg,"nofollowmouse [0 or 1] disables mouse-over focus behavior when follow_mouse is enabled.
+
+Example:
+    nofollowmouse 1"
+nomaxsize,NoMaxSize,disables maximum size limits,arg,"nomaxsize [0 or 1] removes max size restrictions.
+
+Example:
+    nomaxsize 1"
+norounding,NoRounding,disables corner rounding,arg,"norounding [0 or 1] disables corner rounding for the window.
+
+Example:
+    norounding 1"
+noshadow,NoShadow,disables window shadow,arg,"noshadow [0 or 1] prevents drawing shadows around the window.
+
+Example:
+    noshadow 1"
+noshortcutsinhibit,NoShortcutsInhibit,prevents app from disabling shortcuts,arg,"noshortcutsinhibit [0 or 1] ensures the app can't block global shortcuts.
+
+Example:
+    noshortcutsinhibit 1"
+opaque,Opaque,makes the window fully opaque,arg,"opaque [0 or 1] disables transparency entirely.
+
+Example:
+    opaque 1"
+forcergbx,ForceRGBX,forces full window opacity by ignoring alpha,arg,"forcergbx [0 or 1] makes the window ignore alpha, forcing 100% opacity.
+
+Example:
+    forcergbx 1"
+syncfullscreen,SyncFullscreen,syncs internal and client fullscreen states,arg,"syncfullscreen [0 or 1] ensures fullscreen mode matches the client’s view.
+
+Example:
+    syncfullscreen 1"
+immediate,Immediate,allows tearing,arg,"immediate [0 or 1] disables vsync, allowing tearing.
+
+Example:
+    immediate 1"
+xray,XRay,sets blur xray mode for the window,arg,"xray [0 or 1] enables xray-style blur behind the window.
+
+Example:
+    xray 1"
+renderunfocused,RenderUnfocused,forces rendering when window is unfocused,null,"renderunfocused forces the window to keep rendering when it's not visible.
+
+Example:
+    renderunfocused"
+scrollmouse,ScrollMouse,sets custom scroll factor for mouse,arg,"scrollmouse [float] overrides the input:scroll_factor for this window.
+
+Example:
+    scrollmouse 1.5"
+scrolltouchpad,ScrollTouchpad,sets custom scroll factor for touchpad,arg,"scrolltouchpad [float] overrides input:touchpad:scroll_factor.
+
+Example:
+    scrolltouchpad 1.2"

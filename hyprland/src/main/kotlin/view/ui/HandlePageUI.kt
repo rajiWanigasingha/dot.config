@@ -123,6 +123,17 @@ fun Route.handleUI() {
                         )
                     }
 
+                    Sidebar.ActionLinks.WINDOW_RULES -> {
+                        val ui = sidebarService.getWindow()
+
+                        sendSerialized(
+                            data = SendAndReceive.Send(
+                                actionType = SendAndReceive.ActionType.MAIN_WINDOW,
+                                payload = ui
+                            )
+                        )
+                    }
+
                     else -> {
                         val ui = sidebarService.getPageUI(actionLinks = message.payload.actionLink)
 

@@ -168,7 +168,19 @@ object Tables {
 
     @Serializable
     data class WindowRules(
-        val rules: String,
+        val rules: List<RulesForWindows>,
+        val params: List<String>
+    )
+
+    @Serializable
+    data class RulesForWindows(
+        val name: String,
+        var value: String? = null
+    )
+
+    @Serializable
+    data class WindowRulesDataFrame(
+        val rules: List<String>,
         val params: List<String>
     )
 

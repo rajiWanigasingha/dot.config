@@ -1,0 +1,65 @@
+name,actionName,description,actionSupport,help
+animation,Animation,"forces an animation onto a window, with an optional opt",arg,"animation [style] ([opt]) forces a specific animation on a window.
+
+- style: the animation style (e.g., slide, fade)
+- opt (optional): additional parameters like direction or speed
+
+Examples:
+
+    animation slide
+    animation fade 50"
+bordercolor,BorderColor,force the bordercolor of the window,arg,"bordercolor [c] sets a custom border color or gradient.
+
+- Single: color/color ... color angle → active border
+- Double: color/color ... color angle color ... color [angle] → active & inactive
+
+Colors must be defined in variables->colors.
+
+Examples:
+
+    bordercolor rgb(255,0,0) 0
+    bordercolor rgb(255,0,0) 0 rgb(100,100,100) 0"
+idleinhibit,IdleInhibit,sets an idle inhibit rule to prevent idle behavior like screen dimming,arg,"idleinhibit [mode] prevents idle actions based on the mode.
+
+Modes:
+- none: allow idle
+- always: always inhibit idle
+- focus: only when window is focused
+- fullscreen: only in fullscreen
+
+Examples:
+
+    idleinhibit always
+    idleinhibit fullscreen"
+opacity,Opacity,sets window opacity (overall or by state),arg,"opacity [a] defines transparency for the window.
+
+- 1 float: all states
+- 2 floats: active and inactive
+- 3 floats: active, inactive, fullscreen
+
+Examples:
+
+    opacity 0.9
+    opacity 0.9 0.7
+    opacity 0.9 0.7 1.0"
+tag,Tag,applies a tag to the window for rule matching or grouping,arg,"tag [name] assigns or toggles a window tag.
+
+- `+name`: adds tag
+- `-name`: removes tag
+- `name`: toggles tag
+
+Examples:
+
+    tag +music
+    tag -music
+    tag music"
+maxsize,MaxSize,sets the maximum window size,arg,"maxsize [x] [y] limits the floating window’s size in pixels.
+
+Examples:
+
+    maxsize 800 600"
+minsize,MinSize,sets the minimum window size,arg,"minsize [x] [y] defines the smallest size a window can shrink to.
+
+Examples:
+
+    minsize 200 150"

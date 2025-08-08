@@ -227,6 +227,27 @@ class WriteIntoHyprland {
         return workspaceTable.joinToString("\n")
     }
 
+    fun writeWindow(window: List<Tables.WindowRules>): String {
+        val rules = mutableListOf<String>()
+
+        window.forEach {
+
+            val rulesAdd = mutableListOf<String>()
+
+            it.rules.forEach { rule ->
+                rulesAdd.add(
+                    "${rule.name}${if (rule.value != null) " ${rule.value}" else ""}"
+                )
+            }
+
+            rules.add(
+                "windowrule = ${rulesAdd.joinToString(" ")},${if (it.params.isNotEmpty()) " ${it.params.joinToString(",")}" else ""}"
+            )
+        }
+
+        return rules.joinToString("\n")
+    }
+
     fun updateTime(hyprlandPath: String) {
         val modifiedTime = Path.of(hyprlandPath).getLastModifiedTime().toKotlinInstant()
 

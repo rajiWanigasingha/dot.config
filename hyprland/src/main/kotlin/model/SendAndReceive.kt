@@ -8,7 +8,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ActionType {
-        SIDE_BAR, MAIN ,HELP ,CONNECT ,DISCONNECT ,ERROR ,MAIN_VARIABLES ,MAIN_AUTOSTART ,MAIN_ENV ,MAIN_KEYBINDS ,MAIN_MONITOR ,MAIN_ANIMATION ,MAIN_WORKSPACE
+        SIDE_BAR, MAIN, HELP, CONNECT, DISCONNECT, ERROR, MAIN_VARIABLES, MAIN_AUTOSTART, MAIN_ENV, MAIN_KEYBINDS, MAIN_MONITOR, MAIN_ANIMATION, MAIN_WORKSPACE, MAIN_WINDOW
     }
 
     @Serializable
@@ -39,7 +39,7 @@ object SendAndReceive {
 
     @Serializable
     enum class PagesErrorCodes {
-        INVALID_ACTION_TYPE ,SERIALIZABLE
+        INVALID_ACTION_TYPE, SERIALIZABLE
     }
 
     @Serializable
@@ -72,7 +72,7 @@ object SendAndReceive {
 
     @Serializable
     enum class MainErrorCodes {
-        SERIALIZABLE ,INVALID_ACTION_TYPE
+        SERIALIZABLE, INVALID_ACTION_TYPE
     }
 
     @Serializable
@@ -92,7 +92,7 @@ object SendAndReceive {
 
     @Serializable
     enum class HelpErrorCodes {
-        SERIALIZABLE ,NO_HELP_FOUND
+        SERIALIZABLE, NO_HELP_FOUND
     }
 
     @Serializable
@@ -104,7 +104,7 @@ object SendAndReceive {
     // Variable Receives And Sends Message
     @Serializable
     enum class VariableAction {
-        ADD ,UPDATE
+        ADD, UPDATE
     }
 
     @Serializable
@@ -123,7 +123,7 @@ object SendAndReceive {
     // Execute Receive and send
     @Serializable
     enum class ExecuteActions {
-        ADD ,UPDATE ,DELETE
+        ADD, UPDATE, DELETE
     }
 
     @Serializable
@@ -136,7 +136,7 @@ object SendAndReceive {
 
     @Serializable
     enum class ExecuteStateCommand {
-        EMPTY_COMMAND ,SUCCESS ,ADD_NEW_ERROR ,UPDATE_ERROR ,DELETE_ERROR
+        EMPTY_COMMAND, SUCCESS, ADD_NEW_ERROR, UPDATE_ERROR, DELETE_ERROR
     }
 
     @Serializable
@@ -148,7 +148,7 @@ object SendAndReceive {
     // Env Receive and send
     @Serializable
     enum class EnvActions {
-        ADD ,UPDATE ,DELETE
+        ADD, UPDATE, DELETE
     }
 
     @Serializable
@@ -161,7 +161,7 @@ object SendAndReceive {
 
     @Serializable
     enum class EnvStateCommand {
-        EMPTY_COMMAND ,SUCCESS ,ADD_NEW_ERROR ,UPDATE_ERROR ,DELETE_ERROR
+        EMPTY_COMMAND, SUCCESS, ADD_NEW_ERROR, UPDATE_ERROR, DELETE_ERROR
     }
 
     @Serializable
@@ -173,7 +173,7 @@ object SendAndReceive {
     // Keybinds Receive And Send
     @Serializable
     enum class KeybindActionStatus {
-        KEYBIND_HELP ,DISPATCHER_HELP ,GET_DISPATCHERS ,CREATE_NEW ,DELETE ,UPDATE
+        KEYBIND_HELP, DISPATCHER_HELP, GET_DISPATCHERS, CREATE_NEW, DELETE, UPDATE
     }
 
     @Serializable
@@ -200,7 +200,7 @@ object SendAndReceive {
 
     @Serializable
     enum class KeybindErrStatus {
-        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_HELP_PAGE ,EMPTY_PAYLOAD ,EMPTY_DISPATCHERS ,EMPTY_DISPATCHER_COMMAND ,EMPTY_DATA ,NEW_BIND_CREATING_FAILED ,EMPTY_DELETE ,DELETE_FAILS ,EMPTY_UPDATE ,UPDATE_FAILED
+        SERIALIZABLE, INVALID_ACTION_TYPE, EMPTY_HELP_PAGE, EMPTY_PAYLOAD, EMPTY_DISPATCHERS, EMPTY_DISPATCHER_COMMAND, EMPTY_DATA, NEW_BIND_CREATING_FAILED, EMPTY_DELETE, DELETE_FAILS, EMPTY_UPDATE, UPDATE_FAILED
     }
 
     @Serializable
@@ -223,12 +223,12 @@ object SendAndReceive {
 
     @Serializable
     enum class MonitorActionType {
-        CHANGE_GENERAL ,DISABLE ,ERROR ,ADD_RESERVED ,MIRROR
+        CHANGE_GENERAL, DISABLE, ERROR, ADD_RESERVED, MIRROR
     }
 
     @Serializable
     enum class MonitorErrorStatus {
-        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD ,INVALID_MONITOR_ACTION
+        SERIALIZABLE, INVALID_ACTION_TYPE, EMPTY_PAYLOAD, INVALID_MONITOR_ACTION
     }
 
     @Serializable
@@ -236,7 +236,7 @@ object SendAndReceive {
         val actions: MonitorActionType,
         val monitor: Tables.MonitorTable,
         val disable: Boolean? = null,
-        val reset : Boolean? = null
+        val reset: Boolean? = null
     )
 
     @Serializable
@@ -261,7 +261,7 @@ object SendAndReceive {
 
     @Serializable
     enum class AnimationErrorStatus {
-        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD
+        SERIALIZABLE, INVALID_ACTION_TYPE, EMPTY_PAYLOAD
     }
 
     @Serializable
@@ -272,7 +272,7 @@ object SendAndReceive {
 
     @Serializable
     enum class AnimationReceiveActions {
-        ADD_NEW ,ENABLE_OR_DISABLE ,EDIT ,DELETE ,CURVE_ADD ,CURVE_DELETE ,CURVE_EDIT
+        ADD_NEW, ENABLE_OR_DISABLE, EDIT, DELETE, CURVE_ADD, CURVE_DELETE, CURVE_EDIT
     }
 
     @Serializable
@@ -294,12 +294,12 @@ object SendAndReceive {
 
     @Serializable
     enum class WorkspaceErrorStatus {
-        SERIALIZABLE ,INVALID_ACTION_TYPE ,EMPTY_PAYLOAD ,EMPTY_DELETE_PAYLOAD
+        SERIALIZABLE, INVALID_ACTION_TYPE, EMPTY_PAYLOAD, EMPTY_DELETE_PAYLOAD
     }
 
     @Serializable
     enum class WorkspaceDeleteOder {
-        ALL ,SINGLE
+        ALL, SINGLE
     }
 
     @Serializable
@@ -310,7 +310,7 @@ object SendAndReceive {
 
     @Serializable
     enum class WorkspaceReceiveActions {
-        EDIT ,DELETE ,ADD
+        EDIT, DELETE, ADD
     }
 
     @Serializable
@@ -325,5 +325,54 @@ object SendAndReceive {
         val action: WorkspaceReceiveActions,
         val status: Boolean,
         val message: String
+    )
+
+    // window sends and receives
+
+    @Serializable
+    enum class WindowErrorStatus {
+        SERIALIZABLE, INVALID_ACTION_TYPE, EMPTY_DATA_PAYLOAD ,EMPTY_GET_PAYLOAD
+    }
+
+    @Serializable
+    data class WindowError(
+        val status: WindowErrorStatus,
+        val message: String
+    )
+
+    @Serializable
+    enum class WindowReceiveActions {
+        EDIT, DELETE, ADD, GET
+    }
+
+    @Serializable
+    enum class WindowGetRules {
+        STATIC ,DYNAMIC ,PARAMS
+    }
+
+    @Serializable
+    data class WindowReceiveData(
+        val action: WindowReceiveActions,
+        val data: Tables.WindowRules? = null,
+        val oldData: Tables.WindowRules? = null,
+        val get: WindowGetRules? = null
+    )
+
+    @Serializable
+    data class WindowSendRules(
+        val name: String,
+        val actionName: String,
+        val description: String,
+        val actionSupport: String,
+        val help: String
+    )
+
+    @Serializable
+    data class WindowActionResults(
+        val action: WindowReceiveActions,
+        val status: Boolean,
+        val message: String,
+        val getWindow: WindowGetRules? = null,
+        val getData: List<WindowSendRules>? = null
     )
 }

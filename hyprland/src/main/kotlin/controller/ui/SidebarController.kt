@@ -9,8 +9,10 @@ import org.dot.config.view.basicComponents.InputComponents
 import org.dot.config.view.builderComponents.Sidebar
 import org.dot.config.view.errors.ErrorsBasicInputComponent
 import org.hyprconfig.helpers.HyprlandTypes
+import org.hyprconfig.model.RulesForWindow
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.forEach
+import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.io.ColType
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import org.slf4j.LoggerFactory
@@ -406,6 +408,45 @@ class SidebarController {
         }
 
        return workspace.toList()
+    }
+
+    fun getWindow(): List<Tables.WindowRules> {
+
+        val window = mutableListOf<Tables.WindowRules>()
+
+        val windowSettings = DataFrame.readCsv(
+            fileOrUrl = "${System.getProperty("user.home")}/.dot.config/data/windowRules.csv",
+            colTypes = mapOf("rules" to ColType.String, "params" to ColType.String)
+        )
+
+        windowSettings.forEach { row ->
+
+            val rules = row["rules"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() }
+            val params = row["params"].toString().removePrefix("[").removeSuffix("]").split(",").map { it.trim() }
+
+            val rulesForWindows = mutableListOf<Tables.RulesForWindows>()
+
+            rules.forEach {
+
+                val separateRules = it.trim().split(" " , limit = 2)
+
+                rulesForWindows.add(
+                    Tables.RulesForWindows(
+                        name = separateRules[0],
+                        value = separateRules.getOrNull(1)
+                    )
+                )
+            }
+
+            window.add(
+                Tables.WindowRules(
+                    rules = rulesForWindows,
+                    params = params
+                )
+            )
+        }
+
+        return window.toList()
     }
 
     private fun createPageUI(

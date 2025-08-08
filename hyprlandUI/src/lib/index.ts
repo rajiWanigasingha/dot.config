@@ -44,6 +44,9 @@ export * from "./store/mainInput/animation/animationConnection.svelte"
 export * from "./types/customActionTypes/workspace"
 export * from "./store/mainInput/workspace/workspaceState.svelte"
 export * from "./store/mainInput/workspace/workspaceConnection.svelte"
+export * from "./types/customActionTypes/window"
+export * from "./store/mainInput/window/windowState.svelte"
+export * from "./store/mainInput/window/windowConnection.svelte"
 
 export * from "./store/help/helpState.svelte"
 export * from "./store/help/helpConnection.svelte"
@@ -92,3 +95,6 @@ export { default as AnimationTreeCurve } from "./components/common/animationTree
 export { default as WorkspaceRulesComponents } from "./components/common/workspace/rules.svelte"
 export { default as WorkspaceRulesDelete } from "./components/common/workspace/deleteRules.svelte"
 export { default as WorkspaceRulesAddNew } from "./components/common/workspace/addRules.svelte"
+
+export { default as WindowAddNew } from "./components/common/window/addNew.svelte"
+export { default as WindowDelete } from "./components/common/window/deleteToast.svelte"
