@@ -4,7 +4,7 @@ This is a project that aims to making editing and creating new or existing hyprl
 This will work with your existing hyprland config (For now only work in hyprland v49) and allow you to edit everything in real time.
 This is still in early development but will get better and support all settings of hyprland.
 
-[![Watch the video](https://raw.githubusercontent.com/rajiWanigasingha/dot.config/main/docs/thumbnail.png)](https://raw.githubusercontent.com/rajiWanigasingha/dot.config/main/docs/doc1.mp4)
+[![Watch the video](https://raw.githubusercontent.com/rajiWanigasingha/dot.config/main/docs/thumbnail.png)](https://github.com/user-attachments/assets/eb4811b1-6d6d-45cc-97d8-8908f16810c6)
 
 > [!CAUTION]
 > This project is in development.
