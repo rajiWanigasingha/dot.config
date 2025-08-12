@@ -1,0 +1,12 @@
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+input:touchpad,Disable While Typing,disable_while_typing,Disable the touchpad while typing.,bool,true,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Natural Scroll,natural_scroll,Inverts scrolling direction. When enabled; scrolling moves content directly; rather than manipulating a scrollbar.,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Scroll Factor,scroll_factor,Multiplier applied to the amount of scroll movement.,float,1.0,MOUSE_AND_TOUCHPAD,touchpad,INPUT_FLOAT
+input:touchpad,Middle Button Emulation,middle_button_emulation,Sending LMB and RMB simultaneously will be interpreted as a middle click. This disables any touchpad area that would normally send a middle click based on location,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Tap Button Map,tap_button_map,Sets the tap button mapping for touchpad button emulation. ,str,"",MOUSE_AND_TOUCHPAD,touchpad,INPUT_STR_SELECT,"lrm,lmr","Left right and middle,left middle and right "
+input:touchpad,Clickfinger Behavior,clickfinger_behavior,Click touchpad with one finger for left mouse button; two fingers for right mouse button; three fingers for middle mouse button,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Tap to Click,tap-to-click,Tap touchpad with one finger for left mouse button; two fingers for right mouse button; three fingers for middle mouse button,bool,true,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Drag Lock,drag_lock,When enabled; lifting the finger off for a short time while dragging will not drop the dragged item.,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Tap and Drag,tap-and-drag,Sets the tap and drag mode for the touchpad,bool,true,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Flip X,flip_x,inverts the horizontal movement of the touchpad,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE
+input:touchpad,Flip Y,flip_y,inverts the vertical movement of the touchpad,bool,false,MOUSE_AND_TOUCHPAD,touchpad,INPUT_TOGGLE

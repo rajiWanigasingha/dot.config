@@ -19,6 +19,7 @@ kotlin{
     jvmToolchain(21)
 }
 
+
 dependencies {
     implementation(libs.ktor.server.cors)
     implementation(libs.ktor.server.call.logging)

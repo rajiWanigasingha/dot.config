@@ -1,0 +1,102 @@
+name,actionName,description,actionSupport,help
+float,Float,floats a window,null
+tile,Tile,tiles a window,null
+fullscreen,Fullscreen,fullscreens a window,null
+maximize,Maximize,maximizes a window,null
+persistentsize,PersistentSize,allows size persistence between application launches for floating windows,null
+fullscreenstate,FullscreenState,sets the focused window’s fullscreen mode and the one sent to the client,arg,"fullscreenstate [internal] [client] sets the fullscreen state of a window. internal controls how Hyprland treats the window (e.g., maximize or fullscreen), and client tells the app what state it thinks it's in.
+Values: 0 = none, 1 = maximize, 2 = fullscreen, 3 = maximize + fullscreen.
+Example: fullscreenstate 1 2 means Hyprland maximizes the window internally, while the app believes it's in fullscreen mode — useful for apps that behave differently when ""fullscreened."""
+move,Move,moves a floating window,arg,"move [x] [y] positions a floating window using integers or percentages.
+You can use values like 20, 50%, or anchors like 100%-20 to align from the right/bottom.
+Special forms:
+
+    100%-w-20 → subtracts the window's width/height for precise edge gaps
+
+    cursor [x] [y] → positions window relative to cursor
+
+    onscreen → ensures the window stays within screen bounds
+
+Example: move 100%-w-10 100%-h-10 puts the window in the bottom-right with a 10px gap."
+size,Size,resizes a floating window,arg,"size [x] [y] resizes a floating window using integers or percentages.
+You can prefix values with:
+
+    < → set a maximum size (e.g. <500, <80%)
+
+    > → set a minimum size (e.g. >200, >20%)
+
+    No prefix → set exact size (e.g. 600 400 or 50% 70%)
+
+Examples:
+
+    size 800 600 → sets size to 800×600 pixels
+
+    size <90% <90% → limits max size to 90% of screen
+
+    size >300 >300 → ensures minimum size of 300×300 pixels"
+center,Center,centers the floating window on the monitor,arg,"center [opt] centers a floating window on its monitor.
+
+    If opt is 1, it respects monitor-reserved areas (like top bars or docks).
+
+    If omitted or 0, it centers the window regardless of reserved space.
+
+Examples:
+
+    center → center the window normally
+
+    center 1 → center the window but avoid reserved areas (e.g., bar at the top)"
+pseudo,Pseudo,pseudotiles a window,null
+monitor,Monitor,sets the monitor on which a window should open,arg,"monitor [id] sets the monitor where a window should open.
+You can use either the numeric ID (e.g. 1, 0) or the monitor name (e.g. DP-1, HDMI-A-1).
+
+Examples:
+
+    monitor 1 → open the window on monitor ID 1
+
+    monitor DP-1 → open the window on the monitor named DP-1"
+workspace,Workspace,sets the workspace on which a window should open,arg,"workspace [w] sets the workspace where a window should open.
+
+    [w] can be a number (e.g. 1) or a special name (e.g. special:music)
+
+    Use unset to remove previous workspace rules for this window
+
+    Add silent after the workspace to open the window without switching focus to it
+
+Examples:
+
+    workspace 2 → opens the window on workspace 2
+
+    workspace special:chat → sends the window to the ""chat"" special workspace
+
+    workspace unset → clears any previously assigned workspace
+
+    workspace 1 silent → opens on workspace 1 without focusing it"
+noinitialfocus,NoInitialFocus,disables the initial focus to the window,null
+pin,Pin,pins the window (i.e. show it on all workspaces),null
+unset,Unset,removes all previously set rules for the given parameters,null
+nomaxsize,NoMaxSize,removes max size limitations,null
+stayfocused,StayFocused,forces focus on the window as long as it’s visible,null
+group,Group,set window group properties,arg,"group [options] sets group properties for a window, such as how it behaves in a group (e.g., tabbed layout).
+Options may include tab, nogroup, or others depending on Hyprland's group feature.
+
+Examples:
+
+    group tab → make the window join a tabbed group
+
+    group nogroup → prevent the window from joining any group"
+suppressevent,SuppressEvent,ignores specific events from the window,arg,"suppressevent [types...] tells Hyprland to ignore specific window events.
+Supported events: fullscreen, maximize, activate, activatefocus, fullscreenoutput
+
+Examples:
+
+    suppressevent fullscreen maximize → ignore fullscreen and maximize requests
+
+    suppressevent activate activatefocus → prevent the window from stealing focus"
+content,Content,sets content type,arg,"content [type] sets the content type of the window, helping Hyprland apply optimizations.
+Available types: none, photo, video, game
+
+Examples:
+
+    content game → optimize for games (e.g., latency improvements)
+
+    content video → optimize for video playback"

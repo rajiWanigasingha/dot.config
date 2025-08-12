@@ -1,0 +1,4 @@
+category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
+input:touchdevice,Transform,transform,Transform the input from touchdevices. The possible transformations are the same as those of the monitors. -1 means it’s unset.,int,-1,TOUCH,Touch Devices,INPUT_INT
+input:touchdevice,Output,output,The monitor to bind touch devices. The default is auto-detection. To stop auto-detection; use an empty string or the “[[Empty]]” value.,str,"",TOUCH,Touch Devices,INPUT_STR,""
+input:touchdevice,Enabled,enabled,Whether input is enabled for touch devices.,bool,true,TOUCH,Touch Devices,INPUT_TOGGLE
