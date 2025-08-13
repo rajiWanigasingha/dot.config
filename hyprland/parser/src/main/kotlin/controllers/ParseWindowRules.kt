@@ -7,6 +7,7 @@ import model.tables.WindowRulesModel
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.associateBy
 import org.jetbrains.kotlinx.dataframe.io.readCsv
+import write.windowRule.WriteWindowRules
 
 private val requestPaths = RequestPaths()
 
@@ -20,7 +21,7 @@ private val params = DataFrame.readCsv(requestPaths.getWindowRules("")).associat
  * @param windows as list of string
  * @return list of [WindowRulesModel]
  */
-internal fun parseWindowRules(windows: List<String>): List<WindowRulesModel> {
+internal fun parseWindowRules(windows: List<String>): Result<List<WindowRulesModel>> {
 
     logger.info("Try to process and create window rule settings")
 
@@ -39,32 +40,12 @@ internal fun parseWindowRules(windows: List<String>): List<WindowRulesModel> {
         windowStore.add(WindowRulesModel(rules, params))
     }
 
-    windowStore.forEach { logger.info(it.toString()) }
+    val write = WriteWindowRules()
 
-//    logger.info("Creating windowRules hyprland file")
-//
-//    val windowRule = mutableListOf<String>()
-//
-//    handlePaths(windowRulesPath)
-//
-//    windowStore.forEach {
-//
-////        var rule = ""
-////
-////        it.rules.forEach { rules ->
-////            if (rule == "") {
-////                rule = "${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
-////            } else {
-////                rule += " ${rules.keyword}${if (rules.value != null) " ${rules.value}" else ""}"
-////            }
-////        }
-//
-//        windowRule.add("windowrule = ${it.rules.trim()} ,${it.params.joinToString(",")}".insertVariables())
-//    }
-//
-//    Path.of(windowRulesPath).writeText(windowRule.joinToString("\n"))
+    write.writeIntoHyprland(windowStore).getOrThrow()
+    write.writeIntoDotConfig(windowStore).getOrThrow()
 
-    return windowStore.toList()
+    return Result.success(windowStore.toList())
 }
 
 

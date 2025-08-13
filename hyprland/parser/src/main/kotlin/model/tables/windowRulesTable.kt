@@ -17,3 +17,9 @@ data class WindowRulesModel(
     val rules: List<RulesForWindow>,
     val params: List<String>
 )
+
+@Serializable
+data class WindowRulesForDataFrame(
+    val rules: List<String>,
+    val params: List<String>
+)

@@ -1,8 +1,16 @@
 import controllers.gatherHyprland
+import controllers.parseAnimation
+import controllers.parseBezier
+import controllers.parseEnv
 import controllers.parseExecute
+import controllers.parseLayers
 import controllers.parseMonitor
+import controllers.parsePermissions
+import controllers.parseSubmap
+import controllers.parseUnbind
 import controllers.parseVariables
 import controllers.parseWindowRules
+import controllers.parseWorkspace
 import controllers.parserKeybinds
 import model.HyprlandSettingsModel
 import model.SuccessRateOfParse
@@ -120,7 +128,120 @@ class HyprlandParser {
 
         logger.info("Create Window Rules")
 
-        parseWindowRules(windows = allOtherSettings)
+        val windowRule = parseWindowRules(windows = allOtherSettings).getOrElse {
+            changeSuccess(name = "windowRules" , success = false)
+            return
+        }
+
+        logger.info("Got All Window Rules")
+
+        changeSuccess(name = "windowRules" , success = true)
+
+        processSettings.windowRules = windowRule
+
+        logger.info("Create Workspace Settings")
+
+        val workspaceRules = parseWorkspace(workspace = allOtherSettings).getOrElse {
+            changeSuccess(name = "workspace" , success = false)
+            return
+        }
+
+        logger.info("Got All Workspace Rules")
+
+        changeSuccess(name = "workspace" , success = true)
+
+        processSettings.workspace = workspaceRules
+
+        logger.info("Create Env Settings")
+
+        val envRules = parseEnv(env = allOtherSettings).getOrElse {
+            changeSuccess(name = "env" , success = false)
+            return
+        }
+
+        logger.info("Got All Env Rules")
+
+        changeSuccess(name = "env" , success = true)
+
+        processSettings.env = envRules
+
+        logger.info("Create Layer Settings")
+
+        val layers = parseLayers(layer = allOtherSettings).getOrElse {
+            changeSuccess(name = "layerRules" , success = false)
+            return
+        }
+
+        logger.info("Got All Layer Rules")
+
+        changeSuccess(name = "layerRules" , success = true)
+
+        processSettings.layerRules = layers
+
+        logger.info("Create Unbind Settings")
+
+        val unbind = parseUnbind(unbind = allOtherSettings).getOrElse {
+            changeSuccess(name = "unbind" , success = false)
+            return
+        }
+
+        logger.info("Got All unbind")
+
+        changeSuccess(name = "unbind" , success = true)
+
+        processSettings.unbind = unbind
+
+        logger.info("Create Submap Settings")
+
+        val submap = parseSubmap(submap = allOtherSettings).getOrElse {
+            changeSuccess(name = "submap" , success = false)
+            return
+        }
+
+        logger.info("Got All unbind")
+
+        changeSuccess(name = "submap" , success = true)
+
+        processSettings.submap = submap
+
+        logger.info("Create Permission Settings")
+
+        val permission = parsePermissions(permission = allOtherSettings).getOrElse {
+            changeSuccess(name = "permission" , success = false)
+            return
+        }
+
+        logger.info("Got All Permission")
+
+        changeSuccess(name = "permission" , success = true)
+
+        processSettings.permission = permission
+
+        logger.info("Create Bezier Curves Settings")
+
+        val bezier = parseBezier(bezier = allOtherSettings).getOrElse {
+            changeSuccess(name = "bezier" , success = false)
+            return
+        }
+
+        logger.info("Got All Bezier")
+
+        changeSuccess(name = "bezier" , success = true)
+
+        processSettings.bezier = bezier
+
+        logger.info("Create Animation Curves Settings")
+
+        val animation = parseAnimation(animation = allOtherSettings).getOrElse {
+            changeSuccess(name = "animation" , success = false)
+            return
+        }
+
+        logger.info("Got All Animation")
+
+        changeSuccess(name = "animation" , success = true)
+
+        processSettings.animation = animation
     }
 
     private fun changeSuccess(name: String ,success: Boolean) {

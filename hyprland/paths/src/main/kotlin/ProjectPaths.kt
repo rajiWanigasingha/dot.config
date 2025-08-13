@@ -100,7 +100,16 @@ internal object ProjectPaths {
         "variable",
         "keybind",
         "monitor",
-        "autoStart"
+        "autoStart",
+        "windowRules",
+        "workspace",
+        "env",
+        "layer",
+        "unbind",
+        "submap",
+        "permission",
+        "bezier",
+        "animation"
     )
 
 }
