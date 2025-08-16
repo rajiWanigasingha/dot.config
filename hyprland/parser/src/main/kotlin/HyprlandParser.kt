@@ -3,6 +3,7 @@ import controllers.parseAnimation
 import controllers.parseBezier
 import controllers.parseEnv
 import controllers.parseExecute
+import controllers.parseKeywords
 import controllers.parseLayers
 import controllers.parseMonitor
 import controllers.parsePermissions
@@ -12,7 +13,6 @@ import controllers.parseVariables
 import controllers.parseWindowRules
 import controllers.parseWorkspace
 import controllers.parserKeybinds
-import model.HyprlandSettingsModel
 import model.SuccessRateOfParse
 import org.slf4j.LoggerFactory
 
@@ -59,8 +59,6 @@ class HyprlandParser {
 
         logger.info("Begin Parsing hyprland settings")
 
-        val processSettings = HyprlandSettingsModel()
-
         logger.info("Gather All Settings From All Source File")
 
         val gatherAllHyprland = gatherHyprland().getOrElse {
@@ -83,13 +81,11 @@ class HyprlandParser {
 
         changeSuccess(name = "variable" , success = true)
 
-        processSettings.variables = variables.first
-
-        val allOtherSettings = variables.second
+        val allOtherSettings = variables
 
         logger.info("Create Keybind Settings")
 
-        val keybinds = parserKeybinds(keyBinds = allOtherSettings).getOrElse {
+        parserKeybinds(keyBinds = allOtherSettings).getOrElse {
             changeSuccess(name = "bind" , success = false)
             return
         }
@@ -98,11 +94,9 @@ class HyprlandParser {
 
         changeSuccess(name = "bind" , success = true)
 
-        processSettings.bind = keybinds
-
         logger.info("Create monitor Settings")
 
-        val monitor = parseMonitor(monitors = allOtherSettings).getOrElse {
+        parseMonitor(monitors = allOtherSettings).getOrElse {
             changeSuccess(name = "monitor" , success = false)
             return
         }
@@ -111,11 +105,9 @@ class HyprlandParser {
 
         changeSuccess(name = "monitor" , success = true)
 
-        processSettings.monitor = monitor
-
         logger.info("Create Auto Start Settings")
 
-        val autoStart = parseExecute(execute = allOtherSettings).getOrElse {
+        parseExecute(execute = allOtherSettings).getOrElse {
             changeSuccess(name = "autoStart" , success = false)
             return
         }
@@ -124,11 +116,9 @@ class HyprlandParser {
 
         changeSuccess(name = "autoStart" , success = true)
 
-        processSettings.execute = autoStart
-
         logger.info("Create Window Rules")
 
-        val windowRule = parseWindowRules(windows = allOtherSettings).getOrElse {
+        parseWindowRules(windows = allOtherSettings).getOrElse {
             changeSuccess(name = "windowRules" , success = false)
             return
         }
@@ -137,11 +127,9 @@ class HyprlandParser {
 
         changeSuccess(name = "windowRules" , success = true)
 
-        processSettings.windowRules = windowRule
-
         logger.info("Create Workspace Settings")
 
-        val workspaceRules = parseWorkspace(workspace = allOtherSettings).getOrElse {
+        parseWorkspace(workspace = allOtherSettings).getOrElse {
             changeSuccess(name = "workspace" , success = false)
             return
         }
@@ -150,11 +138,9 @@ class HyprlandParser {
 
         changeSuccess(name = "workspace" , success = true)
 
-        processSettings.workspace = workspaceRules
-
         logger.info("Create Env Settings")
 
-        val envRules = parseEnv(env = allOtherSettings).getOrElse {
+        parseEnv(env = allOtherSettings).getOrElse {
             changeSuccess(name = "env" , success = false)
             return
         }
@@ -163,11 +149,9 @@ class HyprlandParser {
 
         changeSuccess(name = "env" , success = true)
 
-        processSettings.env = envRules
-
         logger.info("Create Layer Settings")
 
-        val layers = parseLayers(layer = allOtherSettings).getOrElse {
+        parseLayers(layer = allOtherSettings).getOrElse {
             changeSuccess(name = "layerRules" , success = false)
             return
         }
@@ -176,11 +160,9 @@ class HyprlandParser {
 
         changeSuccess(name = "layerRules" , success = true)
 
-        processSettings.layerRules = layers
-
         logger.info("Create Unbind Settings")
 
-        val unbind = parseUnbind(unbind = allOtherSettings).getOrElse {
+        parseUnbind(unbind = allOtherSettings).getOrElse {
             changeSuccess(name = "unbind" , success = false)
             return
         }
@@ -189,11 +171,9 @@ class HyprlandParser {
 
         changeSuccess(name = "unbind" , success = true)
 
-        processSettings.unbind = unbind
-
         logger.info("Create Submap Settings")
 
-        val submap = parseSubmap(submap = allOtherSettings).getOrElse {
+        parseSubmap(submap = allOtherSettings).getOrElse {
             changeSuccess(name = "submap" , success = false)
             return
         }
@@ -202,11 +182,9 @@ class HyprlandParser {
 
         changeSuccess(name = "submap" , success = true)
 
-        processSettings.submap = submap
-
         logger.info("Create Permission Settings")
 
-        val permission = parsePermissions(permission = allOtherSettings).getOrElse {
+        parsePermissions(permission = allOtherSettings).getOrElse {
             changeSuccess(name = "permission" , success = false)
             return
         }
@@ -215,11 +193,9 @@ class HyprlandParser {
 
         changeSuccess(name = "permission" , success = true)
 
-        processSettings.permission = permission
-
         logger.info("Create Bezier Curves Settings")
 
-        val bezier = parseBezier(bezier = allOtherSettings).getOrElse {
+        parseBezier(bezier = allOtherSettings).getOrElse {
             changeSuccess(name = "bezier" , success = false)
             return
         }
@@ -228,11 +204,9 @@ class HyprlandParser {
 
         changeSuccess(name = "bezier" , success = true)
 
-        processSettings.bezier = bezier
-
         logger.info("Create Animation Curves Settings")
 
-        val animation = parseAnimation(animation = allOtherSettings).getOrElse {
+        parseAnimation(animation = allOtherSettings).getOrElse {
             changeSuccess(name = "animation" , success = false)
             return
         }
@@ -241,7 +215,9 @@ class HyprlandParser {
 
         changeSuccess(name = "animation" , success = true)
 
-        processSettings.animation = animation
+        logger.info("Create keywords setting")
+
+        parseKeywords(allSettings = allOtherSettings)
     }
 
     private fun changeSuccess(name: String ,success: Boolean) {

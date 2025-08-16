@@ -24,7 +24,9 @@ internal object ProjectPaths {
 
     val defaultHyprlandGen = "${userName}/.config/hypr/dot.config.hyprland"
 
-    val defaultDotConfigGen = "${defaultHyprlandPaths}/store"
+    val defaultHyprlandKeywordPaths = "$defaultHyprlandPaths/default/hyprlandDefault/"
+
+    val defaultHyprlandStore = "$defaultHyprlandPaths/store/"
 
     val keybindDispatchers = "${defaultHyprlandPaths}/default/helpers/keybind.csv"
 
@@ -44,7 +46,6 @@ internal object ProjectPaths {
         "decoration",
         "device",
         "dwindle",
-        "echo",
         "ecosystem",
         "env",
         "execute",
@@ -109,7 +110,7 @@ internal object ProjectPaths {
         "submap",
         "permission",
         "bezier",
-        "animation"
+        "animation",
+        "device"
     )
-
 }

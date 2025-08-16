@@ -2,8 +2,8 @@ category,displayName,settingsName,description,type,value,actionLink,tab,method,v
 misc,Disable Hyprland Logo,disable_hyprland_logo,Disables the random Hyprland logo / anime girl background.,bool,false,LAYOUT_GENERAL,general,INPUT_TOGGLE
 misc,Disable Splash Rendering,disable_splash_rendering,Disables the Hyprland splash rendering.,bool,false,LAYOUT_GENERAL,general,INPUT_TOGGLE
 misc,Splash Text Color,col.splash,Changes the color of the splash text.,color,0xffffffff,LAYOUT_GENERAL,general,INPUT_COLOR
-misc,Font Family,font_family,Set the global default font to render system messages.,string,Sans,MISC,misc,INPUT_STR
-misc,Splash Font Family,splash_font_family,Changes the font used to render the splash text.,string,,LAYOUT_GENERAL,general,INPUT_STR
+misc,Font Family,font_family,Set the global default font to render system messages.,str,Sans,MISC,misc,INPUT_STR
+misc,Splash Font Family,splash_font_family,Changes the font used to render the splash text.,str,,LAYOUT_GENERAL,general,INPUT_STR
 misc,Force Default Wallpaper,force_default_wallpaper,Enforce any of the 3 default wallpapers. Setting this to 0 or 1 disables the anime background. -1 means “random”,int,-1,LAYOUT_GENERAL,general,INPUT_INT
 misc,Variable Frame Rate,vfr,Controls the VFR status of Hyprland.,bool,true,MISC,misc,INPUT_TOGGLE
 misc,Variable Refresh Rate,vrr,Controls VRR mode.,int,0,MISC,misc,INPUT_INT_SELECT,"0,1,2,3","Off,On,Fullscreen Only,Fullscreen with video or game content type"

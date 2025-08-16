@@ -10,3 +10,10 @@ data class StandedKeywordModel(
     val type: HyprlandTypes
 )
 
+@Serializable
+data class StandedKeywordParseModel(
+    val name: String,
+    val value: String,
+    val fileName: String
+)
+

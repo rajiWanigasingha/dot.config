@@ -1,6 +1,6 @@
 category,displayName,settingsName,description,type,value,actionLink,tab,method,validate,special
 group:groupbar,Enabled,enabled,Enables groupbars,bool,true,GROUPS,group bar,INPUT_TOGGLE
-group:groupbar,Font Family,font_family,Font used to display groupbar titles; use misc:font_family if not specified,string,"",GROUPS,group bar,INPUT_STR
+group:groupbar,Font Family,font_family,Font used to display groupbar titles; use misc:font_family if not specified,str,"",GROUPS,group bar,INPUT_STR
 group:groupbar,Font Size,font_size,Font size of groupbar title,int,8,GROUPS,group bar,INPUT_INT
 group:groupbar,Font Weight (Active),font_weight_active,Font weight of active groupbar title,font_weight,normal,GROUPS,group bar,INPUT_STR
 group:groupbar,Font Weight (Inactive),font_weight_inactive,Font weight of inactive groupbar title,font_weight,normal,GROUPS,group bar,INPUT_STR

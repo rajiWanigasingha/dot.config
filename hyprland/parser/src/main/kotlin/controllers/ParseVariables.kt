@@ -5,8 +5,6 @@ import model.tables.VariableModel
 import write.variables.WriteVariable
 import java.util.regex.Matcher
 
-private val variablePath = "${System.getProperty("user.home")}/.config/hypr/hyprConfigAutoGen/variable.conf"
-
 /**
  *
  * This will separate all variables and swap variables with its value
@@ -15,7 +13,7 @@ private val variablePath = "${System.getProperty("user.home")}/.config/hypr/hypr
  * @return result pare of, list of variables and list of processed hyprland settings as strings
  *
  */
-internal fun parseVariables(allSettings: List<String>) : Result<Pair<List<VariableModel>, List<String>>> {
+internal fun parseVariables(allSettings: List<String>) : Result<List<String>> {
 
     val variables = mutableListOf<VariableModel>()
 
@@ -56,5 +54,5 @@ internal fun parseVariables(allSettings: List<String>) : Result<Pair<List<Variab
     writer.writeIntoHyprland(variables.toList())
     writer.writeIntoDotConfig(variables.toList())
 
-    return Result.success(Pair(variables.toList() ,updatedSettings.toList()))
+    return Result.success(updatedSettings.toList())
 }
