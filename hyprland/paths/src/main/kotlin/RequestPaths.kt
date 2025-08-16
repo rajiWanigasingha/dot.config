@@ -1,6 +1,8 @@
 import ProjectPaths.toPath
 import java.nio.file.Path
 import kotlin.io.path.exists
+import kotlin.io.path.isDirectory
+import kotlin.io.path.listDirectoryEntries
 
 class RequestPaths {
 
@@ -106,5 +108,15 @@ class RequestPaths {
 
     fun getHyprlandKeywordStore(): String {
         return ProjectPaths.defaultHyprlandStore
+    }
+
+    fun allCreatedFilesOnHyprland(): List<Path>? {
+        val paths = mutableListOf<Map<String , String>>()
+
+        return ProjectPaths
+            .defaultHyprlandGen
+            .toPath()
+            .takeIf { it.exists() && it.isDirectory() }
+            ?.listDirectoryEntries()
     }
 }

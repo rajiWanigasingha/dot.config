@@ -1,9 +1,12 @@
 package controllers
 
 import RequestPaths
+import io.ktor.server.websocket.DefaultWebSocketServerSession
+import io.ktor.server.websocket.sendSerialized
 import logger
 import model.HyprlandKeywords
 import model.HyprlandTypes
+import model.ParsedModels
 import model.hyprlandTypeCheck
 import model.tables.StandedKeywordModel
 import model.tables.StandedKeywordParseModel
@@ -21,7 +24,7 @@ import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
-internal fun parseKeywords(allSettings: List<String>) {
+internal suspend fun parseKeywords(allSettings: List<String> ,session: DefaultWebSocketServerSession) {
 
     logger.info("Try to parse keywords")
 
@@ -290,7 +293,29 @@ internal fun parseKeywords(allSettings: List<String>) {
 
             val write = WriteKeyword(listOf(k.name))
 
-            write.writeIntoHyprland(validDataModel).getOrThrow()
-            write.writeIntoDotConfig(validDataModel).getOrThrow()
+            runCatching {
+                write.writeIntoHyprland(validDataModel).getOrThrow()
+                write.writeIntoDotConfig(validDataModel).getOrThrow()
+
+                session.sendSerialized(
+                    data = ParsedModels(
+                        name = "Parse All ${k.name}",
+                        success = true,
+                        description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
+                        found = validDataModel.size
+                    )
+                )
+            }.onFailure {
+                session.sendSerialized(
+                    data = ParsedModels(
+                        name = "Parse All ${k.name}",
+                        success = false,
+                        description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
+                        found = 0
+                    )
+                )
+                return
+            }
+
         }
 }

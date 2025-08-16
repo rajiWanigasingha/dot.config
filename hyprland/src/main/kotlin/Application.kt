@@ -1,5 +1,6 @@
 package org.dot.config
 
+import HyprlandParser
 import io.ktor.serialization.kotlinx.KotlinxWebsocketSerializationConverter
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
@@ -9,10 +10,15 @@ import io.ktor.server.request.path
 import io.ktor.server.routing.routing
 import io.ktor.server.websocket.WebSockets
 import io.ktor.server.websocket.pingPeriod
+import io.ktor.server.websocket.receiveDeserialized
 import io.ktor.server.websocket.timeout
+import io.ktor.server.websocket.webSocket
+import io.ktor.websocket.CloseReason
+import io.ktor.websocket.close
+import io.ktor.websocket.send
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import org.dot.config.controller.Initialize
+import org.dot.config.model.SendAndReceive
 import org.dot.config.view.ui.handleHelpUI
 import org.dot.config.view.ui.handleUI
 import org.dot.config.view.ui.mainUI
@@ -46,9 +52,28 @@ fun Application.module() {
         contentConverter = KotlinxWebsocketSerializationConverter(Json)
     }
 
-    Initialize
-
     routing {
+
+        webSocket("/init") {
+
+            val hyprlandParser = HyprlandParser(session = this)
+
+            val result = hyprlandParser.parseConfig().getOrNull()
+
+            if (result == null) {
+                close(CloseReason(CloseReason.Codes.INTERNAL_ERROR ,"Couldn't parse config"))
+            }
+
+            val conformation = receiveDeserialized<SendAndReceive.Confirmation>()
+
+            if (conformation.hypr) {
+                hyprlandParser.createHyprlandFile()
+            } else {
+                send("Didn't create")
+            }
+        }
+
+
         handleUI()
         mainUI()
         handleHelpUI()

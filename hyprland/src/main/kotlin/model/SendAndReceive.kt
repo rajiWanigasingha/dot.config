@@ -7,6 +7,11 @@ import org.hyprconfig.helpers.HyprlandTypes
 object SendAndReceive {
 
     @Serializable
+    data class Confirmation(
+        val hypr: Boolean
+    )
+
+    @Serializable
     enum class ActionType {
         SIDE_BAR, MAIN, HELP, CONNECT, DISCONNECT, ERROR, MAIN_VARIABLES, MAIN_AUTOSTART, MAIN_ENV, MAIN_KEYBINDS, MAIN_MONITOR, MAIN_ANIMATION, MAIN_WORKSPACE, MAIN_WINDOW
     }

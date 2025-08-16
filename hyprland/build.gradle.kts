@@ -36,4 +36,5 @@ dependencies {
 
     implementation("org.hyprconfig:hyprConfigParser:1.0.0")
     implementation(libs.dataframe)
+    implementation(project(":parser"))
 }

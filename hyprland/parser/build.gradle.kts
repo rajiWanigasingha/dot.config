@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.logback.classic)
     implementation(libs.dataframe)
+    implementation(libs.ktor.server.websockets)
 
     implementation(project(":paths"))
 
