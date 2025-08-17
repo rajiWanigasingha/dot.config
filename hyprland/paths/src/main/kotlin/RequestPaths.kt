@@ -1,5 +1,7 @@
 import ProjectPaths.toPath
 import java.nio.file.Path
+import kotlin.io.path.createDirectories
+import kotlin.io.path.createFile
 import kotlin.io.path.exists
 import kotlin.io.path.isDirectory
 import kotlin.io.path.listDirectoryEntries
@@ -87,7 +89,7 @@ class RequestPaths {
             "dwindle" -> listOf("dwindle {", "}")
             "master" -> listOf("master {", "}")
             "animations" -> listOf("animations {", "}")
-            "inputs" -> listOf("inputs {", "touchpad {", "}", "touchdevice {", "}", "tablet {", "}", "}")
+            "inputs" -> listOf("input {", "touchpad {", "}", "touchdevice {", "}", "tablet {", "}", "}")
             "binds" -> listOf("binds {", "}")
             "gestures" -> listOf("gestures {", "}")
             "xwayland" -> listOf("xwayland {", "}")
@@ -111,12 +113,30 @@ class RequestPaths {
     }
 
     fun allCreatedFilesOnHyprland(): List<Path>? {
-        val paths = mutableListOf<Map<String , String>>()
-
         return ProjectPaths
             .defaultHyprlandGen
             .toPath()
             .takeIf { it.exists() && it.isDirectory() }
             ?.listDirectoryEntries()
+    }
+
+    fun getHyprlandDotConfigPath(): Path {
+        return ProjectPaths.pathInDotConfig.toPath()
+    }
+
+    fun  getBackupPath(): Path {
+
+        val backupPath = Path.of(ProjectPaths.backupPath)
+
+        if (!backupPath.exists()) {
+            backupPath.createDirectories()
+            backupPath.resolve("backup.conf").createFile()
+        }
+
+        if (!backupPath.resolve("backup.conf").exists()) {
+            backupPath.resolve("backup.conf").createFile()
+        }
+
+        return backupPath
     }
 }

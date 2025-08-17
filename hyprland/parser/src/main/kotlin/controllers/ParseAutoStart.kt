@@ -18,6 +18,8 @@ internal fun parseExecute(execute: List<String>): Result<List<ExecuteModel>> {
 
     execute.forEach {
 
+        if (!it.startsWith("exec")) return@forEach
+
         val executes = it.split("#")[0].split("=").map { exe -> exe.trim() }
 
         val exeKeyword = executes.getOrNull(0)?.validateKeyword() ?: return@forEach

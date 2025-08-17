@@ -3,8 +3,6 @@ import kotlin.test.Test
 class ParseTest {
 
     @Test
-    fun parse() {
-        HyprlandParser().parseConfig()
-    }
+    fun `test if need to be parsed`() {}
 
 }

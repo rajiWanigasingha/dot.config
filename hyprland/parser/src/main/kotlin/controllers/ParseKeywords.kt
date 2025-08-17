@@ -7,23 +7,34 @@ import logger
 import model.HyprlandKeywords
 import model.HyprlandTypes
 import model.ParsedModels
+import model.ParsingStep
+import model.ParsingSteps
 import model.hyprlandTypeCheck
 import model.tables.StandedKeywordModel
 import model.tables.StandedKeywordParseModel
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.convert
 import org.jetbrains.kotlinx.dataframe.api.forEach
-import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.with
 import org.jetbrains.kotlinx.dataframe.io.readCsv
 import write.keyword.WriteKeyword
 import java.nio.file.Path
-import kotlin.collections.emptyList
 import kotlin.io.path.exists
-import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
+/**
+ * Parses a list of settings and categorizes them into a store of keywords.
+ * It organizes settings into various categories based on pre-defined keyword hierarchies
+ * and processes them according to their respective structures and values. The categorized
+ * settings are subsequently available for further processing.
+ *
+ * This is used for any settings with a keyword.
+ * Ex: {general: {name: "foo"}}, {group: {name: "foo"}}, {debug: {name: "foo"}}
+ *
+ * @param allSettings a list of strings representing all settings to be parsed and categorized
+ * @param session an instance of [DefaultWebSocketServerSession] used for server communication
+ */
 internal suspend fun parseKeywords(allSettings: List<String> ,session: DefaultWebSocketServerSession) {
 
     logger.info("Try to parse keywords")
@@ -146,13 +157,22 @@ internal suspend fun parseKeywords(allSettings: List<String> ,session: DefaultWe
                     name = key,
                     value = value,
                     fileName = searchKeyword.joinToString("") { first -> first.replaceFirstChar { ch -> ch.uppercase() } }
-                        .replaceFirstChar { ch -> ch.lowercase() }.replace("input", "inputs").let { input ->
+                        .replaceFirstChar { ch -> ch.lowercase() }
+                        .let { input ->
+                            if (input != "input") {
+                                input.replace("input", "inputs")
+                            } else {
+                                input
+                            }
+                        }
+                        .let { input ->
                             if (input == "inputsTouchdevice") {
                                 return@let "inputsTouchDevice"
                             } else {
                                 return@let input
                             }
-                        })
+                        }
+                )
             )
 
             "binds" -> hyprlandKeywordsStore.binds.add(
@@ -269,13 +289,9 @@ internal suspend fun parseKeywords(allSettings: List<String> ,session: DefaultWe
                         .filter { nameof -> nameof.key == model.name.trim() }
                         .takeIf { list -> list.isNotEmpty() }
                         ?.let { list ->
-                            val valueOfMap = list[model.name.trim()]
+                            val valueOfMap = list[model.name.trim()] ?: return@forEachIndexed
 
-                            if (valueOfMap == null) return@forEachIndexed
-
-                            val validValue = model.value.hyprlandTypeCheck(valueOfMap.type)
-
-                            if (validValue == null) return@forEachIndexed
+                            val validValue = model.value.hyprlandTypeCheck(valueOfMap.type) ?: return@forEachIndexed
 
                             validDataModel.add(
                                 Pair(
@@ -298,20 +314,26 @@ internal suspend fun parseKeywords(allSettings: List<String> ,session: DefaultWe
                 write.writeIntoDotConfig(validDataModel).getOrThrow()
 
                 session.sendSerialized(
-                    data = ParsedModels(
-                        name = "Parse All ${k.name}",
-                        success = true,
-                        description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
-                        found = validDataModel.size
+                    data = ParsingSteps(
+                        step = ParsingStep.PARSE,
+                        parse = ParsedModels(
+                            name = "Parse All ${k.name}",
+                            success = true,
+                            description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
+                            found = validDataModel.size
+                        )
                     )
                 )
             }.onFailure {
                 session.sendSerialized(
-                    data = ParsedModels(
-                        name = "Parse All ${k.name}",
-                        success = false,
-                        description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
-                        found = 0
+                    data = ParsingSteps(
+                        step = ParsingStep.PARSE,
+                        parse = ParsedModels(
+                            name = "Parse All ${k.name}",
+                            success = false,
+                            description = "Parse and write all ${k.name} to hyprland source file and dot.config.hyprland store.",
+                            found = 0
+                        )
                     )
                 )
                 return

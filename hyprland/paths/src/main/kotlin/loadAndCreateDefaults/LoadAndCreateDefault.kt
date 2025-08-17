@@ -16,7 +16,7 @@ class LoadAndCreateDefault {
 
     fun checkForDefaultPath() {
 
-        // if user doesn't exist
+        // if the user doesn't exist
         if (!Path.of(ProjectPaths.userName.toString()).isDirectory()) {
             TODO("Exception should be thrown")
         }
@@ -69,7 +69,7 @@ class LoadAndCreateDefault {
             }
         }
 
-        // create backup.conf file
+        // create a backup.conf file
         val backupsFile = Path.of("${ProjectPaths.defaultHyprlandPaths}/backups/backup.conf")
 
         if (!backupsFile.exists()) {
@@ -100,6 +100,12 @@ class LoadAndCreateDefault {
             }
         }
 
+        // create hyprland path csv
+        val hyprlandDotConfPath = ProjectPaths.pathInDotConfig.toPath()
+
+        if (!hyprlandDotConfPath.parent.exists()) hyprlandDotConfPath.parent.createDirectory()
+
+        if (!hyprlandDotConfPath.exists()) hyprlandDotConfPath.createFile()
     }
 
 

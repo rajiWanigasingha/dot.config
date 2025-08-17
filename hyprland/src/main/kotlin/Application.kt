@@ -11,13 +11,15 @@ import io.ktor.server.routing.routing
 import io.ktor.server.websocket.WebSockets
 import io.ktor.server.websocket.pingPeriod
 import io.ktor.server.websocket.receiveDeserialized
+import io.ktor.server.websocket.sendSerialized
 import io.ktor.server.websocket.timeout
 import io.ktor.server.websocket.webSocket
 import io.ktor.websocket.CloseReason
 import io.ktor.websocket.close
-import io.ktor.websocket.send
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import model.ParsingStep
+import model.ParsingSteps
 import org.dot.config.model.SendAndReceive
 import org.dot.config.view.ui.handleHelpUI
 import org.dot.config.view.ui.handleUI
@@ -36,6 +38,8 @@ import kotlin.time.Duration.Companion.seconds
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
+
+private val logger = org.slf4j.LoggerFactory.getLogger("Application")
 
 @OptIn(ExperimentalSerializationApi::class)
 fun Application.module() {
@@ -58,6 +62,24 @@ fun Application.module() {
 
             val hyprlandParser = HyprlandParser(session = this)
 
+            logger.info("Initiate Hyprland Parser")
+
+            val needToParse = hyprlandParser.checkForParsing()
+
+            if (!needToParse) {
+                sendSerialized(data = ParsingSteps(
+                    step = ParsingStep.NEED,
+                    need = false
+                ))
+            } else {
+                sendSerialized(data = ParsingSteps(
+                    step = ParsingStep.NEED,
+                    need = true
+                ))
+                close(CloseReason(CloseReason.Codes.NORMAL, "No need to parse"))
+                return@webSocket
+            }
+
             val result = hyprlandParser.parseConfig().getOrNull()
 
             if (result == null) {
@@ -67,9 +89,14 @@ fun Application.module() {
             val conformation = receiveDeserialized<SendAndReceive.Confirmation>()
 
             if (conformation.hypr) {
-                hyprlandParser.createHyprlandFile()
+                hyprlandParser
+                    .createHyprlandFile()
+                    .onSuccess {
+                        hyprlandParser.createBackups()
+                    }
             } else {
-                send("Didn't create")
+                close(CloseReason(CloseReason.Codes.NORMAL ,"Don't create hyprland file"))
+                return@webSocket
             }
         }
 

@@ -18,6 +18,8 @@ internal fun parseBezier(bezier: List<String>): Result<List<BezierModel>> {
 
     bezier.forEach {
 
+        if (!it.startsWith("bezier")) return@forEach
+
         val processBezier = it.split("#")[0].split("=").getOrNull(1)?.split(",")?.map { bezier -> bezier.trim() } ?: return@forEach
 
         if (processBezier.size != 5) return@forEach

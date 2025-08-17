@@ -34,10 +34,13 @@ internal object ProjectPaths {
 
     val rules = "${defaultHyprlandPaths}/default/helpers"
 
+    val pathInDotConfig = "$defaultHyprlandPaths/path/hyprland.csv"
+
+    val backupPath = "$defaultHyprlandPaths/backups"
+
     val hyprFolder = listOf(
         "animation",
         "animations",
-        "autoStart",
         "bezier",
         "bind",
         "binds",
@@ -48,7 +51,7 @@ internal object ProjectPaths {
         "dwindle",
         "ecosystem",
         "env",
-        "execute",
+        "autoStart",
         "experimental",
         "general",
         "gestures",

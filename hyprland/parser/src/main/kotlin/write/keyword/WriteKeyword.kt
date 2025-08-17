@@ -42,14 +42,15 @@ class WriteKeyword(val hyprPath: List<String>) :
             TODO("Result option throw")
         }
 
-        hypr.forEach { (standed, parse) ->
+        hypr.forEach { (stood, parse) ->
+
             val hyprlandName = parse.fileName.split(Regex("(?=[A-Z])")).last().lowercase()
 
             val index = struct!!.indexOfFirst { it == "$hyprlandName {" }
 
             if (index == -1) return@forEach
 
-            struct.add(element = "${standed.name} = ${standed.value}", index = index + 1)
+            struct.add(element = "${stood.name} = ${stood.value}", index = index + 1)
         }
 
         logger.info("Writing ${hypr.size} settings into ${hyprPath[0]} keyword settings")

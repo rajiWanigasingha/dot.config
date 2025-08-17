@@ -20,8 +20,6 @@ internal fun parseSubmap(submap: List<String>): Result<List<SubmapModel>> {
 
         if (!it.startsWith("submap")) return@forEach
 
-        if (!it.startsWith("unbind")) return@forEach
-
         val processSubmap = it.split("#")[0].split("=").getOrNull(1)?.trim() ?: return@forEach
 
         submapStore.add(SubmapModel(processSubmap))

@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development" />
+    <list default="true" id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="Update Development">
+      <change afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/model/tables/hyprlandCreateTable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/read/readHyprlandParseNeed/ReadHyprlandParseNeed.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/write/hyprland/WriteHyprland.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/HyprlandParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/HyprlandParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseAutoStart.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseAutoStart.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseBezier.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseBezier.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseKeywords.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseKeywords.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseSubmap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/controllers/ParseSubmap.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/model/SettingsParseModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/model/SettingsParseModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/write/keyword/WriteKeyword.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/main/kotlin/write/keyword/WriteKeyword.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/parser/src/test/kotlin/ParseTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/parser/src/test/kotlin/ParseTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/ProjectPaths.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/ProjectPaths.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/RequestPaths.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/RequestPaths.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/loadAndCreateDefaults/LoadAndCreateDefault.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/paths/src/main/kotlin/loadAndCreateDefaults/LoadAndCreateDefault.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyprland/src/main/kotlin/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/hyprland/src/main/kotlin/Application.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,19 +56,6 @@
                 <item name="hyprland" type="f1a62948:ProjectNode" />
                 <item name="hyprland" type="2d1252cf:ModuleNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="hyprland" type="f1a62948:ProjectNode" />
-                <item name="hyprland" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="hyprland" type="f1a62948:ProjectNode" />
-                <item name="hyprland" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -63,8 +67,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Object" />
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -83,6 +87,10 @@
     &quot;accountId&quot;: &quot;bde270c7-a7fc-4d3b-ac94-9ea170117419&quot;
   }
 }</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/hyprland" gradleHome="$PROJECT_DIR$/../.gradle/wrapper/dists/gradle-8.4-bin/1w5dpkrfk8irigvoxmyhowfim/gradle-8.4" javaHome="$PROJECT_DIR$/../.jdks/corretto-20.0.2.1" gradleVersion="8.4" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -94,6 +102,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.Build hyprland.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hyprland [:org.dot.config.ApplicationKt.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.hyprland [build].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.hyprland [clean].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.hyprlandSettingsParser [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
@@ -101,9 +110,17 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/rajindawanigasingha/dot.config&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+    &quot;git-widget-placeholder&quot;: &quot;refactor&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rajindawanigasingha/dot.config/hyprland/settings.gradle.kts&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;bun&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/rajindawanigasingha/dot.config/hyprlandUI/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -186,6 +203,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EngineMain" type="KtorApplicationConfigurationType" factoryName="Ktor" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.ktor.server.netty.EngineMain" />
+      <module name="hyprland.main" />
+      <option name="alternativeJrePath" />
+      <option name="alternativeJrePathEnabled" value="false" />
+      <option name="includeProvidedScope" value="false" />
+      <option name="mainClass" value="io.ktor.server.netty.EngineMain" />
+      <option name="passParentEnvs" value="true" />
+      <option name="programParameters" />
+      <option name="shortenCommandLine" />
+      <option name="vmParameters" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.ApplicationKt" />
@@ -195,6 +228,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a978b453-5c43-4bcb-a78c-336d2531ba1c" name="Changes" comment="" />
@@ -202,6 +243,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1749711794568</updated>
+      <workItem from="1755368747434" duration="1299000" />
+      <workItem from="1755370213337" duration="558000" />
+      <workItem from="1755370782457" duration="647000" />
+      <workItem from="1755413042026" duration="17398000" />
+      <workItem from="1755436387760" duration="2245000" />
+      <workItem from="1755439450588" duration="1376000" />
+      <workItem from="1755441895067" duration="3914000" />
     </task>
     <task id="LOCAL-00001" summary="Update Development">
       <option name="closed" value="true" />
@@ -270,6 +318,9 @@
     <option name="localTasksCounter" value="9" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -284,5 +335,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Development" />
     <option name="LAST_COMMIT_MESSAGE" value="Update Development" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
